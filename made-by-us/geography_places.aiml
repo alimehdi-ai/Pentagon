@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- Geography and Countries - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHAT IS PAKISTAN</pattern>
+<template>Pakistan is a South Asian country founded in 1947. Capital: Islamabad. Home to K2, ancient Indus Valley civilization, and 240+ million people. Known for cricket, hospitality, and diverse landscapes from mountains to deserts.</template>
+</category>
+
+<category><pattern>WHAT IS INDIA</pattern>
+<template>India is the world's most populous country with 1.4+ billion people. It's the birthplace of Hinduism, Buddhism, and the world's largest democracy. Known for the Taj Mahal, Bollywood, and incredible diversity.</template>
+</category>
+
+<category><pattern>WHAT IS CHINA</pattern>
+<template>China is the world's second-largest economy with 1.4 billion people. It has the longest continuous civilization, built the Great Wall, and is a global manufacturing powerhouse. Beijing is the capital.</template>
+</category>
+
+<category><pattern>WHAT IS JAPAN</pattern>
+<template>Japan is an island nation known for blending ancient tradition with cutting-edge technology. Home to Mount Fuji, anime, sushi, Toyota, and Sony. The world's third-largest economy with 125 million people.</template>
+</category>
+
+<category><pattern>WHAT IS USA</pattern>
+<template>The USA (United States of America) is the world's largest economy and third-largest country. 50 states, 330 million people, founded in 1776. Known for Hollywood, Silicon Valley, NASA, and cultural global influence.</template>
+</category>
+
+<category><pattern>WHAT IS AMERICA</pattern>
+<template>America typically refers to the USA - the world's largest economy, founded in 1776. 50 states, 330 million people. Technically, "America" includes North, Central, and South American continents.</template>
+</category>
+
+<category><pattern>WHAT IS CANADA</pattern>
+<template>Canada is the world's second-largest country by area. Known for maple syrup, hockey, politeness, and stunning nature. Population: 40 million. It has the world's longest coastline and borders only the USA.</template>
+</category>
+
+<category><pattern>WHAT IS UK</pattern>
+<template>The UK (United Kingdom) comprises England, Scotland, Wales, and Northern Ireland. A constitutional monarchy with London as capital. Former global empire, birthplace of English language, and home of the Royal Family.</template>
+</category>
+
+<category><pattern>WHAT IS ENGLAND</pattern>
+<template>England is part of the United Kingdom, sharing the island of Britain with Scotland and Wales. Capital: London. Birthplace of Shakespeare, English language, football (soccer), and the Industrial Revolution.</template>
+</category>
+
+<category><pattern>WHAT IS FRANCE</pattern>
+<template>France is a Western European country known for the Eiffel Tower, wine, cuisine, fashion, and art. Paris is the capital. It has the world's most visited country status with 90+ million tourists annually.</template>
+</category>
+
+<category><pattern>WHAT IS GERMANY</pattern>
+<template>Germany is Europe's largest economy, known for engineering excellence (BMW, Mercedes, Volkswagen), beer, Oktoberfest, and history. United in 1990 after the Cold War. Capital: Berlin. Population: 83 million.</template>
+</category>
+
+<category><pattern>WHAT IS ITALY</pattern>
+<template>Italy is a boot-shaped European country, birthplace of the Roman Empire, Renaissance, and pizza. Home to Venice, Rome, the Vatican, and more UNESCO sites than any other country. Famous for art, food, and fashion.</template>
+</category>
+
+<category><pattern>WHAT IS SPAIN</pattern>
+<template>Spain is a Western European country known for flamenco, bullfighting, siesta culture, and beautiful beaches. Madrid is the capital. Home to Barcelona, Gaudi's architecture, and La Liga football.</template>
+</category>
+
+<category><pattern>WHAT IS RUSSIA</pattern>
+<template>Russia is the world's largest country, spanning 11 time zones across Europe and Asia. Home to 144 million people, Moscow's Kremlin, and vast natural resources including oil and gas. Former Soviet superpower.</template>
+</category>
+
+<category><pattern>WHAT IS AUSTRALIA</pattern>
+<template>Australia is both a country and continent, known for unique wildlife (kangaroos, koalas), the Outback, Great Barrier Reef, and laid-back culture. Capital: Canberra. Population: 26 million. Mostly desert interior.</template>
+</category>
+
+<category><pattern>WHAT IS BRAZIL</pattern>
+<template>Brazil is South America's largest country, known for the Amazon rainforest, Carnival, football (5 World Cup wins), and Rio de Janeiro. Portuguese-speaking with 215 million people. Capital: Brasília.</template>
+</category>
+
+<category><pattern>WHAT IS EGYPT</pattern>
+<template>Egypt is a transcontinental country in North Africa, home to ancient pyramids, the Sphinx, and the Nile River. One of the world's oldest civilizations. Cairo is the capital. Population: 100+ million.</template>
+</category>
+
+<category><pattern>WHAT IS SOUTH AFRICA</pattern>
+<template>South Africa is a country at Africa's southern tip, known for Nelson Mandela, diverse wildlife, Table Mountain, and complex apartheid history. It has 3 capitals: Pretoria, Cape Town, and Bloemfontein.</template>
+</category>
+
+<category><pattern>WHAT IS SAUDI ARABIA</pattern>
+<template>Saudi Arabia is the largest Middle Eastern country, birthplace of Islam, and guardian of Mecca and Medina. World's largest oil exporter. Ruled by the Al Saud royal family. Capital: Riyadh.</template>
+</category>
+
+<category><pattern>WHAT IS UAE</pattern>
+<template>The UAE (United Arab Emirates) is a federation of 7 emirates including Dubai and Abu Dhabi. Known for luxury tourism, tall skyscrapers (Burj Khalifa), and oil wealth. Population: 10 million.</template>
+</category>
+
+<category><pattern>WHAT IS DUBAI</pattern>
+<template>Dubai is a city and emirate in the UAE, known for luxury, the Burj Khalifa (world's tallest building), Palm Jumeirah, and transforming from a fishing village to a global hub in just decades.</template>
+</category>
+
+<category><pattern>WHAT IS TURKEY</pattern>
+<template>Turkey is a transcontinental country bridging Europe and Asia. Home to Istanbul, ancient Troy, and the remnants of the Ottoman and Byzantine Empires. Population: 85 million. Famous for Turkish delights and kebabs.</template>
+</category>
+
+<category><pattern>WHAT IS IRAN</pattern>
+<template>Iran (formerly Persia) has one of the world's oldest civilizations. Home to beautiful mosques, ancient ruins, and rich culture. Capital: Tehran. Known for poetry (Rumi, Hafez), carpets, and saffron.</template>
+</category>
+
+<category><pattern>WHAT IS IRAQ</pattern>
+<template>Iraq, located in Mesopotamia ("cradle of civilization"), was home to ancient Babylon and Sumer. Capital: Baghdad, once the world's largest city. Rich in oil but marked by recent conflicts.</template>
+</category>
+
+<category><pattern>WHAT IS ISRAEL</pattern>
+<template>Israel is a Middle Eastern country founded in 1948, significant to Judaism, Christianity, and Islam. Home to Jerusalem, the Dead Sea, and advanced technology sector. Capital disputed (Jerusalem/Tel Aviv).</template>
+</category>
+
+<category><pattern>WHAT IS PALESTINE</pattern>
+<template>Palestine refers to territories including the West Bank and Gaza Strip, with a complex political status. East Jerusalem is claimed as capital. Rich history and ongoing conflict with Israel over land and recognition.</template>
+</category>
+
+<category><pattern>WHAT IS AFGHANISTAN</pattern>
+<template>Afghanistan is a landlocked South Asian country known as the "Graveyard of Empires." Mountainous terrain, rich history along the Silk Road. Capital: Kabul. Has experienced decades of conflict.</template>
+</category>
+
+<category><pattern>WHAT IS BANGLADESH</pattern>
+<template>Bangladesh is a South Asian country formed in 1971, one of the world's most densely populated nations. Capital: Dhaka. Known for textiles, the Ganges-Brahmaputra Delta, and resilience against flooding.</template>
+</category>
+
+<category><pattern>WHAT IS NEPAL</pattern>
+<template>Nepal is a Himalayan country home to Mount Everest and birthplace of Buddha. Landlocked between India and China. Known for trekking, temples, and stunning mountain scenery. Capital: Kathmandu.</template>
+</category>
+
+<category><pattern>WHAT IS SRI LANKA</pattern>
+<template>Sri Lanka is an island nation south of India, known as the "Pearl of the Indian Ocean." Famous for tea, ancient ruins, beaches, and wildlife. Capital: Sri Jayawardenepura Kotte. Population: 22 million.</template>
+</category>
+
+<category><pattern>WHAT IS SOUTH KOREA</pattern>
+<template>South Korea is an East Asian nation known for K-pop, Samsung, Hyundai, and rapid economic development. Capital: Seoul. Technically still at war with North Korea. Population: 52 million.</template>
+</category>
+
+<category><pattern>WHAT IS NORTH KOREA</pattern>
+<template>North Korea is one of the world's most isolated nations, ruled by the Kim dynasty since 1948. Nuclear-armed, heavily militarized. Capital: Pyongyang. Limited information available due to isolation.</template>
+</category>
+
+<category><pattern>WHAT IS VIETNAM</pattern>
+<template>Vietnam is a Southeast Asian country known for stunning landscapes, delicious cuisine (pho!), and complex war history. Capital: Hanoi. Population: 100 million. One of the fastest-growing economies.</template>
+</category>
+
+<category><pattern>WHAT IS THAILAND</pattern>
+<template>Thailand is a Southeast Asian country known for beautiful temples, beaches, Thai food, and friendly people. Never colonized - "Thai" means "free." Capital: Bangkok. Major tourist destination.</template>
+</category>
+
+<category><pattern>WHAT IS MALAYSIA</pattern>
+<template>Malaysia is a Southeast Asian country known for Petronas Towers, diverse culture (Malay, Chinese, Indian), rainforests, and delicious food. Capital: Kuala Lumpur. Population: 33 million.</template>
+</category>
+
+<category><pattern>WHAT IS SINGAPORE</pattern>
+<template>Singapore is a wealthy city-state in Southeast Asia, known for cleanliness, efficiency, strict laws, and being a global financial hub. One of the world's most expensive cities. Population: 5.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS INDONESIA</pattern>
+<template>Indonesia is the world's largest archipelago (17,000+ islands) and most populous Muslim-majority country. Home to Bali, Komodo dragons, and incredible biodiversity. Capital moving from Jakarta to Nusantara.</template>
+</category>
+
+<category><pattern>WHAT IS PHILIPPINES</pattern>
+<template>The Philippines is a Southeast Asian archipelago of 7,600+ islands. Known for beautiful beaches, friendly people, and complex colonial history (Spanish, American). Capital: Manila. Population: 115 million.</template>
+</category>
+
+<category><pattern>WHAT IS MEXICO</pattern>
+<template>Mexico is a North American country known for ancient Mayan/Aztec civilizations, tacos, tequila, and vibrant culture. Capital: Mexico City (one of the world's largest). Population: 130 million.</template>
+</category>
+
+<category><pattern>WHAT IS ARGENTINA</pattern>
+<template>Argentina is a South American country known for tango, beef, wine, and football (Maradona, Messi!). Capital: Buenos Aires. Second-largest South American country. Population: 46 million.</template>
+</category>
+
+<category><pattern>WHAT IS GREECE</pattern>
+<template>Greece is the birthplace of democracy, philosophy, Western civilization, and the Olympics. Known for ancient ruins, beautiful islands, and Mediterranean cuisine. Capital: Athens. Population: 10.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS SWITZERLAND</pattern>
+<template>Switzerland is a neutral, landlocked European country known for banks, chocolate, cheese, watches, and the Alps. Four official languages. One of the world's wealthiest nations. Capital: Bern.</template>
+</category>
+
+<category><pattern>WHAT IS SWEDEN</pattern>
+<template>Sweden is a Scandinavian country known for IKEA, Volvo, ABBA, and excellent quality of life. Capital: Stockholm. Known for social welfare, design, and progressive policies. Population: 10.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS NORWAY</pattern>
+<template>Norway is a Scandinavian country known for fjords, Northern Lights, oil wealth, and consistently ranking as world's happiest country. Capital: Oslo. Population: 5.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS NETHERLANDS</pattern>
+<template>The Netherlands (often called Holland) is known for tulips, windmills, canals, bicycles, and progressive policies. Much of it is below sea level! Capital: Amsterdam. Population: 17.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS BELGIUM</pattern>
+<template>Belgium is a small European country known for chocolate, waffles, beer, and being home to the EU headquarters in Brussels. Has Dutch, French, and German as official languages. Population: 11.5 million.</template>
+</category>
+
+<category><pattern>WHAT IS PORTUGAL</pattern>
+<template>Portugal is a Western European country known for explorers, pastel de nata, port wine, and Lisbon's beauty. Former global empire that spread Portuguese to Brazil and beyond. Population: 10 million.</template>
+</category>
+
+<category><pattern>WHAT IS POLAND</pattern>
+<template>Poland is a Central European country with rich history, including surviving WWII occupation. Known for Auschwitz memorial, Krakow, and resilient people. Capital: Warsaw. Population: 38 million.</template>
+</category>
+
+<category><pattern>WHAT IS UKRAINE</pattern>
+<template>Ukraine is Europe's second-largest country by area, known as the "breadbasket of Europe" for wheat production. Capital: Kyiv. Currently defending against Russian invasion since 2022. Population: 43 million.</template>
+</category>
+
+<category><pattern>WHAT IS NEW ZEALAND</pattern>
+<template>New Zealand is an island nation in the Pacific known for stunning scenery (filmed Lord of the Rings here), Maori culture, and rugby. Capital: Wellington. Population: 5 million. More sheep than people!</template>
+</category>
+
+<category><pattern>WHAT IS KENYA</pattern>
+<template>Kenya is an East African country known for safaris, the Maasai people, and being the birthplace of human ancestors. Capital: Nairobi. Famous for long-distance runners. Population: 55 million.</template>
+</category>
+
+<category><pattern>WHAT IS NIGERIA</pattern>
+<template>Nigeria is Africa's most populous country (220 million) and largest economy. Known for Nollywood film industry, diverse culture (250+ ethnic groups), and oil resources. Capital: Abuja.</template>
+</category>
+
+<category><pattern>WHAT IS ETHIOPIA</pattern>
+<template>Ethiopia is Africa's oldest independent nation, never colonized (except brief Italian occupation). Birthplace of coffee, home to ancient churches, and has its own calendar. Capital: Addis Ababa.</template>
+</category>
+
+<category><pattern>WHAT IS MOROCCO</pattern>
+<template>Morocco is a North African country known for Marrakech, the Sahara Desert, delicious tagine, and vibrant medinas. Capital: Rabat. Has both Atlantic and Mediterranean coasts. Population: 37 million.</template>
+</category>
+
+<category><pattern>WHAT IS CUBA</pattern>
+<template>Cuba is a Caribbean island nation known for classic cars, cigars, salsa music, and communist government since 1959. Capital: Havana. 90 miles from Florida but isolated by US embargo. Population: 11 million.</template>
+</category>
+
+<category><pattern>WHAT IS JAMAICA</pattern>
+<template>Jamaica is a Caribbean island nation known for reggae music, Bob Marley, Usain Bolt, and beautiful beaches. Capital: Kingston. Famous for Blue Mountain coffee and Rastafarian culture.</template>
+</category>
+
+<category><pattern>WHAT IS THE AMAZON</pattern>
+<template>The Amazon is the world's largest rainforest, covering 5.5 million km² across 9 countries, mostly Brazil. It produces 20% of Earth's oxygen, contains 10% of all species, and is being rapidly deforested.</template>
+</category>
+
+<category><pattern>WHAT IS THE SAHARA</pattern>
+<template>The Sahara is the world's largest hot desert, covering 9 million km² of North Africa - almost as big as the USA! It wasn't always desert - 5,000 years ago it was green with lakes and rivers.</template>
+</category>
+
+<category><pattern>WHAT IS MOUNT EVEREST</pattern>
+<template>Mount Everest is the world's highest mountain at 8,849 meters (29,032 feet), located in the Himalayas between Nepal and Tibet. First summited by Edmund Hillary and Tenzing Norgay in 1953.</template>
+</category>
+
+<category><pattern>WHAT IS K2</pattern>
+<template>K2 is the world's second-highest mountain at 8,611 meters, located in Pakistan/China. It's called the "Savage Mountain" because it's more dangerous than Everest - 1 in 4 climbers who attempt it die.</template>
+</category>
+
+<category><pattern>WHAT IS THE NILE</pattern>
+<template>The Nile is the world's longest river at 6,650 km, flowing through 11 African countries to the Mediterranean. Ancient Egypt's civilization depended on its annual floods for agriculture.</template>
+</category>
+
+<category><pattern>WHAT IS THE AMAZON RIVER</pattern>
+<template>The Amazon River is the world's largest river by volume, carrying 20% of all river water to the ocean. It's 6,400 km long and has over 1,100 tributaries. During flood season, it can be 190 km wide!</template>
+</category>
+
+<category><pattern>WHAT IS THE PACIFIC OCEAN</pattern>
+<template>The Pacific is the world's largest and deepest ocean, covering 165 million km² - more than all land combined! It contains the Mariana Trench (deepest point on Earth) and the Ring of Fire volcanic zone.</template>
+</category>
+
+<category><pattern>WHAT IS THE ATLANTIC OCEAN</pattern>
+<template>The Atlantic is the world's second-largest ocean, separating the Americas from Europe and Africa. It's named after the Greek Titan Atlas. The Mid-Atlantic Ridge runs down its center.</template>
+</category>
+
+<category><pattern>WHAT IS THE GREAT WALL OF CHINA</pattern>
+<template>The Great Wall of China is a series of fortifications built over 2,000 years to protect against invasions. Total length: 21,196 km. Contrary to myth, it's NOT visible from space with the naked eye.</template>
+</category>
+
+<category><pattern>WHAT IS THE TAJ MAHAL</pattern>
+<template>The Taj Mahal is a white marble mausoleum in Agra, India, built by Mughal Emperor Shah Jahan for his wife Mumtaz Mahal. Completed in 1653, it's considered the finest example of Mughal architecture.</template>
+</category>
+
+<category><pattern>WHAT IS THE EIFFEL TOWER</pattern>
+<template>The Eiffel Tower is a 330-meter iron tower in Paris, built for the 1889 World's Fair. Originally criticized as an eyesore, it's now the world's most visited paid monument with 7 million visitors annually.</template>
+</category>
+
+<category><pattern>WHAT IS THE PYRAMIDS</pattern>
+<template>The Egyptian Pyramids are ancient tombs for pharaohs, built 4,500+ years ago. The Great Pyramid of Giza is the only surviving Ancient Wonder. Built with 2.3 million blocks, each weighing 2.5 tons on average.</template>
+</category>
+
+<category><pattern>WHAT IS THE COLOSSEUM</pattern>
+<template>The Colosseum is an ancient amphitheater in Rome, built 70-80 AD. It held 50,000-80,000 spectators watching gladiator fights and public spectacles. The largest ancient amphitheater ever built.</template>
+</category>
+
+<category><pattern>WHAT IS MACHU PICCHU</pattern>
+<template>Machu Picchu is a 15th-century Incan citadel in Peru, perched 2,430 meters high in the Andes. Abandoned during Spanish conquest and "rediscovered" in 1911. One of the New Seven Wonders of the World.</template>
+</category>
+
+<category><pattern>WHAT IS THE STATUE OF LIBERTY</pattern>
+<template>The Statue of Liberty is a copper statue in New York Harbor, a gift from France in 1886. It symbolizes freedom and welcomed millions of immigrants. She's 93 meters tall including the pedestal.</template>
+</category>
+
+</aiml>

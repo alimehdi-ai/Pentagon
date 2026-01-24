@@ -1,0 +1,13 @@
+<aiml version="1.0">
+
+<category>
+<pattern>LOAD AIML</pattern>
+<template>
+
+<!-- Load all AIML files -->
+<learn>*.aiml</learn>
+
+</template>
+</category>
+
+</aiml>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- Food and Drinks - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHAT IS PIZZA</pattern>
+<template>Pizza is an Italian dish: flatbread topped with tomato sauce, cheese, and various toppings. From Naples, it conquered the world! Americans eat 3 billion pizzas yearly. Debates rage over pineapple topping.</template>
+</category>
+
+<category><pattern>WHAT IS BURGER</pattern>
+<template>A burger is a sandwich with ground meat patty (usually beef) in a bun. Invented in late 1800s America (disputed origins). McDonald's sells 75 burgers per second! Veggie and plant-based versions gaining popularity.</template>
+</category>
+
+<category><pattern>WHAT IS BIRYANI</pattern>
+<template>Biryani is a South Asian rice dish layered with spiced meat, saffron, and fried onions. Origins in Mughal era. Hyderabadi and Lucknowi styles are famous. Every region claims theirs is best!</template>
+</category>
+
+<category><pattern>WHAT IS SUSHI</pattern>
+<template>Sushi is Japanese cuisine: vinegared rice with seafood, vegetables, or egg. Types include nigiri (fish on rice) and maki (rolls). Originated as a way to preserve fish. Now a global delicacy.</template>
+</category>
+
+<category><pattern>WHAT IS PASTA</pattern>
+<template>Pasta is Italian food made from wheat dough in various shapes: spaghetti, penne, fusilli, lasagna, etc. Different shapes hold different sauces! Italians eat 26 kg per person yearly.</template>
+</category>
+
+<category><pattern>WHAT IS RICE</pattern>
+<template>Rice is a cereal grain and staple food for half of humanity, especially Asia. Cultivated for 10,000+ years. White, brown, basmati, jasmine are varieties. 90% of world's rice is grown in Asia.</template>
+</category>
+
+<category><pattern>WHAT IS BREAD</pattern>
+<template>Bread is a staple food made from dough of flour and water. It's been fundamental to human civilization for 14,000 years. Types vary by culture: naan, baguette, pita, sourdough, rye.</template>
+</category>
+
+<category><pattern>WHAT IS CHOCOLATE</pattern>
+<template>Chocolate is a food made from cacao beans. Aztecs drank it unsweetened; Europeans added sugar. Now a $130B industry. Dark chocolate has health benefits. Switzerland and Belgium are famous for quality chocolate.</template>
+</category>
+
+<category><pattern>WHAT IS ICE CREAM</pattern>
+<template>Ice cream is a frozen dessert made from cream, sugar, and flavorings. Origins in ancient China/Persia. Americans eat 1.5 billion gallons yearly. Häagen-Dazs and Ben &amp; Jerry's are premium brands.</template>
+</category>
+
+<category><pattern>WHAT IS CHEESE</pattern>
+<template>Cheese is a dairy product made by coagulating milk protein. Over 1,800 varieties exist! France alone has 400+. Aged cheeses develop complex flavors. Pizza mozzarella to stinky blue - cheese spans extremes.</template>
+</category>
+
+<category><pattern>WHAT IS CHICKEN</pattern>
+<template>Chicken is the world's most consumed meat - healthier than red meat and cheaper. Roasted, fried, grilled, curried - it's versatile! 70 billion chickens are eaten annually. KFC made it globally iconic.</template>
+</category>
+
+<category><pattern>WHAT IS BEEF</pattern>
+<template>Beef is meat from cattle. It's high in protein, iron, and B vitamins but also saturated fat. Steaks, burgers, roasts are popular. Major producers: USA, Brazil, EU. Environmental impact is significant.</template>
+</category>
+
+<category><pattern>WHAT IS FISH</pattern>
+<template>Fish are aquatic animals that have been human food for 40,000 years. High in protein and omega-3s. Salmon, tuna, cod, tilapia are popular. Overfishing threatens ocean ecosystems.</template>
+</category>
+
+<category><pattern>WHAT IS VEGETABLE</pattern>
+<template>Vegetables are edible plant parts: leaves (spinach), roots (carrots), fruits (tomatoes), stems (celery). Essential for nutrition - fiber, vitamins, minerals. "Eat your vegetables" is universal parental advice!</template>
+</category>
+
+<category><pattern>WHAT IS FRUIT</pattern>
+<template>A fruit is the seed-bearing part of a plant, typically sweet. Provides vitamins, fiber, antioxidants. Bananas are the most consumed fruit globally. "An apple a day keeps the doctor away!"</template>
+</category>
+
+<category><pattern>WHAT IS CURRY</pattern>
+<template>Curry refers to dishes with a sauce seasoned with spices, especially in South Asian cuisine. The spice blend varies regionally. British curry is a distinct style. Curry houses are ubiquitous in UK.</template>
+</category>
+
+<category><pattern>WHAT IS NOODLES</pattern>
+<template>Noodles are strips of dough made from wheat, rice, or other starches. Staple in Asian cuisines for 4,000 years. Ramen, pho, pad thai, lo mein - each culture has signature noodle dishes.</template>
+</category>
+
+<category><pattern>WHAT IS RAMEN</pattern>
+<template>Ramen is Japanese noodle soup with wheat noodles in meat or fish broth, topped with pork, egg, seaweed, and vegetables. Instant ramen invented in 1958 feeds millions daily. Gourmet ramen is an art form.</template>
+</category>
+
+<category><pattern>WHAT IS TACOS</pattern>
+<template>A taco is a Mexican dish: a folded tortilla filled with meat, vegetables, cheese, and salsa. Authentic tacos are simple; Tex-Mex versions are more elaborate. Taco Tuesday is an institution!</template>
+</category>
+
+<category><pattern>WHAT IS HUMMUS</pattern>
+<template>Hummus is a Middle Eastern dip made from chickpeas, tahini, lemon, and garlic. It's been eaten for thousands of years. High in protein and fiber. Debates continue over its origin: Lebanon? Israel? Egypt?</template>
+</category>
+
+<category><pattern>WHAT IS FALAFEL</pattern>
+<template>Falafel is a deep-fried ball made from ground chickpeas or fava beans, popular in Middle Eastern cuisine. Often served in pita with salad and tahini. A staple street food and vegetarian protein source.</template>
+</category>
+
+<category><pattern>WHAT IS KEBAB</pattern>
+<template>Kebab refers to grilled meat dishes originating in the Middle East. Types include shish (skewered), doner (rotating spit), and seekh (ground). Döner kebab is Europe's favorite fast food!</template>
+</category>
+
+<category><pattern>WHAT IS SAMOSA</pattern>
+<template>A samosa is a fried or baked pastry with savory filling (spiced potatoes, peas, meat). Popular across South Asia, Middle East, and Africa. Perfect with chutney. A beloved snack and street food.</template>
+</category>
+
+<category><pattern>WHAT IS DIM SUM</pattern>
+<template>Dim sum is Cantonese cuisine: small bite-sized dishes served in steamer baskets. Dumplings, buns, rolls eaten with tea. "Yum cha" (drinking tea) is the social ritual around it. Perfect for sharing!</template>
+</category>
+
+<category><pattern>WHAT IS PHO</pattern>
+<template>Pho is Vietnamese soup with rice noodles in beef or chicken broth, topped with meat, herbs, and bean sprouts. Pronounced "fuh." Breakfast food in Vietnam, now globally loved comfort food.</template>
+</category>
+
+<category><pattern>WHAT IS PAD THAI</pattern>
+<template>Pad Thai is Thailand's national dish: stir-fried rice noodles with egg, tofu or shrimp, peanuts, and tamarind sauce. Created in the 1930s to promote national identity. Sweet, sour, salty, perfect balance!</template>
+</category>
+
+<category><pattern>WHAT IS CROISSANT</pattern>
+<template>A croissant is a buttery, flaky French pastry. Despite the name (meaning "crescent"), its origins are Austrian (kipferl). Perfect for breakfast with coffee. The laminated dough technique creates those layers.</template>
+</category>
+
+<category><pattern>WHAT IS PANCAKE</pattern>
+<template>A pancake is a flat cake made from batter and cooked on a hot surface. Every culture has versions: American (thick, fluffy), French (crêpes), Dutch (pannenkoeken). Perfect with maple syrup!</template>
+</category>
+
+<category><pattern>WHAT IS WAFFLE</pattern>
+<template>A waffle is a batter-based cake cooked between patterned plates, creating characteristic pockets. Belgian waffles are famous - Brussels style (light) vs Liège (denser, caramelized). Great with fruit and cream!</template>
+</category>
+
+<category><pattern>WHAT IS DONUT</pattern>
+<template>A donut (doughnut) is a fried ring of sweet dough, often glazed or filled. Brought to America by Dutch immigrants. Dunkin' sells 3 billion yearly. The hole supposedly invented for even cooking.</template>
+</category>
+
+<category><pattern>WHAT IS CAKE</pattern>
+<template>Cake is a sweet baked dessert. From simple sponge to elaborate wedding cakes. Birthday cakes with candles are universal. Varieties: chocolate, cheesecake, carrot, red velvet. "Let them eat cake!" - (not actually Marie Antoinette)</template>
+</category>
+
+<category><pattern>WHAT IS COOKIE</pattern>
+<template>A cookie is a small, baked sweet treat. Types include chocolate chip (invented 1938), Oreos, and butter cookies. Americans call them cookies; British say biscuits. Girl Scout cookie sales are $800M annually!</template>
+</category>
+
+<category><pattern>WHAT IS COFFEE</pattern>
+<template>Coffee is a brewed beverage from roasted coffee beans. The world's most popular psychoactive drug! Contains caffeine which blocks adenosine (sleepiness). Discovered in Ethiopia, now a global $100B industry.</template>
+</category>
+
+<category><pattern>WHAT IS TEA</pattern>
+<template>Tea is a beverage made by steeping leaves of the Camellia sinensis plant. Types: green, black, oolong, white. The world's most consumed drink after water. Originated in China 5,000 years ago.</template>
+</category>
+
+<category><pattern>WHAT IS BEER</pattern>
+<template>Beer is an alcoholic drink made by fermenting grain (usually barley). One of the oldest drinks - Sumerians brewed it 5,000 years ago. Styles include lager, ale, stout. Germany's Oktoberfest celebrates it!</template>
+</category>
+
+<category><pattern>WHAT IS WINE</pattern>
+<template>Wine is an alcoholic drink made from fermented grapes. Red, white, rosé, sparkling varieties. France, Italy, Spain are top producers. Wine culture is ancient - 8,000 years old. "In vino veritas" (in wine, truth).</template>
+</category>
+
+<category><pattern>WHAT IS WHISKEY</pattern>
+<template>Whiskey (or whisky) is a distilled spirit made from fermented grain. Types include Scotch (Scotland), Bourbon (USA), Irish whiskey. Aged in oak barrels for years. "Single malt" vs "blended" is a distinction.</template>
+</category>
+
+<category><pattern>WHAT IS VODKA</pattern>
+<template>Vodka is a clear distilled spirit, traditionally from Eastern Europe (Russia/Poland). Made from grains or potatoes. Known for neutrality - it's a canvas for cocktails. "Vodka" means "little water" in Russian.</template>
+</category>
+
+<category><pattern>WHAT IS RUM</pattern>
+<template>Rum is a spirit made from sugarcane or molasses. Associated with Caribbean and pirates! Types: white, dark, spiced, aged. Essential for cocktails: mojito, piña colada, daiquiri. "Yo ho ho and a bottle of rum!"</template>
+</category>
+
+<category><pattern>WHAT IS JUICE</pattern>
+<template>Juice is liquid extracted from fruits or vegetables. Orange juice is most popular. 100% juice vs "juice drinks" (mostly sugar water) - check labels! Fresh-squeezed has most nutrients.</template>
+</category>
+
+<category><pattern>WHAT IS MILK</pattern>
+<template>Milk is a white liquid produced by mammals to feed their young. Humans drink cow, goat, and other milk. High in calcium and protein. Plant-based alternatives (oat, almond, soy) are increasingly popular.</template>
+</category>
+
+<category><pattern>WHAT IS SMOOTHIE</pattern>
+<template>A smoothie is a blended drink of fruits, vegetables, yogurt, or other ingredients. Healthy meal replacement or snack. Popular additions: protein powder, spinach, chia seeds. Smoothie shops are everywhere!</template>
+</category>
+
+<category><pattern>WHAT IS SODA</pattern>
+<template>Soda (soft drink) is a carbonated, sweetened beverage. Coca-Cola and Pepsi dominate the $400B industry. High sugar content linked to health issues. Diet versions use artificial sweeteners.</template>
+</category>
+
+<category><pattern>WHAT IS COCONUT</pattern>
+<template>A coconut is a tropical fruit with water inside and white flesh. Used for oil, milk, cream, and flour. "Tree of life" in tropical cultures - every part is useful. Coconut water is a natural electrolyte drink.</template>
+</category>
+
+<category><pattern>WHAT IS AVOCADO</pattern>
+<template>An avocado is a fruit with creamy green flesh high in healthy fats. Originated in Mexico 10,000 years ago. Avocado toast became a millennial stereotype! Essential for guacamole. Technically a large berry!</template>
+</category>
+
+<category><pattern>WHAT IS MANGO</pattern>
+<template>A mango is a tropical fruit, one of the most consumed worldwide. Sweet, juicy, and vitamin-rich. National fruit of India, Pakistan, and Philippines. "King of fruits" in many cultures.</template>
+</category>
+
+<category><pattern>WHAT IS BANANA</pattern>
+<template>A banana is a curved yellow fruit and the world's most popular fruit. Cheap, nutritious, and convenient. Technically an herb! Cavendish variety dominates, but a fungus threatens global production.</template>
+</category>
+
+<category><pattern>WHAT IS STRAWBERRY</pattern>
+<template>A strawberry is a red fruit known for its sweetness and aroma. Technically not a berry (seeds are on the outside!). Used in desserts, jams, and smoothies. Wimbledon consumes 28,000 kg of strawberries!</template>
+</category>
+
+<category><pattern>WHAT IS TOMATO</pattern>
+<template>A tomato is technically a fruit but used as a vegetable. Native to South America, now essential worldwide - Italian pasta, Indian curry, American ketchup. Supreme Court ruled it a vegetable (1893) for tariff purposes!</template>
+</category>
+
+<category><pattern>WHAT IS POTATO</pattern>
+<template>A potato is a starchy tuber, the 4th largest food crop. Native to Peru. Fries, chips, mashed, baked - incredibly versatile. Saved Ireland (until the famine) and changed global diets. High in vitamin C!</template>
+</category>
+
+<category><pattern>WHAT IS ONION</pattern>
+<template>An onion is a bulb vegetable essential to cooking worldwide. Makes you cry because cutting releases sulfur compounds. Red, white, yellow varieties. The foundation of countless dishes - "start with sautéed onions."</template>
+</category>
+
+<category><pattern>WHAT IS GARLIC</pattern>
+<template>Garlic is a pungent bulb used for flavoring and medicine. "Stinking rose" has been used for 5,000 years. Supposed to ward off vampires! Crushing releases allicin - the beneficial compound. Black garlic is fermented.</template>
+</category>
+
+</aiml>

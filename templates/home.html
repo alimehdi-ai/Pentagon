@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentagon - AI Chatbot | PF AI Project</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            color: #eaeaea;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #16213e;
+            border-right: 1px solid #2a2a4a;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bot-info {
+            padding: 15px;
+            border-bottom: 1px solid #2a2a4a;
+            text-align: center;
+        }
+
+        .bot-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .bot-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+        }
+
+        .bot-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .team-short {
+            color: #8892b0;
+            font-size: 0.7em;
+            margin-top: 5px;
+        }
+
+        .chat-history-section {
+            padding: 15px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-history-section h3 {
+            color: #8892b0;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .chat-history-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .chat-history-item {
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chat-history-item:hover {
+            background: #252545;
+        }
+
+        .chat-history-item .user-msg {
+            color: #a5b4fc;
+            font-size: 0.8em;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-history-item .bot-msg {
+            color: #8892b0;
+            font-size: 0.75em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-history-item .timestamp {
+            color: #6b7280;
+            font-size: 0.65em;
+            margin-top: 4px;
+        }
+
+        .no-history {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.8em;
+            padding: 20px;
+        }
+
+        .user-info-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: #1a1a2e;
+            border-bottom: 1px solid #2a2a4a;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .user-info-bar span {
+            flex: 1;
+            font-size: 0.85em;
+            color: #eaeaea;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: none;
+            color: #8892b0;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #ef444420;
+            color: #ef4444;
+        }
+
+        .team-info {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .team-info h3 {
+            color: #8892b0;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .info-item label {
+            color: #8892b0;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-item p {
+            color: #eaeaea;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+
+        /* Main Chat Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #1a1a2e;
+        }
+
+        .chat-header {
+            padding: 15px 25px;
+            background: #16213e;
+            border-bottom: 1px solid #2a2a4a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h2 {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            background: #10b981;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            max-width: 70%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .message.user .message-avatar {
+            background: #3b82f6;
+        }
+
+        .message-content {
+            background: #16213e;
+            padding: 12px 16px;
+            border-radius: 16px;
+            line-height: 1.5;
+        }
+
+        .message.user .message-content {
+            background: #3b82f6;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.bot .message-content {
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-input-area {
+            padding: 20px;
+            background: #16213e;
+            border-top: 1px solid #2a2a4a;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 8px;
+            border: 1px solid #2a2a4a;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #667eea;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #eaeaea;
+            font-size: 0.95em;
+            padding: 8px 12px;
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: #6b7280;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* NLP Analysis Panel */
+        .nlp-panel {
+            width: 320px;
+            background: #16213e;
+            border-left: 1px solid #2a2a4a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .nlp-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #2a2a4a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nlp-header i {
+            color: #667eea;
+        }
+
+        .nlp-header h3 {
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .nlp-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .nlp-section {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .nlp-section h4 {
+            color: #8892b0;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nlp-section h4 i {
+            color: #667eea;
+        }
+
+        /* Sentiment Display */
+        .sentiment-display {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sentiment-emoji {
+            font-size: 2.5em;
+        }
+
+        .sentiment-details {
+            flex: 1;
+        }
+
+        .sentiment-label {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .sentiment-bar {
+            height: 6px;
+            background: #2a2a4a;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .sentiment-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .sentiment-bar-fill.positive { background: #10b981; }
+        .sentiment-bar-fill.negative { background: #ef4444; }
+        .sentiment-bar-fill.neutral { background: #6b7280; }
+
+        .sentiment-scores {
+            display: flex;
+            gap: 15px;
+            font-size: 0.75em;
+            color: #8892b0;
+        }
+
+        /* Tags Display */
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            background: #2a2a4a;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tag .pos {
+            color: #667eea;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        /* Entity tags */
+        .entity-tag {
+            background: #312e81;
+            color: #a5b4fc;
+        }
+
+        /* Noun definitions */
+        .noun-item {
+            background: #2a2a4a;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+        }
+
+        .noun-word {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 4px;
+        }
+
+        .noun-def {
+            font-size: 0.85em;
+            color: #8892b0;
+            line-height: 1.4;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            color: #6b7280;
+            padding: 30px;
+        }
+
+        .empty-state i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #4b5563;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3b3b5c;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b4b6c;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nlp-panel {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+            .bot-info, .chat-history-section, .user-info-bar {
+                display: none;
+            }
+            .sidebar::after {
+                content: '🤖';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="bot-info">
+                <div class="bot-header">
+                    <div class="bot-avatar">🤖</div>
+                    <div class="bot-name">Pentagon</div>
+                </div>
+                <div class="team-short">by Muqeet, Zaryab & Ali | PF AI - A1</div>
+            </div>
+            <div class="user-info-bar">
+                <div class="user-avatar">👤</div>
+                <span id="userDisplayName">User</span>
+                <button class="logout-btn" onclick="logout()" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+            <div class="chat-history-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="margin-bottom: 0;">Chat History</h3>
+                    <button onclick="newChatSession()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7em;" title="New Chat">
+                        <i class="fas fa-plus"></i> New
+                    </button>
+                </div>
+                <div class="chat-history-list" id="chatHistoryList">
+                    <div class="no-history">No chat history yet</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chat Area -->
+        <div class="main-content">
+            <div class="chat-header">
+                <h2><i class="fas fa-comments"></i> Chat with Pentagon</h2>
+                <div class="status-badge">Online</div>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        Hello! I'm <strong>Pentagon</strong>, an AI chatbot created by Muqeet, Zaryab, and Ali for the PF AI course. I can understand your messages using NLP! Try asking me something.
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <div class="input-wrapper">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off">
+                    <button class="send-btn" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NLP Analysis Panel -->
+        <div class="nlp-panel">
+            <div class="nlp-header">
+                <i class="fas fa-brain"></i>
+                <h3>NLP Analysis</h3>
+            </div>
+            <div class="nlp-content" id="nlpContent">
+                <div class="empty-state">
+                    <i class="fas fa-comment-dots"></i>
+                    <p>Send a message to see NLP analysis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const chatMessages = $('#chatMessages');
+            const chatInput = $('#chatInput');
+            const sendBtn = $('#sendBtn');
+            const nlpContent = $('#nlpContent');
+            const chatHistoryList = $('#chatHistoryList');
+
+            // Check if user is logged in
+            const currentUser = sessionStorage.getItem('pentagon_user');
+            let userId = sessionStorage.getItem('pentagon_user_id');
+            let sessionId = sessionStorage.getItem('pentagon_session_id');
+            
+            if (!currentUser || !userId) {
+                // Redirect to login page if not authenticated
+                window.location.href = '/login';
+                return;
+            }
+
+            // Parse user data and display username
+            const userData = JSON.parse(currentUser);
+            $('#userDisplayName').text(userData.name || userData.username);
+            
+            // Show admin badge if user is admin
+            if (userData.user_type === 'admin') {
+                $('#userDisplayName').after('<span class="admin-badge" style="background: #f59e0b; color: #000; font-size: 0.6em; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">ADMIN</span>');
+            }
+            
+            console.log('User ID:', userId, 'User:', userData.username, 'Session:', sessionId);
+
+            // Create new session if none exists
+            if (!sessionId) {
+                $.ajax({
+                    url: '/api/session/new/' + userId,
+                    method: 'POST',
+                    async: false,
+                    success: function(data) {
+                        if (data.session_id) {
+                            sessionId = data.session_id;
+                            sessionStorage.setItem('pentagon_session_id', sessionId);
+                            console.log('New session created:', sessionId);
+                        }
+                    },
+                    error: function() {
+                        console.log('Could not create session');
+                    }
+                });
+            }
+
+            // Logout function
+            window.logout = function() {
+                sessionStorage.removeItem('pentagon_user');
+                sessionStorage.removeItem('pentagon_user_id');
+                sessionStorage.removeItem('pentagon_session_id');
+                window.location.href = '/login';
+            };
+            
+            // New chat session function
+            window.newChatSession = function() {
+                $.ajax({
+                    url: '/api/session/new/' + userId,
+                    method: 'POST',
+                    success: function(data) {
+                        if (data.session_id) {
+                            sessionId = data.session_id;
+                            sessionStorage.setItem('pentagon_session_id', sessionId);
+                            chatMessages.empty();
+                            chatMessages.append('<div class="welcome-message" style="text-align: center; color: #8892b0; padding: 20px;">New chat session started!</div>');
+                            loadUserSessions();
+                            console.log('New session created:', sessionId);
+                        }
+                    },
+                    error: function() {
+                        alert('Could not create new session');
+                    }
+                });
+            };
+
+            function formatTimestamp(timestamp) {
+                if (!timestamp) return '';
+                const date = new Date(timestamp);
+                const now = new Date();
+                const diffMs = now - date;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                const diffDays = Math.floor(diffMs / 86400000);
+                
+                if (diffMins < 1) return 'Just now';
+                if (diffMins < 60) return diffMins + 'm ago';
+                if (diffHours < 24) return diffHours + 'h ago';
+                if (diffDays < 7) return diffDays + 'd ago';
+                return date.toLocaleDateString();
+            }
+
+            function updateChatHistory(history) {
+                if (!history || history.length === 0) {
+                    chatHistoryList.html('<div class="no-history">No chat history yet</div>');
+                    return;
+                }
+
+                let html = '';
+                // Show most recent first in sidebar
+                const reversed = [...history].reverse();
+                reversed.forEach(item => {
+                    const userMsg = item.input || item.user_text || '';
+                    const botMsg = item.output || item.agent_text || '';
+                    const time = formatTimestamp(item.timestamp || item.user_timestamp);
+                    const sessId = item.session_id || '';
+                    html += `
+                        <div class="chat-history-item" data-session="${sessId}" data-input="${userMsg.replace(/"/g, '&quot;')}" data-output="${botMsg.replace(/"/g, '&quot;')}">
+                            <div class="user-msg">👤 ${userMsg}</div>
+                            <div class="bot-msg">🤖 ${botMsg}</div>
+                            <div class="timestamp">${time}</div>
+                        </div>
+                    `;
+                });
+                chatHistoryList.html(html);
+            }
+            
+            function loadUserSessions() {
+                $.get('/api/sessions/' + userId)
+                    .done(function(data) {
+                        console.log('User sessions:', data);
+                        if (data && data.sessions && data.sessions.length > 0) {
+                            // Could display session list here if needed
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log('Could not load sessions:', error);
+                    });
+            }
+
+            function loadChatHistory() {
+                $.get('/api/chat_history/' + userId)
+                    .done(function(data) {
+                        console.log('Chat history loaded:', data);
+                        if (data && data.history) {
+                            updateChatHistory(data.history);
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log('Could not load chat history:', error);
+                    });
+            }
+
+            // Load history into chat area only on initial page load
+            function loadInitialHistory() {
+                $.get('/api/chat_history/' + userId)
+                    .done(function(data) {
+                        if (data && data.history && data.history.length > 0) {
+                            updateChatHistory(data.history);
+                            // Restore messages to chat area
+                            chatMessages.empty();
+                            data.history.forEach(item => {
+                                addMessage(item.input, true, false);
+                                addMessage(item.output, false, false);
+                            });
+                            chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                        }
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log('Could not load initial history:', error);
+                    });
+            }
+
+            function addMessage(content, isUser, animate = true) {
+                const messageClass = isUser ? 'user' : 'bot';
+                const avatar = isUser ? '👤' : '🤖';
+                const animClass = animate ? '' : ' style="animation: none;"';
+                const message = `
+                    <div class="message ${messageClass}"${animClass}>
+                        <div class="message-avatar">${avatar}</div>
+                        <div class="message-content">${content}</div>
+                    </div>
+                `;
+                chatMessages.append(message);
+                if (animate) {
+                    chatMessages.scrollTop(chatMessages[0].scrollHeight);
+                }
+            }
+
+            function updateNLPPanel(nlpData) {
+                if (!nlpData) {
+                    nlpContent.html('<div class="empty-state"><i class="fas fa-comment-dots"></i><p>Send a message to see NLP analysis</p></div>');
+                    return;
+                }
+
+                let html = '';
+
+                // Sentiment Analysis
+                if (nlpData.sentiment && nlpData.sentiment.sentiment) {
+                    const s = nlpData.sentiment;
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fas fa-heart"></i> Sentiment Analysis</h4>
+                            <div class="sentiment-display">
+                                <div class="sentiment-emoji">${s.emoji}</div>
+                                <div class="sentiment-details">
+                                    <div class="sentiment-label">${s.sentiment}</div>
+                                    <div class="sentiment-bar">
+                                        <div class="sentiment-bar-fill positive" style="width: ${s.scores.positive}%"></div>
+                                    </div>
+                                    <div class="sentiment-bar">
+                                        <div class="sentiment-bar-fill negative" style="width: ${s.scores.negative}%"></div>
+                                    </div>
+                                    <div class="sentiment-scores">
+                                        <span>Pos: ${s.scores.positive}%</span>
+                                        <span>Neg: ${s.scores.negative}%</span>
+                                        <span>Score: ${s.scores.compound}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Tokens & POS Tags
+                if (nlpData.pos_tags && nlpData.pos_tags.length > 0) {
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fas fa-tags"></i> Tokens & POS Tags</h4>
+                            <div class="tag-container">
+                    `;
+                    nlpData.pos_tags.forEach(item => {
+                        html += `<div class="tag">${item.word} <span class="pos">${item.tag}</span></div>`;
+                    });
+                    html += '</div></div>';
+                }
+
+                // Named Entities
+                if (nlpData.entities && nlpData.entities.length > 0) {
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fas fa-user-tag"></i> Named Entities</h4>
+                            <div class="tag-container">
+                    `;
+                    nlpData.entities.forEach(entity => {
+                        html += `<div class="tag entity-tag">${entity.name} <span class="pos">${entity.type}</span></div>`;
+                    });
+                    html += '</div></div>';
+                } else {
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fas fa-user-tag"></i> Named Entities</h4>
+                            <p style="color: #6b7280; font-size: 0.85em;">No named entities detected</p>
+                        </div>
+                    `;
+                }
+
+                // Noun Definitions
+                if (nlpData.nouns && nlpData.nouns.length > 0) {
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fas fa-book"></i> WordNet Definitions</h4>
+                    `;
+                    nlpData.nouns.forEach(noun => {
+                        html += `
+                            <div class="noun-item">
+                                <div class="noun-word">${noun.word}</div>
+                                <div class="noun-def">${noun.definition}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+
+                nlpContent.html(html || '<div class="empty-state"><i class="fas fa-comment-dots"></i><p>No analysis available</p></div>');
+            }
+
+            function sendMessage() {
+                const message = chatInput.val().trim();
+                if (!message) return;
+
+                addMessage(message, true);
+                chatInput.val('');
+
+                // Show typing indicator
+                const typingId = 'typing-' + Date.now();
+                chatMessages.append(`
+                    <div class="message bot" id="${typingId}">
+                        <div class="message-avatar">🤖</div>
+                        <div class="message-content"><em>Analyzing...</em></div>
+                    </div>
+                `);
+                chatMessages.scrollTop(chatMessages[0].scrollHeight);
+
+                $.get('/get', { msg: message, user_id: userId, session_id: sessionId })
+                    .done(function(data) {
+                        $(`#${typingId}`).remove();
+                        
+                        // Handle both JSON and string responses
+                        let response, nlpData;
+                        if (typeof data === 'object') {
+                            response = data.bot_reply || data.response;
+                            nlpData = data.nlp;
+                            // Update session ID if returned (new session created)
+                            if (data.session_id && data.session_id !== sessionId) {
+                                sessionId = data.session_id;
+                                sessionStorage.setItem('pentagon_session_id', sessionId);
+                            }
+                        } else {
+                            response = data;
+                            nlpData = null;
+                        }
+
+                        addMessage(response, false);
+                        updateNLPPanel(nlpData);
+                        
+                        // Refresh chat history from database
+                        loadChatHistory();
+                    })
+                    .fail(function() {
+                        $(`#${typingId}`).remove();
+                        addMessage("Sorry, I couldn't process that. Please try again.", false);
+                    });
+            }
+
+            sendBtn.click(sendMessage);
+            
+            chatInput.keypress(function(e) {
+                if (e.which === 13) {
+                    sendMessage();
+                }
+            });
+
+            // Load chat history on page load (initial load restores to chat area)
+            loadInitialHistory();
+
+            chatInput.focus();
+        });
+    </script>
+</body>
+</html>

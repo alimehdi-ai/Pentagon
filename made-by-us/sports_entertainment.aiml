@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- Sports and Entertainment - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHAT IS FOOTBALL</pattern>
+<template>Football (soccer) is the world's most popular sport, played by 4 billion fans. Two teams of 11 try to kick a ball into the opposing goal. The FIFA World Cup is watched by half of humanity!</template>
+</category>
+
+<category><pattern>WHAT IS SOCCER</pattern>
+<template>Soccer (called "football" everywhere except North America) is the world's most popular sport with 4 billion fans. Simple rules: 2 teams, 1 ball, get it in the goal. No hands allowed (except goalkeeper)!</template>
+</category>
+
+<category><pattern>WHAT IS CRICKET</pattern>
+<template>Cricket is a bat-and-ball sport hugely popular in South Asia, UK, and Australia. Two teams of 11 take turns batting and bowling. A Test match can last 5 days! The Cricket World Cup is a massive event.</template>
+</category>
+
+<category><pattern>WHAT IS BASKETBALL</pattern>
+<template>Basketball is a team sport where players shoot a ball through a hoop 10 feet high. Invented in 1891 by James Naismith. The NBA is the premier league. Stars like Jordan, LeBron, and Curry are global icons.</template>
+</category>
+
+<category><pattern>WHAT IS TENNIS</pattern>
+<template>Tennis is a racket sport played individually or in doubles. Points are scored in a unique system: 15, 30, 40, game. Four Grand Slam tournaments: Australian Open, French Open, Wimbledon, US Open.</template>
+</category>
+
+<category><pattern>WHAT IS GOLF</pattern>
+<template>Golf is a sport where players hit a ball into holes using various clubs. Typically 18 holes per course. Lowest score wins. Origins in 15th century Scotland. Major championships include The Masters and British Open.</template>
+</category>
+
+<category><pattern>WHAT IS BASEBALL</pattern>
+<template>Baseball is America's pastime - a bat-and-ball sport where batters try to hit and run around 4 bases. 9 innings per game. Major League Baseball has existed since 1903. Famous for hot dogs and 7th inning stretch!</template>
+</category>
+
+<category><pattern>WHAT IS AMERICAN FOOTBALL</pattern>
+<template>American football is a team sport where players advance an oval ball down a 100-yard field. Touchdowns score 6 points. The Super Bowl is America's biggest sporting event, watched by 100+ million.</template>
+</category>
+
+<category><pattern>WHAT IS HOCKEY</pattern>
+<template>Hockey can mean ice hockey (puck on ice, popular in Canada/USA) or field hockey (ball on grass, popular in South Asia/Europe). Fast-paced team sports with goals and goaltenders.</template>
+</category>
+
+<category><pattern>WHAT IS RUGBY</pattern>
+<template>Rugby is a contact team sport originating in England. Players advance an oval ball by carrying, passing, or kicking. It spawned American football. The Rugby World Cup is third-largest sporting event.</template>
+</category>
+
+<category><pattern>WHAT IS BOXING</pattern>
+<template>Boxing is a combat sport where two fighters punch each other in a ring. Matches are won by knockout, decision, or stoppage. Famous boxers: Muhammad Ali, Mike Tyson, Manny Pacquiao.</template>
+</category>
+
+<category><pattern>WHAT IS MMA</pattern>
+<template>MMA (Mixed Martial Arts) combines techniques from various fighting styles: boxing, wrestling, jiu-jitsu, kickboxing. UFC is the premier organization. Fighters compete in an octagonal cage.</template>
+</category>
+
+<category><pattern>WHAT IS WWE</pattern>
+<template>WWE (World Wrestling Entertainment) is sports entertainment combining scripted storylines with athletic performance. It's not "real" fighting but requires tremendous athleticism. Stars like The Rock became Hollywood actors.</template>
+</category>
+
+<category><pattern>WHAT IS THE OLYMPICS</pattern>
+<template>The Olympics are international sporting events held every 4 years, originated in ancient Greece (776 BC) and revived in 1896. Summer and Winter Games feature athletes from 200+ nations. The ultimate sporting stage.</template>
+</category>
+
+<category><pattern>WHAT IS FIFA</pattern>
+<template>FIFA (Fédération Internationale de Football Association) is the governing body of world football/soccer. It organizes the World Cup, the world's most-watched sporting event. Founded in 1904 with 211 member associations.</template>
+</category>
+
+<category><pattern>WHAT IS THE WORLD CUP</pattern>
+<template>The FIFA World Cup is the biggest soccer tournament, held every 4 years. 32 (soon 48) nations compete. Brazil has won 5 times. The 2022 final between Argentina and France was called the greatest match ever.</template>
+</category>
+
+<category><pattern>WHAT IS THE SUPER BOWL</pattern>
+<template>The Super Bowl is the NFL championship game, America's most-watched TV event. The halftime show features top performers. Commercial ads cost $7 million for 30 seconds! Held on "Super Bowl Sunday."</template>
+</category>
+
+<category><pattern>WHAT IS THE NBA</pattern>
+<template>The NBA (National Basketball Association) is the premier men's basketball league with 30 teams. Champions include Lakers (17), Celtics (17). Global stars like LeBron James and Stephen Curry make it worldwide popular.</template>
+</category>
+
+<category><pattern>WHAT IS WIMBLEDON</pattern>
+<template>Wimbledon is the oldest tennis tournament, held in London since 1877. The only Grand Slam on grass. Known for all-white dress code, strawberries and cream, and prestigious tradition.</template>
+</category>
+
+<category><pattern>WHAT IS THE PREMIER LEAGUE</pattern>
+<template>The Premier League is England's top football league and the world's most-watched sports league. 20 teams compete. Manchester United, Liverpool, Arsenal, Chelsea are historic clubs. Global TV audience of 3.2 billion!</template>
+</category>
+
+<category><pattern>WHAT IS LA LIGA</pattern>
+<template>La Liga is Spain's top football league, home to Real Madrid and Barcelona - two of the world's biggest clubs. Known for technical, possession-based football. Messi and Ronaldo dominated here.</template>
+</category>
+
+<category><pattern>WHAT IS THE CHAMPIONS LEAGUE</pattern>
+<template>The UEFA Champions League is Europe's premier club football tournament. Top clubs from each league compete. "That" anthem is iconic. Real Madrid has won 15 times - the most. Final watched by 400+ million.</template>
+</category>
+
+<category><pattern>WHAT IS CHESS</pattern>
+<template>Chess is a strategic board game dating back 1,500 years. Two players control 16 pieces each trying to checkmate the opponent's king. Grandmaster is the highest title. AI now beats all humans.</template>
+</category>
+
+<category><pattern>WHAT IS ESPORTS</pattern>
+<template>Esports is competitive video gaming, now a billion-dollar industry. Popular games: League of Legends, DOTA 2, Counter-Strike. Tournaments fill arenas, and top players earn millions. It may join the Olympics!</template>
+</category>
+
+<category><pattern>WHAT IS A MOVIE</pattern>
+<template>A movie (film) is a recorded visual story watched for entertainment. Movies emerged in the 1890s, revolutionized storytelling, and became a massive industry. Hollywood (USA) and Bollywood (India) are major centers.</template>
+</category>
+
+<category><pattern>WHAT IS HOLLYWOOD</pattern>
+<template>Hollywood is a district in Los Angeles and the historic center of the American film industry. It's synonymous with cinema glamour. Major studios include Disney, Warner Bros., Universal, and Paramount.</template>
+</category>
+
+<category><pattern>WHAT IS BOLLYWOOD</pattern>
+<template>Bollywood is the Hindi-language film industry based in Mumbai, India. It produces the most films annually. Known for song-and-dance sequences, colorful aesthetics, and melodramatic stories. Global reach of 3 billion!</template>
+</category>
+
+<category><pattern>WHAT IS NETFLIX</pattern>
+<template>Netflix is a streaming service with 250+ million subscribers. Started as DVD rental in 1997, pivoted to streaming in 2007, and began original content in 2013. Revolutionized how we watch TV and movies.</template>
+</category>
+
+<category><pattern>WHAT IS YOUTUBE</pattern>
+<template>YouTube is a video-sharing platform launched in 2005, bought by Google in 2006 for $1.65B. 2 billion monthly users watch 1 billion hours daily. It created "YouTubers" as a career. Second-largest search engine.</template>
+</category>
+
+<category><pattern>WHAT IS TIKTOK</pattern>
+<template>TikTok is a short-video social media app owned by Chinese company ByteDance. Launched internationally in 2017, it has 1 billion+ users. Known for viral trends, dances, and algorithm-driven discovery.</template>
+</category>
+
+<category><pattern>WHAT IS INSTAGRAM</pattern>
+<template>Instagram is a photo and video sharing social network owned by Meta (Facebook). Launched 2010, bought for $1B in 2012, now has 2 billion users. Known for influencers, filters, Stories, and Reels.</template>
+</category>
+
+<category><pattern>WHAT IS TWITTER</pattern>
+<template>Twitter (now called X) is a social media platform for short messages (originally 140, now 280 characters). Bought by Elon Musk in 2022 for $44B. Known for news, trends, and sometimes controversy.</template>
+</category>
+
+<category><pattern>WHAT IS FACEBOOK</pattern>
+<template>Facebook is the world's largest social network with 3 billion users. Founded by Mark Zuckerberg in 2004 at Harvard. Parent company Meta also owns Instagram and WhatsApp. It changed how we connect online.</template>
+</category>
+
+<category><pattern>WHAT IS SNAPCHAT</pattern>
+<template>Snapchat is a multimedia messaging app known for disappearing messages and AR filters. Popular with younger users. Pioneered Stories format that Instagram and others copied. 750 million users.</template>
+</category>
+
+<category><pattern>WHAT IS WHATSAPP</pattern>
+<template>WhatsApp is a messaging app used by 2 billion people. End-to-end encrypted. Bought by Facebook for $19B in 2014. Essential communication tool in many countries, especially India and Brazil.</template>
+</category>
+
+<category><pattern>WHAT IS SPOTIFY</pattern>
+<template>Spotify is the world's largest music streaming service with 550+ million users. Launched in 2008 from Sweden. It pays artists per stream (though rates are controversial) and offers podcasts too.</template>
+</category>
+
+<category><pattern>WHAT IS AMAZON</pattern>
+<template>Amazon is the world's largest e-commerce company, founded by Jeff Bezos in 1994 as an online bookstore. Now sells everything, has Prime streaming, and AWS cloud services power much of the internet.</template>
+</category>
+
+<category><pattern>WHAT IS DISNEY</pattern>
+<template>The Walt Disney Company is an entertainment conglomerate owning Mickey Mouse, Marvel, Star Wars, Pixar, ABC, ESPN, and Disneyland parks. Founded in 1923. Market value: $160 billion.</template>
+</category>
+
+<category><pattern>WHAT IS MARVEL</pattern>
+<template>Marvel is a comic book and entertainment company owned by Disney since 2009. It created Spider-Man, Iron Man, X-Men, Avengers. The Marvel Cinematic Universe is the highest-grossing film franchise ever.</template>
+</category>
+
+<category><pattern>WHAT IS DC</pattern>
+<template>DC Comics (Detective Comics) is a comic publisher owned by Warner Bros. It created Superman, Batman, Wonder Woman, Justice League. Rival to Marvel. The DC Extended Universe includes major films.</template>
+</category>
+
+<category><pattern>WHAT IS STAR WARS</pattern>
+<template>Star Wars is a space opera franchise created by George Lucas starting with the 1977 film. Features Darth Vader, Luke Skywalker, Yoda. Disney bought Lucasfilm for $4B in 2012. "May the Force be with you!"</template>
+</category>
+
+<category><pattern>WHAT IS HARRY POTTER</pattern>
+<template>Harry Potter is a fantasy book/film series by J.K. Rowling about a boy wizard. 7 books, 8 films, sold 500 million copies. Hogwarts, Voldemort, and "The boy who lived" became cultural phenomena.</template>
+</category>
+
+<category><pattern>WHAT IS GAME OF THRONES</pattern>
+<template>Game of Thrones is an HBO TV series (2011-2019) based on George R.R. Martin's books. Epic fantasy with dragons, politics, and shocking deaths. Controversial ending but one of the most popular shows ever.</template>
+</category>
+
+<category><pattern>WHAT IS ANIME</pattern>
+<template>Anime is Japanese animation, a distinct art style with large eyes, dramatic expressions, and diverse genres. Popular globally, it includes Dragon Ball, Naruto, Attack on Titan. Japan's $20B+ industry.</template>
+</category>
+
+<category><pattern>WHAT IS MANGA</pattern>
+<template>Manga are Japanese comics, read right-to-left. They cover all genres and ages. Manga artists (mangaka) are celebrities in Japan. Popular series include One Piece, Naruto, and My Hero Academia.</template>
+</category>
+
+<category><pattern>WHAT IS KPOP</pattern>
+<template>K-pop is Korean pop music known for catchy songs, synchronized choreography, and polished aesthetics. Global phenomenon with groups like BTS (most successful), BLACKPINK, and EXO. Multi-billion dollar industry.</template>
+</category>
+
+<category><pattern>WHAT IS BTS</pattern>
+<template>BTS (Bangtan Sonyeondan/Beyond The Scene) is a South Korean boy band and global phenomenon. 7 members, formed 2013. First K-pop act to top US charts. ARMY is their massive fan base. Worth $5B+ to Korean economy.</template>
+</category>
+
+<category><pattern>WHAT IS A VIDEO GAME</pattern>
+<template>A video game is an electronic game played on a screen. The industry is bigger than movies and music combined! From Pong (1972) to today's immersive worlds. Genres: shooter, RPG, puzzle, sports, simulation.</template>
+</category>
+
+<category><pattern>WHAT IS MINECRAFT</pattern>
+<template>Minecraft is a sandbox video game where players build with textured cubes in a procedurally generated 3D world. Launched 2011, sold 238 million copies - the best-selling game ever. Creative and survival modes.</template>
+</category>
+
+<category><pattern>WHAT IS FORTNITE</pattern>
+<template>Fortnite is a free-to-play battle royale game where 100 players fight until one remains. Launched 2017, it became a cultural phenomenon with in-game concerts and events. Over 350 million players.</template>
+</category>
+
+<category><pattern>WHAT IS GTA</pattern>
+<template>GTA (Grand Theft Auto) is an action-adventure video game series known for open-world crime gameplay. GTA V (2013) has sold 190 million copies and earned $8 billion - the most successful entertainment product ever!</template>
+</category>
+
+<category><pattern>WHAT IS CALL OF DUTY</pattern>
+<template>Call of Duty is a first-person shooter video game franchise started in 2003. Over $30 billion in revenue. Annual releases focus on different eras: WW2, modern warfare, future. Massive multiplayer community.</template>
+</category>
+
+<category><pattern>WHAT IS PLAYSTATION</pattern>
+<template>PlayStation is Sony's gaming console brand, launched in 1994. PS5 is the latest (2020). Has sold 500+ million consoles across generations. Exclusive games include God of War, The Last of Us, Spider-Man.</template>
+</category>
+
+<category><pattern>WHAT IS XBOX</pattern>
+<template>Xbox is Microsoft's gaming console brand, launched in 2001 to compete with PlayStation. Known for Xbox Game Pass subscription service. Owned studios include Bethesda and Activision Blizzard.</template>
+</category>
+
+<category><pattern>WHAT IS NINTENDO</pattern>
+<template>Nintendo is a Japanese gaming company that created Mario, Zelda, Pokemon, and iconic consoles: NES, Game Boy, Wii, Switch. Founded in 1889 as a playing card company! Known for family-friendly innovation.</template>
+</category>
+
+</aiml>

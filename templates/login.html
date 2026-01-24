@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pentagon - Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            color: #eaeaea;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: #16213e;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .bot-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2em;
+        }
+
+        .auth-header h1 {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .auth-header p {
+            color: #8892b0;
+            font-size: 0.9em;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: #8892b0;
+            font-size: 0.95em;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .auth-tab:hover:not(.active) {
+            color: #fff;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #8892b0;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 14px 14px 45px;
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 10px;
+            color: #eaeaea;
+            font-size: 0.95em;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-input::placeholder {
+            color: #6b7280;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .auth-btn:active {
+            transform: translateY(0);
+        }
+
+        .auth-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-message {
+            background: #dc262620;
+            border: 1px solid #dc2626;
+            color: #ef4444;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            display: none;
+        }
+
+        .success-message {
+            background: #10b98120;
+            border: 1px solid #10b981;
+            color: #10b981;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85em;
+            display: none;
+        }
+
+        .team-credit {
+            text-align: center;
+            margin-top: 25px;
+            color: #6b7280;
+            font-size: 0.75em;
+        }
+
+        .team-credit a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s ease-in-out infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="bot-avatar">🤖</div>
+                <h1>Pentagon</h1>
+                <p>AI Chatbot with NLP</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Login</button>
+                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            </div>
+
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" class="form-input" placeholder="Enter your username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-at"></i>
+                        <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required minlength="6">
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn" id="signupBtn">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <div class="team-credit">
+                by Muqeet, Zaryab & Ali | PF AI - A1
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Check if already logged in
+            const currentUser = sessionStorage.getItem('pentagon_user');
+            if (currentUser) {
+                window.location.href = '/';
+            }
+
+            // Tab switching
+            $('.auth-tab').click(function() {
+                const tab = $(this).data('tab');
+                $('.auth-tab').removeClass('active');
+                $(this).addClass('active');
+                $('.auth-form').removeClass('active');
+                $(`#${tab}Form`).addClass('active');
+                hideMessages();
+            });
+
+            function showError(message) {
+                $('#errorMessage').text(message).show();
+                $('#successMessage').hide();
+            }
+
+            function showSuccess(message) {
+                $('#successMessage').text(message).show();
+                $('#errorMessage').hide();
+            }
+
+            function hideMessages() {
+                $('#errorMessage').hide();
+                $('#successMessage').hide();
+            }
+
+            function setLoading(btn, loading) {
+                if (loading) {
+                    btn.prop('disabled', true);
+                    btn.data('original-text', btn.html());
+                    btn.html('<span class="spinner"></span> Please wait...');
+                } else {
+                    btn.prop('disabled', false);
+                    btn.html(btn.data('original-text'));
+                }
+            }
+
+            // Login form submission
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                hideMessages();
+                
+                const username = $('#loginUsername').val().trim();
+                const password = $('#loginPassword').val();
+                const btn = $('#loginBtn');
+
+                if (!username || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+
+                setLoading(btn, true);
+
+                $.ajax({
+                    url: '/api/auth/login',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ username, password }),
+                    success: function(response) {
+                        if (response.success) {
+                            sessionStorage.setItem('pentagon_user', JSON.stringify(response.user));
+                            sessionStorage.setItem('pentagon_user_id', response.user.id);
+                            showSuccess('Login successful! Redirecting...');
+                            setTimeout(() => {
+                                window.location.href = '/';
+                            }, 1000);
+                        } else {
+                            showError(response.message || 'Login failed');
+                            setLoading(btn, false);
+                        }
+                    },
+                    error: function(xhr) {
+                        const response = xhr.responseJSON;
+                        showError(response?.message || 'Login failed. Please try again.');
+                        setLoading(btn, false);
+                    }
+                });
+            });
+
+            // Signup form submission
+            $('#signupForm').submit(function(e) {
+                e.preventDefault();
+                hideMessages();
+                
+                const name = $('#signupName').val().trim();
+                const username = $('#signupUsername').val().trim();
+                const email = $('#signupEmail').val().trim();
+                const password = $('#signupPassword').val();
+                const btn = $('#signupBtn');
+
+                if (!name || !username || !email || !password) {
+                    showError('Please fill in all fields');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    showError('Password must be at least 6 characters');
+                    return;
+                }
+
+                setLoading(btn, true);
+
+                $.ajax({
+                    url: '/api/auth/signup',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ name, username, email, password }),
+                    success: function(response) {
+                        if (response.success) {
+                            showSuccess('Account created! Please login.');
+                            setLoading(btn, false);
+                            // Switch to login tab
+                            setTimeout(() => {
+                                $('.auth-tab[data-tab="login"]').click();
+                                $('#loginUsername').val(username);
+                            }, 1500);
+                        } else {
+                            showError(response.message || 'Signup failed');
+                            setLoading(btn, false);
+                        }
+                    },
+                    error: function(xhr) {
+                        const response = xhr.responseJSON;
+                        showError(response?.message || 'Signup failed. Please try again.');
+                        setLoading(btn, false);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

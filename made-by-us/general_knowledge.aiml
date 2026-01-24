@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- General Knowledge - Made by Muqeet, Zaryab, Ali -->
+
+<!-- Common Objects -->
+<category><pattern>WHAT IS APPLE</pattern>
+<template>Apple: 1. Temptation of Adam. 2. Inspiration for Newton. 3. Empire for Steve Jobs.</template>
+</category>
+
+<category><pattern>WHAT IS A COMPUTER</pattern>
+<template>A computer is an electronic device that processes data, performs calculations, and executes programs. It consists of hardware (CPU, RAM, storage) and software (operating system, applications).</template>
+</category>
+
+<category><pattern>WHAT IS THE INTERNET</pattern>
+<template>The Internet is a global network of interconnected computers that communicate using standardized protocols. It enables email, web browsing, social media, and countless other services.</template>
+</category>
+
+<category><pattern>WHAT IS WATER</pattern>
+<template>Water (H2O) is a transparent, tasteless, odorless liquid essential for all known forms of life. It covers about 71% of Earth's surface and makes up about 60% of the human body.</template>
+</category>
+
+<category><pattern>WHAT IS FIRE</pattern>
+<template>Fire is a chemical reaction called combustion that releases heat, light, and various gases. It requires fuel, oxygen, and heat to sustain itself.</template>
+</category>
+
+<category><pattern>WHAT IS AIR</pattern>
+<template>Air is the invisible mixture of gases surrounding Earth. It's composed of about 78% nitrogen, 21% oxygen, and small amounts of argon, carbon dioxide, and other gases.</template>
+</category>
+
+<category><pattern>WHAT IS ELECTRICITY</pattern>
+<template>Electricity is the flow of electric charge, typically through conductors like wires. It powers our homes, devices, and industries, generated from sources like fossil fuels, nuclear, solar, and wind.</template>
+</category>
+
+<category><pattern>WHAT IS GRAVITY</pattern>
+<template>Gravity is a fundamental force that attracts objects with mass toward each other. On Earth, it gives weight to objects and keeps us grounded. It was famously described by Newton and later refined by Einstein.</template>
+</category>
+
+<category><pattern>WHAT IS TIME</pattern>
+<template>Time is the indefinite continued progress of existence and events from past through present to future. It's measured in seconds, minutes, hours, days, and years.</template>
+</category>
+
+<category><pattern>WHAT IS MONEY</pattern>
+<template>Money is a medium of exchange used to facilitate transactions. It can be physical (coins, notes) or digital (cryptocurrency, bank transfers). It serves as a store of value and unit of account.</template>
+</category>
+
+<category><pattern>WHAT IS LOVE</pattern>
+<template>Love is a complex set of emotions, behaviors, and beliefs associated with strong feelings of affection, protectiveness, warmth, and respect for another person or thing.</template>
+</category>
+
+<category><pattern>WHAT IS HAPPINESS</pattern>
+<template>Happiness is a state of well-being and contentment. It can come from achievements, relationships, experiences, or simply appreciating life's moments.</template>
+</category>
+
+<category><pattern>WHAT IS MUSIC</pattern>
+<template>Music is an art form combining vocal or instrumental sounds in a harmonious or expressive way. It includes elements like melody, rhythm, harmony, and timbre.</template>
+</category>
+
+<category><pattern>WHAT IS ART</pattern>
+<template>Art is the expression of human creative skill and imagination, typically in visual forms like painting and sculpture, producing works to be appreciated for beauty or emotional power.</template>
+</category>
+
+<category><pattern>WHAT IS SCIENCE</pattern>
+<template>Science is the systematic study of the natural world through observation and experiment. It includes physics, chemistry, biology, astronomy, and many other disciplines.</template>
+</category>
+
+<category><pattern>WHAT IS MATHEMATICS</pattern>
+<template>Mathematics is the abstract science of number, quantity, and space. It includes arithmetic, algebra, geometry, calculus, and statistics, forming the foundation of science and engineering.</template>
+</category>
+
+<category><pattern>WHAT IS PHYSICS</pattern>
+<template>Physics is the natural science that studies matter, energy, motion, and force. It explores everything from subatomic particles to the entire universe.</template>
+</category>
+
+<category><pattern>WHAT IS CHEMISTRY</pattern>
+<template>Chemistry is the scientific study of matter's properties, composition, and transformations. It explains how substances interact, combine, and change.</template>
+</category>
+
+<category><pattern>WHAT IS BIOLOGY</pattern>
+<template>Biology is the scientific study of living organisms, including their structure, function, growth, evolution, and distribution.</template>
+</category>
+
+<category><pattern>WHAT IS HISTORY</pattern>
+<template>History is the study of past events, particularly human affairs. It helps us understand how societies developed and why the world is as it is today.</template>
+</category>
+
+<category><pattern>WHAT IS GEOGRAPHY</pattern>
+<template>Geography is the study of places and relationships between people and their environments. It includes physical geography (landforms, climate) and human geography (cultures, economies).</template>
+</category>
+
+<category><pattern>WHAT IS PHILOSOPHY</pattern>
+<template>Philosophy is the study of fundamental questions about existence, knowledge, values, reason, mind, and language. It seeks wisdom through rational argument.</template>
+</category>
+
+<category><pattern>WHAT IS PSYCHOLOGY</pattern>
+<template>Psychology is the scientific study of mind and behavior. It explores how people think, feel, and act, both individually and in groups.</template>
+</category>
+
+<category><pattern>WHAT IS ECONOMICS</pattern>
+<template>Economics is the social science studying production, distribution, and consumption of goods and services. It analyzes how societies allocate scarce resources.</template>
+</category>
+
+<category><pattern>WHAT IS POLITICS</pattern>
+<template>Politics is the set of activities associated with governance and decision-making in groups. It involves debate, negotiation, and exercise of power.</template>
+</category>
+
+<category><pattern>WHAT IS DEMOCRACY</pattern>
+<template>Democracy is a system of government where citizens exercise power through voting. It comes from Greek words meaning "rule by the people."</template>
+</category>
+
+<category><pattern>WHAT IS A BOOK</pattern>
+<template>A book is a medium for recording information, typically composed of bound pages containing text, images, or both. It can be fiction, non-fiction, or reference material.</template>
+</category>
+
+<category><pattern>WHAT IS A PHONE</pattern>
+<template>A phone is a telecommunications device that transmits voice and data. Modern smartphones combine calling with computing, cameras, and internet access.</template>
+</category>
+
+<category><pattern>WHAT IS A CAR</pattern>
+<template>A car is a wheeled motor vehicle used for transportation. It typically has four wheels, an engine, and can carry a small number of passengers.</template>
+</category>
+
+<category><pattern>WHAT IS A HOUSE</pattern>
+<template>A house is a building for human habitation, especially one that is lived in by a family or small group. It provides shelter, security, and comfort.</template>
+</category>
+
+<category><pattern>WHAT IS FOOD</pattern>
+<template>Food is any substance consumed to provide nutritional support for the body. It's usually of plant or animal origin and contains essential nutrients like carbohydrates, proteins, fats, and vitamins.</template>
+</category>
+
+<category><pattern>WHAT IS A TREE</pattern>
+<template>A tree is a perennial plant with an elongated stem (trunk) supporting branches and leaves. Trees produce oxygen, provide habitats, and are sources of wood and food.</template>
+</category>
+
+<category><pattern>WHAT IS THE SUN</pattern>
+<template>The Sun is the star at the center of our solar system. It's a nearly perfect sphere of hot plasma that provides Earth with light and heat, making life possible.</template>
+</category>
+
+<category><pattern>WHAT IS THE MOON</pattern>
+<template>The Moon is Earth's only natural satellite. It orbits our planet every 27.3 days and affects tides. Humans first walked on it in 1969.</template>
+</category>
+
+<category><pattern>WHAT IS A STAR</pattern>
+<template>A star is a luminous sphere of plasma held together by gravity. Stars produce energy through nuclear fusion, converting hydrogen into helium.</template>
+</category>
+
+<category><pattern>WHAT IS A PLANET</pattern>
+<template>A planet is a celestial body orbiting a star, massive enough for gravity to make it spherical, and having cleared its orbital neighborhood of other debris.</template>
+</category>
+
+<category><pattern>WHAT IS THE EARTH</pattern>
+<template>Earth is the third planet from the Sun and the only known planet to harbor life. It has one moon, liquid water, and a protective atmosphere.</template>
+</category>
+
+<category><pattern>WHAT IS SPACE</pattern>
+<template>Space is the vast, seemingly infinite expanse beyond Earth's atmosphere. It contains galaxies, stars, planets, and mostly empty vacuum.</template>
+</category>
+
+<category><pattern>WHAT IS A GALAXY</pattern>
+<template>A galaxy is a massive system of stars, gas, dust, and dark matter bound together by gravity. Our galaxy, the Milky Way, contains billions of stars.</template>
+</category>
+
+<category><pattern>WHAT IS THE UNIVERSE</pattern>
+<template>The Universe is all of space, time, matter, and energy that exists. It began with the Big Bang about 13.8 billion years ago and continues to expand.</template>
+</category>
+
+<category><pattern>WHAT IS DNA</pattern>
+<template>DNA (Deoxyribonucleic Acid) is a molecule carrying genetic instructions for all living organisms. Its double helix structure was discovered by Watson and Crick in 1953.</template>
+</category>
+
+<category><pattern>WHAT IS A CELL</pattern>
+<template>A cell is the basic structural and functional unit of all living organisms. Cells contain genetic material and can replicate themselves.</template>
+</category>
+
+<category><pattern>WHAT IS AN ATOM</pattern>
+<template>An atom is the smallest unit of matter that retains the properties of an element. It consists of a nucleus (protons and neutrons) surrounded by electrons.</template>
+</category>
+
+<category><pattern>WHAT IS ENERGY</pattern>
+<template>Energy is the capacity to do work. It exists in many forms including kinetic, potential, thermal, electrical, chemical, and nuclear energy.</template>
+</category>
+
+<category><pattern>WHAT IS LIGHT</pattern>
+<template>Light is electromagnetic radiation visible to the human eye. It travels at about 300,000 km/s and exhibits properties of both waves and particles (photons).</template>
+</category>
+
+<category><pattern>WHAT IS SOUND</pattern>
+<template>Sound is a vibration that propagates through a medium (like air) as a wave. We perceive sound when these waves reach our ears and are processed by our brain.</template>
+</category>
+
+<category><pattern>WHAT IS TEMPERATURE</pattern>
+<template>Temperature is a measure of the average kinetic energy of particles in a substance. It's measured in Celsius, Fahrenheit, or Kelvin scales.</template>
+</category>
+
+<category><pattern>WHAT IS PRESSURE</pattern>
+<template>Pressure is force applied perpendicular to a surface per unit area. It's measured in pascals, atmospheres, or pounds per square inch.</template>
+</category>
+
+<category><pattern>WHAT IS SPEED</pattern>
+<template>Speed is the rate at which an object covers distance. It's calculated as distance divided by time and measured in meters per second or kilometers per hour.</template>
+</category>
+
+<category><pattern>WHAT IS VELOCITY</pattern>
+<template>Velocity is speed with a direction. Unlike speed, velocity is a vector quantity that specifies both how fast something moves and in which direction.</template>
+</category>
+
+<category><pattern>WHAT IS ACCELERATION</pattern>
+<template>Acceleration is the rate of change of velocity over time. An object accelerates when it speeds up, slows down, or changes direction.</template>
+</category>
+
+<category><pattern>WHAT IS FORCE</pattern>
+<template>Force is any interaction that causes an object to change motion, direction, or shape. Newton's second law states Force equals mass times acceleration (F=ma).</template>
+</category>
+
+<category><pattern>WHAT IS MASS</pattern>
+<template>Mass is the amount of matter in an object. Unlike weight, mass remains constant regardless of location. It's measured in kilograms.</template>
+</category>
+
+<category><pattern>WHAT IS WEIGHT</pattern>
+<template>Weight is the force of gravity acting on an object's mass. Unlike mass, weight varies depending on gravitational strength.</template>
+</category>
+
+<category><pattern>WHAT IS VOLUME</pattern>
+<template>Volume is the amount of three-dimensional space enclosed by a boundary. It's measured in liters, cubic meters, or gallons.</template>
+</category>
+
+<category><pattern>WHAT IS DENSITY</pattern>
+<template>Density is mass per unit volume of a substance. Objects denser than water sink, while less dense objects float.</template>
+</category>
+
+<category><pattern>WHAT IS A VIRUS</pattern>
+<template>A virus is a microscopic infectious agent that replicates only inside living cells. Viruses cause diseases like flu, COVID-19, and common cold.</template>
+</category>
+
+<category><pattern>WHAT IS A BACTERIA</pattern>
+<template>Bacteria are single-celled microorganisms found everywhere on Earth. While some cause disease, many are beneficial for digestion and the environment.</template>
+</category>
+
+<category><pattern>WHAT IS A VACCINE</pattern>
+<template>A vaccine is a biological preparation that provides immunity to a specific disease. It stimulates the immune system to recognize and fight pathogens.</template>
+</category>
+
+<category><pattern>WHAT IS MEDICINE</pattern>
+<template>Medicine is the science and practice of diagnosing, treating, and preventing disease. It also refers to drugs used to treat illness.</template>
+</category>
+
+<category><pattern>WHAT IS A HOSPITAL</pattern>
+<template>A hospital is a healthcare institution providing patient treatment by specialized staff and equipment. It offers emergency care, surgery, and medical procedures.</template>
+</category>
+
+<category><pattern>WHAT IS EDUCATION</pattern>
+<template>Education is the process of acquiring knowledge, skills, values, and habits through teaching, training, or research. It's fundamental to personal and societal development.</template>
+</category>
+
+<category><pattern>WHAT IS A SCHOOL</pattern>
+<template>A school is an educational institution designed to provide learning spaces and environments for students under teachers' direction.</template>
+</category>
+
+<category><pattern>WHAT IS A UNIVERSITY</pattern>
+<template>A university is a higher education institution offering undergraduate and graduate programs. It typically includes multiple colleges and research facilities.</template>
+</category>
+
+<category><pattern>WHAT IS A LANGUAGE</pattern>
+<template>A language is a structured system of communication using words and grammar. There are over 7,000 languages spoken worldwide.</template>
+</category>
+
+<category><pattern>WHAT IS ENGLISH</pattern>
+<template>English is a West Germanic language originating in England. It's the most widely spoken language globally, used as official or primary language in over 50 countries.</template>
+</category>
+
+<category><pattern>WHAT IS PROGRAMMING</pattern>
+<template>Programming is the process of creating instructions for computers to execute. It involves writing code in languages like Python, Java, C++, or JavaScript.</template>
+</category>
+
+<category><pattern>WHAT IS SOFTWARE</pattern>
+<template>Software is a collection of programs and data that tell a computer how to perform tasks. It includes applications, operating systems, and utilities.</template>
+</category>
+
+<category><pattern>WHAT IS HARDWARE</pattern>
+<template>Hardware refers to the physical components of a computer system, including the CPU, memory, storage drives, keyboard, monitor, and other peripherals.</template>
+</category>
+
+<category><pattern>WHAT IS AN ALGORITHM</pattern>
+<template>An algorithm is a step-by-step procedure for solving a problem or accomplishing a task. It's fundamental to computer programming and mathematics.</template>
+</category>
+
+<category><pattern>WHAT IS ARTIFICIAL INTELLIGENCE</pattern>
+<template>Artificial Intelligence (AI) is the simulation of human intelligence by machines. It includes learning, reasoning, problem-solving, and language understanding.</template>
+</category>
+
+<category><pattern>WHAT IS AI</pattern>
+<template>AI (Artificial Intelligence) enables machines to learn from experience, adjust to new inputs, and perform human-like tasks. I am an example of AI!</template>
+</category>
+
+<category><pattern>WHAT IS MACHINE LEARNING</pattern>
+<template>Machine Learning is a subset of AI where computers learn from data without being explicitly programmed. It powers recommendations, image recognition, and predictions.</template>
+</category>
+
+<category><pattern>WHAT IS A ROBOT</pattern>
+<template>A robot is a machine capable of carrying out complex actions automatically. Robots can be programmed to perform tasks in manufacturing, medicine, exploration, and more.</template>
+</category>
+
+<category><pattern>WHAT IS A DATABASE</pattern>
+<template>A database is an organized collection of structured data stored electronically. It allows efficient storage, retrieval, and management of information.</template>
+</category>
+
+<category><pattern>WHAT IS A WEBSITE</pattern>
+<template>A website is a collection of web pages under a single domain name. Websites provide information, services, or entertainment accessible via the internet.</template>
+</category>
+
+<category><pattern>WHAT IS AN APP</pattern>
+<template>An app (application) is software designed to perform specific tasks. Mobile apps run on smartphones, while desktop apps run on computers.</template>
+</category>
+
+<category><pattern>WHAT IS SOCIAL MEDIA</pattern>
+<template>Social media are online platforms enabling users to create and share content and participate in social networking. Examples include Facebook, Twitter, and Instagram.</template>
+</category>
+
+<category><pattern>WHAT IS FACEBOOK</pattern>
+<template>Facebook is a social media platform founded by Mark Zuckerberg in 2004. It connects billions of users worldwide for sharing posts, photos, and messages.</template>
+</category>
+
+<category><pattern>WHAT IS TWITTER</pattern>
+<template>Twitter (now X) is a social media platform for short messages called tweets. It's used for news, opinions, and real-time discussions.</template>
+</category>
+
+<category><pattern>WHAT IS INSTAGRAM</pattern>
+<template>Instagram is a photo and video sharing social media platform owned by Meta. It's popular for sharing visual content and stories.</template>
+</category>
+
+<category><pattern>WHAT IS YOUTUBE</pattern>
+<template>YouTube is the world's largest video-sharing platform, owned by Google. Users can upload, view, and share videos on virtually any topic.</template>
+</category>
+
+<category><pattern>WHAT IS GOOGLE</pattern>
+<template>Google is the world's most popular search engine, founded by Larry Page and Sergey Brin in 1998. It also provides email, maps, cloud services, and Android.</template>
+</category>
+
+<category><pattern>WHAT IS AMAZON</pattern>
+<template>Amazon is the world's largest e-commerce and cloud computing company, founded by Jeff Bezos in 1994. It offers online shopping, AWS, and streaming services.</template>
+</category>
+
+<category><pattern>WHAT IS MICROSOFT</pattern>
+<template>Microsoft is a technology company founded by Bill Gates and Paul Allen in 1975. It created Windows, Office, Xbox, and Azure cloud services.</template>
+</category>
+
+<category><pattern>WHAT IS A SMARTPHONE</pattern>
+<template>A smartphone is a mobile phone with advanced computing capabilities. It combines calling, messaging, internet, camera, apps, and GPS in one device.</template>
+</category>
+
+<category><pattern>WHAT IS AN IPHONE</pattern>
+<template>iPhone is Apple's smartphone line, first released in 2007 by Steve Jobs. It revolutionized mobile phones with its touchscreen interface and App Store.</template>
+</category>
+
+<category><pattern>WHAT IS ANDROID</pattern>
+<template>Android is a mobile operating system developed by Google. It powers most of the world's smartphones and tablets, known for its customization options.</template>
+</category>
+
+<category><pattern>WHAT IS WINDOWS</pattern>
+<template>Windows is a series of operating systems by Microsoft. It's the most widely used desktop OS, known for its graphical user interface.</template>
+</category>
+
+<category><pattern>WHAT IS LINUX</pattern>
+<template>Linux is a free, open-source operating system kernel created by Linus Torvalds in 1991. It powers servers, supercomputers, Android, and many devices.</template>
+</category>
+
+<category><pattern>WHAT IS PYTHON</pattern>
+<template>Python is a high-level programming language known for its simple syntax and versatility. It's popular for web development, AI, data science, and automation.</template>
+</category>
+
+<category><pattern>WHAT IS JAVA</pattern>
+<template>Java is a popular object-oriented programming language created by Sun Microsystems in 1995. Its "write once, run anywhere" principle makes it highly portable.</template>
+</category>
+
+<category><pattern>WHAT IS JAVASCRIPT</pattern>
+<template>JavaScript is a programming language primarily used for web development. It makes websites interactive and powers both front-end and back-end applications.</template>
+</category>
+
+<category><pattern>WHAT IS HTML</pattern>
+<template>HTML (HyperText Markup Language) is the standard markup language for creating web pages. It structures content using elements like headings, paragraphs, and links.</template>
+</category>
+
+<category><pattern>WHAT IS CSS</pattern>
+<template>CSS (Cascading Style Sheets) is a style language used to describe the presentation of HTML documents. It controls layout, colors, fonts, and visual design.</template>
+</category>
+
+</aiml>

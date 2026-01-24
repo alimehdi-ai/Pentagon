@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- History and Events - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHAT IS WORLD WAR 1</pattern>
+<template>World War 1 (1914-1918) was a global conflict starting after Archduke Franz Ferdinand's assassination. It involved trench warfare, 17 million deaths, and ended with Germany's defeat. It set the stage for WW2.</template>
+</category>
+
+<category><pattern>WHAT IS WORLD WAR 2</pattern>
+<template>World War 2 (1939-1945) was history's deadliest conflict: 70-85 million deaths. Caused by Nazi Germany's expansion, it ended with Hitler's defeat, atomic bombs on Japan, and the creation of the UN.</template>
+</category>
+
+<category><pattern>WHAT IS THE HOLOCAUST</pattern>
+<template>The Holocaust was Nazi Germany's systematic murder of 6 million Jews and millions of others (Roma, disabled, LGBTQ+) during WW2. It remains history's starkest warning about hatred and dehumanization.</template>
+</category>
+
+<category><pattern>WHAT IS THE COLD WAR</pattern>
+<template>The Cold War (1947-1991) was political tension between the US (capitalism) and USSR (communism). No direct fighting, but proxy wars, nuclear arms race, and space race. Ended with Soviet collapse.</template>
+</category>
+
+<category><pattern>WHAT IS 9 11</pattern>
+<template>9/11 refers to September 11, 2001, when terrorists hijacked planes and crashed into the World Trade Center and Pentagon, killing nearly 3,000. It led to the War on Terror and changed global security forever.</template>
+</category>
+
+<category><pattern>WHAT IS COVID 19</pattern>
+<template>COVID-19 is a disease caused by SARS-CoV-2 coronavirus, first identified in late 2019 in Wuhan, China. The pandemic killed millions, transformed work and education, and accelerated vaccine technology.</template>
+</category>
+
+<category><pattern>WHAT IS THE FRENCH REVOLUTION</pattern>
+<template>The French Revolution (1789-1799) overthrew the monarchy, established a republic, and spread ideals of liberty, equality, and fraternity. It ended with the guillotine, Reign of Terror, and Napoleon's rise.</template>
+</category>
+
+<category><pattern>WHAT IS THE AMERICAN REVOLUTION</pattern>
+<template>The American Revolution (1775-1783) was the US colonies' war for independence from Britain. Key figures: George Washington, Thomas Jefferson. It created the first modern constitutional republic.</template>
+</category>
+
+<category><pattern>WHAT IS THE INDUSTRIAL REVOLUTION</pattern>
+<template>The Industrial Revolution (1760-1840) was the shift from hand production to machines, starting in Britain. It transformed society: urbanization, factories, railways, and eventually better living standards.</template>
+</category>
+
+<category><pattern>WHAT IS THE RENAISSANCE</pattern>
+<template>The Renaissance (14th-17th century) was Europe's cultural rebirth after the Middle Ages. It brought art (da Vinci, Michelangelo), science (Galileo), and humanism. Florence, Italy was the epicenter.</template>
+</category>
+
+<category><pattern>WHAT IS THE REFORMATION</pattern>
+<template>The Reformation (1517-1648) was Martin Luther's challenge to Catholic Church practices, leading to Protestantism. His 95 Theses criticized indulgences. It split Christianity and sparked religious wars.</template>
+</category>
+
+<category><pattern>WHAT IS THE ROMAN EMPIRE</pattern>
+<template>The Roman Empire (27 BC-476 AD) was one of history's largest empires, centered on Rome. It gave us roads, laws, Latin language, and spread Christianity. "All roads lead to Rome" was literally true!</template>
+</category>
+
+<category><pattern>WHAT IS THE OTTOMAN EMPIRE</pattern>
+<template>The Ottoman Empire (1299-1922) was a Turkish state that controlled Southeast Europe, Western Asia, and North Africa. It conquered Constantinople in 1453 and lasted 600+ years until Turkey became a republic.</template>
+</category>
+
+<category><pattern>WHAT IS THE BRITISH EMPIRE</pattern>
+<template>The British Empire was history's largest empire, covering 25% of Earth at its peak. It spread English language, parliamentary democracy, and common law. Colonialism's legacy remains complex and debated.</template>
+</category>
+
+<category><pattern>WHAT IS THE MUGHAL EMPIRE</pattern>
+<template>The Mughal Empire (1526-1857) ruled most of the Indian subcontinent. It gave us the Taj Mahal, rich art, and Persian-influenced culture. Declined as British power rose, ending after the 1857 rebellion.</template>
+</category>
+
+<category><pattern>WHAT IS SLAVERY</pattern>
+<template>Slavery is forced labor without payment or freedom. The Atlantic slave trade (15th-19th century) forcibly transported 12+ million Africans to the Americas. Abolished in most of the world by the late 1800s.</template>
+</category>
+
+<category><pattern>WHAT IS COLONIALISM</pattern>
+<template>Colonialism is when a country takes control of another territory, exploiting its resources and people. European powers colonized most of Asia, Africa, and the Americas. Effects persist in borders, languages, and inequalities.</template>
+</category>
+
+<category><pattern>WHAT IS INDEPENDENCE</pattern>
+<template>Independence is freedom from external control. Many countries gained independence from colonial powers in the 20th century. Pakistan and India: 1947. Most African nations: 1960s. Often celebrated annually.</template>
+</category>
+
+<category><pattern>WHAT IS PARTITION</pattern>
+<template>Partition typically refers to 1947's division of British India into India and Pakistan (and later Bangladesh). It caused one of history's largest migrations (15 million) and violence (1-2 million deaths).</template>
+</category>
+
+<category><pattern>WHAT IS THE CIVIL RIGHTS MOVEMENT</pattern>
+<template>The Civil Rights Movement (1950s-60s) fought to end racial discrimination in the US. Leaders like MLK Jr. used nonviolent protest. Key victories: desegregation, Voting Rights Act. Struggle continues today.</template>
+</category>
+
+<category><pattern>WHAT IS APARTHEID</pattern>
+<template>Apartheid (1948-1994) was South Africa's system of racial segregation. The white minority ruled, oppressing the Black majority. Nelson Mandela led opposition and became president after apartheid ended.</template>
+</category>
+
+<category><pattern>WHAT IS THE BERLIN WALL</pattern>
+<template>The Berlin Wall (1961-1989) divided East and West Berlin during the Cold War. It symbolized the Iron Curtain between communist and capitalist worlds. Its fall on November 9, 1989 marked communism's collapse in Europe.</template>
+</category>
+
+<category><pattern>WHAT IS THE MOON LANDING</pattern>
+<template>The Moon landing occurred on July 20, 1969, when Apollo 11's Neil Armstrong and Buzz Aldrin became the first humans on the Moon. Armstrong's words: "One small step for man, one giant leap for mankind."</template>
+</category>
+
+<category><pattern>WHAT IS THE SPACE RACE</pattern>
+<template>The Space Race (1957-1975) was US-Soviet competition for spaceflight superiority. USSR launched Sputnik first; US won the Moon race. It drove technological innovation that benefits us today.</template>
+</category>
+
+<category><pattern>WHAT IS THE TITANIC</pattern>
+<template>The Titanic was a British ship that sank on April 15, 1912, on its maiden voyage after hitting an iceberg. 1,500+ died. Called "unsinkable," it's a symbol of hubris. Found on the ocean floor in 1985.</template>
+</category>
+
+<category><pattern>WHAT IS THE GREAT DEPRESSION</pattern>
+<template>The Great Depression (1929-1939) was the worst economic downturn in modern history, starting with the US stock market crash. Unemployment hit 25%. It ended with WW2 spending and New Deal reforms.</template>
+</category>
+
+<category><pattern>WHAT IS THE BLACK DEATH</pattern>
+<template>The Black Death (1347-1351) was a plague pandemic that killed 75-200 million people - up to 60% of Europe's population. Caused by Yersinia pestis bacteria, spread by fleas on rats. Changed society forever.</template>
+</category>
+
+<category><pattern>WHAT IS HIROSHIMA</pattern>
+<template>Hiroshima is the Japanese city where the first atomic bomb was dropped on August 6, 1945, killing 80,000 instantly and more from radiation. Three days later, Nagasaki was bombed. Japan surrendered, ending WW2.</template>
+</category>
+
+<category><pattern>WHAT IS THE SILK ROAD</pattern>
+<template>The Silk Road was an ancient network of trade routes connecting East and West from 130 BC to 1453 AD. It spread silk, spices, ideas, religions, and unfortunately, diseases. China's Belt and Road echoes it today.</template>
+</category>
+
+<category><pattern>WHAT IS THE CRUSADES</pattern>
+<template>The Crusades (1095-1291) were religious wars where European Christians tried to capture the Holy Land from Muslims. They failed ultimately but increased East-West contact, trade, and lasting tensions.</template>
+</category>
+
+<category><pattern>WHAT IS MAGNA CARTA</pattern>
+<template>Magna Carta (1215) was an English document limiting the king's power and establishing that everyone, including royalty, is subject to law. It's a foundation of constitutional democracy and human rights.</template>
+</category>
+
+<category><pattern>WHAT IS THE DECLARATION OF INDEPENDENCE</pattern>
+<template>The Declaration of Independence (July 4, 1776) announced American colonies' separation from Britain. Written mainly by Thomas Jefferson, it declared "all men are created equal" with rights to life, liberty, and pursuit of happiness.</template>
+</category>
+
+<category><pattern>WHAT IS THE CONSTITUTION</pattern>
+<template>The Constitution is a country's fundamental law. The US Constitution (1787) is the world's oldest written national constitution, establishing government structure and citizen rights through amendments (Bill of Rights).</template>
+</category>
+
+<category><pattern>WHAT IS THE UNITED NATIONS</pattern>
+<template>The United Nations (UN) is an international organization founded in 1945 after WW2 to maintain peace and security. It has 193 member states. Headquartered in NYC. Bodies include Security Council and WHO.</template>
+</category>
+
+<category><pattern>WHAT IS NATO</pattern>
+<template>NATO (North Atlantic Treaty Organization) is a military alliance formed in 1949 for collective defense. Originally against Soviet threats, now 31 members. Article 5: attack on one is attack on all.</template>
+</category>
+
+<category><pattern>WHAT IS THE EUROPEAN UNION</pattern>
+<template>The European Union (EU) is a political/economic union of 27 European countries. Started to prevent war and promote trade. Has single market, Schengen area (no border checks), and the euro currency.</template>
+</category>
+
+<category><pattern>WHAT IS BREXIT</pattern>
+<template>Brexit is the UK's departure from the European Union, voted for in 2016 and completed January 31, 2020. It remains controversial, affecting trade, immigration, and UK-EU relations.</template>
+</category>
+
+<category><pattern>WHAT IS COMMUNISM</pattern>
+<template>Communism is a political ideology advocating common ownership of production means and no private property. Marx's vision; implemented in USSR, China, Cuba. In practice, led to authoritarian regimes.</template>
+</category>
+
+<category><pattern>WHAT IS CAPITALISM</pattern>
+<template>Capitalism is an economic system with private ownership, free markets, and profit motive. It creates wealth and innovation but can cause inequality. Most modern economies are mixed systems.</template>
+</category>
+
+<category><pattern>WHAT IS SOCIALISM</pattern>
+<template>Socialism is a political/economic system advocating collective ownership and democratic control of production. Exists on a spectrum - from Scandinavian social democracy to authoritarian socialism.</template>
+</category>
+
+<category><pattern>WHAT IS FASCISM</pattern>
+<template>Fascism is authoritarian ultranationalism characterized by dictatorial power, forcible suppression of opposition, and rigid society/economy. Associated with Mussolini's Italy and Hitler's Germany.</template>
+</category>
+
+<category><pattern>WHAT IS TERRORISM</pattern>
+<template>Terrorism is the use of violence against civilians to achieve political goals through fear. It's a tactic, not ideology - used by various groups throughout history. One person's terrorist is another's freedom fighter.</template>
+</category>
+
+<category><pattern>WHAT IS GENOCIDE</pattern>
+<template>Genocide is the deliberate killing of a large group of people, especially an ethnic or national group. Examples: Holocaust, Armenian, Rwandan, Bosnian genocides. The term was created in 1944 by Raphael Lemkin.</template>
+</category>
+
+<category><pattern>WHAT IS THE ARAB SPRING</pattern>
+<template>The Arab Spring (2010-2012) was a wave of protests and uprisings across the Arab world demanding democracy and reform. It started in Tunisia, toppled some dictators, but led to civil wars in Syria and Libya.</template>
+</category>
+
+<category><pattern>WHAT IS THE CHINESE REVOLUTION</pattern>
+<template>The Chinese Revolution (1949) brought communists under Mao Zedong to power, establishing the People's Republic of China. The Nationalists fled to Taiwan. Mao's rule brought both land reform and mass famines.</template>
+</category>
+
+<category><pattern>WHAT IS THE RUSSIAN REVOLUTION</pattern>
+<template>The Russian Revolution (1917) overthrew the Tsar and eventually brought Bolsheviks (communists) under Lenin to power. It created the Soviet Union and shaped 20th century geopolitics.</template>
+</category>
+
+<category><pattern>WHAT IS IMPERIALISM</pattern>
+<template>Imperialism is extending a country's power through colonization, military force, or economic dominance. European imperialism (1500s-1900s) controlled most of the world. Its effects persist today.</template>
+</category>
+
+<category><pattern>WHAT IS NATIONALISM</pattern>
+<template>Nationalism is strong identification with one's nation and support for its interests. It can unite people and drive independence movements, but extreme nationalism has caused wars and atrocities.</template>
+</category>
+
+<category><pattern>WHAT IS GLOBALIZATION</pattern>
+<template>Globalization is increasing worldwide interconnection through trade, technology, and culture. Benefits: economic growth, cultural exchange. Criticisms: inequality, loss of local cultures, environmental damage.</template>
+</category>
+
+</aiml>

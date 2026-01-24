@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- Famous People - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHO IS ALBERT EINSTEIN</pattern>
+<template>Albert Einstein (1879-1955) was a German-born physicist who developed the theory of relativity. His equation E=mc² is one of the most famous in science. He won the Nobel Prize in Physics in 1921.</template>
+</category>
+
+<category><pattern>WHO IS ISAAC NEWTON</pattern>
+<template>Isaac Newton (1643-1727) was an English mathematician and physicist. He discovered gravity, developed calculus, and formulated the laws of motion that form the foundation of classical mechanics.</template>
+</category>
+
+<category><pattern>WHO IS STEPHEN HAWKING</pattern>
+<template>Stephen Hawking (1942-2018) was a British theoretical physicist known for his work on black holes and cosmology. Despite having ALS, he became one of the most famous scientists of our time.</template>
+</category>
+
+<category><pattern>WHO IS NIKOLA TESLA</pattern>
+<template>Nikola Tesla (1856-1943) was a Serbian-American inventor and engineer. He developed AC electrical systems, the Tesla coil, and contributed to radio technology.</template>
+</category>
+
+<category><pattern>WHO IS THOMAS EDISON</pattern>
+<template>Thomas Edison (1847-1931) was an American inventor holding over 1,000 patents. He invented the practical light bulb, phonograph, and motion picture camera.</template>
+</category>
+
+<category><pattern>WHO IS STEVE JOBS</pattern>
+<template>Steve Jobs (1955-2011) co-founded Apple Inc. and revolutionized personal computing, phones, music, and tablets with products like Mac, iPhone, iPod, and iPad.</template>
+</category>
+
+<category><pattern>WHO IS BILL GATES</pattern>
+<template>Bill Gates (born 1955) co-founded Microsoft and was the world's richest person for many years. He now focuses on philanthropy through the Bill &amp; Melinda Gates Foundation.</template>
+</category>
+
+<category><pattern>WHO IS ELON MUSK</pattern>
+<template>Elon Musk (born 1971) is an entrepreneur who founded SpaceX, leads Tesla, acquired Twitter (now X), and co-founded PayPal. He aims to colonize Mars and accelerate sustainable energy.</template>
+</category>
+
+<category><pattern>WHO IS MARK ZUCKERBERG</pattern>
+<template>Mark Zuckerberg (born 1984) is the co-founder and CEO of Meta (formerly Facebook). He launched Facebook from his Harvard dorm room in 2004.</template>
+</category>
+
+<category><pattern>WHO IS JEFF BEZOS</pattern>
+<template>Jeff Bezos (born 1964) founded Amazon in 1994, growing it from an online bookstore to the world's largest e-commerce company. He also founded Blue Origin space company.</template>
+</category>
+
+<category><pattern>WHO IS MUHAMMAD ALI</pattern>
+<template>Muhammad Ali (1942-2016) was an American boxer and activist, widely regarded as the greatest heavyweight boxer of all time. Famous quote: "Float like a butterfly, sting like a bee."</template>
+</category>
+
+<category><pattern>WHO IS MICHAEL JORDAN</pattern>
+<template>Michael Jordan (born 1963) is a retired basketball legend who played for the Chicago Bulls. He won 6 NBA championships and is considered the greatest basketball player ever.</template>
+</category>
+
+<category><pattern>WHO IS LIONEL MESSI</pattern>
+<template>Lionel Messi (born 1987) is an Argentine footballer widely considered the greatest player of all time. He has won 8 Ballon d'Or awards and the 2022 FIFA World Cup.</template>
+</category>
+
+<category><pattern>WHO IS CRISTIANO RONALDO</pattern>
+<template>Cristiano Ronaldo (born 1985) is a Portuguese footballer and one of the greatest players ever. He has won 5 Ballon d'Or awards and multiple league titles in England, Spain, and Italy.</template>
+</category>
+
+<category><pattern>WHO IS WILLIAM SHAKESPEARE</pattern>
+<template>William Shakespeare (1564-1616) was an English playwright and poet, widely regarded as the greatest writer in the English language. He wrote Hamlet, Romeo and Juliet, Macbeth, and many more.</template>
+</category>
+
+<category><pattern>WHO IS LEONARDO DA VINCI</pattern>
+<template>Leonardo da Vinci (1452-1519) was an Italian polymath: painter, sculptor, architect, inventor, and scientist. He painted the Mona Lisa and The Last Supper, and designed flying machines.</template>
+</category>
+
+<category><pattern>WHO IS PABLO PICASSO</pattern>
+<template>Pablo Picasso (1881-1973) was a Spanish painter and sculptor who co-founded Cubism. He created over 20,000 works and is one of the most influential artists of the 20th century.</template>
+</category>
+
+<category><pattern>WHO IS BEETHOVEN</pattern>
+<template>Ludwig van Beethoven (1770-1827) was a German composer and pianist. He composed symphonies, concertos, and sonatas that bridged Classical and Romantic eras, even while going deaf.</template>
+</category>
+
+<category><pattern>WHO IS MOZART</pattern>
+<template>Wolfgang Amadeus Mozart (1756-1791) was an Austrian composer who composed over 600 works in his short 35 years. A child prodigy, he mastered symphony, opera, and chamber music.</template>
+</category>
+
+<category><pattern>WHO IS MAHATMA GANDHI</pattern>
+<template>Mahatma Gandhi (1869-1948) led India's independence movement through nonviolent civil disobedience. His philosophy of peaceful resistance inspired civil rights movements worldwide.</template>
+</category>
+
+<category><pattern>WHO IS NELSON MANDELA</pattern>
+<template>Nelson Mandela (1918-2013) was a South African anti-apartheid revolutionary who became the country's first Black president. He spent 27 years in prison and won the Nobel Peace Prize.</template>
+</category>
+
+<category><pattern>WHO IS MARTIN LUTHER KING</pattern>
+<template>Martin Luther King Jr. (1929-1968) was an American civil rights leader who advocated for racial equality through nonviolent protest. His "I Have a Dream" speech is iconic.</template>
+</category>
+
+<category><pattern>WHO IS ABRAHAM LINCOLN</pattern>
+<template>Abraham Lincoln (1809-1865) was the 16th US President who led the nation through the Civil War and abolished slavery with the Emancipation Proclamation.</template>
+</category>
+
+<category><pattern>WHO IS GEORGE WASHINGTON</pattern>
+<template>George Washington (1732-1799) was the first President of the United States and Commander-in-Chief during the American Revolutionary War. He's called the "Father of His Country."</template>
+</category>
+
+<category><pattern>WHO IS NAPOLEON</pattern>
+<template>Napoleon Bonaparte (1769-1821) was a French military leader who rose during the French Revolution to become Emperor of France. He conquered much of Europe before his defeat at Waterloo.</template>
+</category>
+
+<category><pattern>WHO IS ALEXANDER THE GREAT</pattern>
+<template>Alexander the Great (356-323 BC) was a Macedonian king who created one of history's largest empires, stretching from Greece to India, by age 30. He never lost a battle.</template>
+</category>
+
+<category><pattern>WHO IS JULIUS CAESAR</pattern>
+<template>Julius Caesar (100-44 BC) was a Roman general and statesman who played a critical role in transforming the Roman Republic into the Roman Empire. He was assassinated on the Ides of March.</template>
+</category>
+
+<category><pattern>WHO IS CLEOPATRA</pattern>
+<template>Cleopatra VII (69-30 BC) was the last active ruler of the Ptolemaic Kingdom of Egypt. Known for her relationships with Julius Caesar and Mark Antony, she was highly educated and politically astute.</template>
+</category>
+
+<category><pattern>WHO IS QUEEN ELIZABETH</pattern>
+<template>Queen Elizabeth II (1926-2022) was the longest-reigning British monarch, serving for 70 years. She modernized the monarchy and was a symbol of continuity through changing times.</template>
+</category>
+
+<category><pattern>WHO IS PRINCESS DIANA</pattern>
+<template>Princess Diana (1961-1997) was the first wife of King Charles III. Known as the "People's Princess," she was beloved for her charity work and warmth. Her death shocked the world.</template>
+</category>
+
+<category><pattern>WHO IS MOTHER TERESA</pattern>
+<template>Mother Teresa (1910-1997) was an Albanian-Indian Catholic nun who founded the Missionaries of Charity. She dedicated her life to serving the poor in Calcutta and won the Nobel Peace Prize.</template>
+</category>
+
+<category><pattern>WHO IS MARIE CURIE</pattern>
+<template>Marie Curie (1867-1934) was a Polish-French physicist and chemist who discovered radioactivity, polonium, and radium. She was the first woman to win a Nobel Prize and the only person to win in two sciences.</template>
+</category>
+
+<category><pattern>WHO IS CHARLES DARWIN</pattern>
+<template>Charles Darwin (1809-1882) was an English naturalist who developed the theory of evolution by natural selection. His book "On the Origin of Species" transformed biology.</template>
+</category>
+
+<category><pattern>WHO IS GALILEO</pattern>
+<template>Galileo Galilei (1564-1642) was an Italian astronomer, physicist, and mathematician. He improved the telescope, discovered Jupiter's moons, and supported heliocentrism despite persecution.</template>
+</category>
+
+<category><pattern>WHO IS ARISTOTLE</pattern>
+<template>Aristotle (384-322 BC) was a Greek philosopher and scientist who studied under Plato. His works cover logic, physics, biology, ethics, and politics, influencing Western thought for millennia.</template>
+</category>
+
+<category><pattern>WHO IS PLATO</pattern>
+<template>Plato (428-348 BC) was a Greek philosopher and founder of the Academy in Athens. His dialogues, featuring Socrates, explore justice, beauty, equality, and knowledge.</template>
+</category>
+
+<category><pattern>WHO IS SOCRATES</pattern>
+<template>Socrates (470-399 BC) was a Greek philosopher considered the founder of Western philosophy. He developed the Socratic method of questioning. He was executed for "corrupting youth."</template>
+</category>
+
+<category><pattern>WHO IS CONFUCIUS</pattern>
+<template>Confucius (551-479 BC) was a Chinese philosopher whose teachings on ethics, family, and government became the foundation of East Asian culture and Confucianism.</template>
+</category>
+
+<category><pattern>WHO IS BUDDHA</pattern>
+<template>Buddha (Siddhartha Gautama, c. 563-483 BC) was the founder of Buddhism. Born a prince in Nepal, he achieved enlightenment and taught the path to end suffering through the Middle Way.</template>
+</category>
+
+<category><pattern>WHO IS JESUS</pattern>
+<template>Jesus Christ (c. 4 BC - 30 AD) is the central figure of Christianity, believed by Christians to be the Son of God and savior of humanity. His teachings form the basis of Christian faith.</template>
+</category>
+
+<category><pattern>WHO IS MUHAMMAD</pattern>
+<template>Prophet Muhammad (570-632 AD) is the founder of Islam and considered the last prophet by Muslims. He received the Quran and established the Muslim community in Medina.</template>
+</category>
+
+<category><pattern>WHO IS WALT DISNEY</pattern>
+<template>Walt Disney (1901-1966) was an American entrepreneur who co-founded The Walt Disney Company. He created Mickey Mouse, pioneered animated films, and built Disneyland.</template>
+</category>
+
+<category><pattern>WHO IS OPRAH WINFREY</pattern>
+<template>Oprah Winfrey (born 1954) is an American media executive, actress, and philanthropist. Her talk show was the highest-rated of its kind, and she's one of the world's most influential women.</template>
+</category>
+
+<category><pattern>WHO IS MICHAEL JACKSON</pattern>
+<template>Michael Jackson (1958-2009) was an American singer and dancer, known as the "King of Pop." His albums Thriller and Bad are among the best-selling ever. He popularized the moonwalk.</template>
+</category>
+
+<category><pattern>WHO IS ELVIS PRESLEY</pattern>
+<template>Elvis Presley (1935-1977) was an American singer and actor known as the "King of Rock and Roll." He brought rock music to mainstream audiences and is one of the best-selling music artists ever.</template>
+</category>
+
+<category><pattern>WHO IS THE BEATLES</pattern>
+<template>The Beatles were a British rock band formed in Liverpool in 1960: John Lennon, Paul McCartney, George Harrison, and Ringo Starr. They're the best-selling music act of all time.</template>
+</category>
+
+<category><pattern>WHO IS BOB MARLEY</pattern>
+<template>Bob Marley (1945-1981) was a Jamaican singer and musician who popularized reggae music worldwide. His songs like "One Love" and "No Woman, No Cry" spread messages of peace and unity.</template>
+</category>
+
+<category><pattern>WHO IS MARILYN MONROE</pattern>
+<template>Marilyn Monroe (1926-1962) was an American actress and model who became a major cultural icon. Known for films like "Some Like It Hot" and her iconic blonde image.</template>
+</category>
+
+<category><pattern>WHO IS CHARLIE CHAPLIN</pattern>
+<template>Charlie Chaplin (1889-1977) was a British actor, filmmaker, and composer who rose to fame in silent films. His character "The Tramp" became a worldwide icon of comedy.</template>
+</category>
+
+<category><pattern>WHO IS ALFRED HITCHCOCK</pattern>
+<template>Alfred Hitchcock (1899-1980) was a British filmmaker known as the "Master of Suspense." His films include Psycho, Vertigo, The Birds, and North by Northwest.</template>
+</category>
+
+<category><pattern>WHO IS STEVEN SPIELBERG</pattern>
+<template>Steven Spielberg (born 1946) is an American filmmaker and one of the most commercially successful directors. He directed Jaws, E.T., Jurassic Park, Schindler's List, and Saving Private Ryan.</template>
+</category>
+
+<category><pattern>WHO IS TOM HANKS</pattern>
+<template>Tom Hanks (born 1956) is an American actor and filmmaker known for Forrest Gump, Cast Away, Saving Private Ryan, and Toy Story. He's won two consecutive Academy Awards.</template>
+</category>
+
+<category><pattern>WHO IS LEONARDO DICAPRIO</pattern>
+<template>Leonardo DiCaprio (born 1974) is an American actor and environmentalist. Known for Titanic, Inception, The Wolf of Wall Street, and The Revenant, for which he won an Oscar.</template>
+</category>
+
+<category><pattern>WHO IS ANGELINA JOLIE</pattern>
+<template>Angelina Jolie (born 1975) is an American actress, filmmaker, and humanitarian. Known for Tomb Raider, Mr. &amp; Mrs. Smith, and Maleficent, she's also a UN Special Envoy.</template>
+</category>
+
+<category><pattern>WHO IS BRAD PITT</pattern>
+<template>Brad Pitt (born 1963) is an American actor and producer. Known for Fight Club, Troy, Inglourious Basterds, and Once Upon a Time in Hollywood, winning an Oscar for the latter.</template>
+</category>
+
+<category><pattern>WHO IS TAYLOR SWIFT</pattern>
+<template>Taylor Swift (born 1989) is an American singer-songwriter. Starting in country music, she became a global pop star. Her albums like 1989 and Folklore broke numerous records.</template>
+</category>
+
+<category><pattern>WHO IS BEYONCE</pattern>
+<template>Beyoncé (born 1981) is an American singer, songwriter, and actress. Rising to fame with Destiny's Child, she became one of the world's best-selling music artists.</template>
+</category>
+
+<category><pattern>WHO IS RIHANNA</pattern>
+<template>Rihanna (born 1988) is a Barbadian singer, actress, and businesswoman. Known for hits like "Umbrella" and "Diamonds," she also founded the successful Fenty Beauty brand.</template>
+</category>
+
+<category><pattern>WHO IS DRAKE</pattern>
+<template>Drake (born 1986) is a Canadian rapper, singer, and actor. He started on the TV show Degrassi and became one of the best-selling music artists worldwide.</template>
+</category>
+
+<category><pattern>WHO IS KANYE WEST</pattern>
+<template>Kanye West (born 1977) is an American rapper, producer, and fashion designer. His innovative albums and Yeezy brand made him influential in both music and fashion.</template>
+</category>
+
+<category><pattern>WHO IS EMINEM</pattern>
+<template>Eminem (born 1972) is an American rapper, songwriter, and producer. Known for his technical skill and controversial lyrics, he's one of the best-selling music artists ever.</template>
+</category>
+
+<category><pattern>WHO IS JAY Z</pattern>
+<template>Jay-Z (born 1969) is an American rapper, businessman, and record executive. One of the best-selling musicians ever, he co-founded Roc-A-Fella Records and owns Tidal.</template>
+</category>
+
+<category><pattern>WHO IS LEBRON JAMES</pattern>
+<template>LeBron James (born 1984) is an American basketball player widely considered one of the greatest ever. He's won 4 NBA championships with three different teams.</template>
+</category>
+
+<category><pattern>WHO IS USAIN BOLT</pattern>
+<template>Usain Bolt (born 1986) is a Jamaican retired sprinter and the fastest person ever recorded. He holds world records in 100m (9.58s) and 200m (19.19s) and won 8 Olympic gold medals.</template>
+</category>
+
+<category><pattern>WHO IS ROGER FEDERER</pattern>
+<template>Roger Federer (born 1981) is a Swiss retired tennis player. He held the world No. 1 ranking for a record 310 weeks and won 20 Grand Slam titles.</template>
+</category>
+
+<category><pattern>WHO IS SERENA WILLIAMS</pattern>
+<template>Serena Williams (born 1981) is an American tennis player, widely regarded as the greatest female tennis player ever. She won 23 Grand Slam singles titles.</template>
+</category>
+
+<category><pattern>WHO IS TIGER WOODS</pattern>
+<template>Tiger Woods (born 1975) is an American golfer, one of the greatest ever. He's won 15 major championships and held the world No. 1 ranking for a record total of 683 weeks.</template>
+</category>
+
+<category><pattern>WHO IS SACHIN TENDULKAR</pattern>
+<template>Sachin Tendulkar (born 1973) is a retired Indian cricketer, widely regarded as one of the greatest batsmen ever. He holds numerous records including most runs in international cricket.</template>
+</category>
+
+<category><pattern>WHO IS VIRAT KOHLI</pattern>
+<template>Virat Kohli (born 1988) is an Indian cricketer and former captain, considered one of the best batsmen in the world. He's known for his aggressive batting style.</template>
+</category>
+
+<category><pattern>WHO IS STEPHEN CURRY</pattern>
+<template>Stephen Curry (born 1988) is an American basketball player who revolutionized the game with his three-point shooting. He's won 4 NBA championships with the Golden State Warriors.</template>
+</category>
+
+</aiml>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+<!-- Animals and Nature - Made by Muqeet, Zaryab, Ali -->
+
+<category><pattern>WHAT IS A DOG</pattern>
+<template>A dog is a domesticated mammal and humanity's oldest companion (15,000+ years). There are 340+ breeds from Chihuahua to Great Dane. Dogs are loyal, trainable, and can detect cancer, seizures, and emotions!</template>
+</category>
+
+<category><pattern>WHAT IS A CAT</pattern>
+<template>A cat is a small carnivorous mammal, domesticated 10,000 years ago. They're independent, sleep 12-16 hours daily, and can't taste sweetness. Cats have been worshipped (Egypt) and feared (medieval Europe).</template>
+</category>
+
+<category><pattern>WHAT IS A LION</pattern>
+<template>A lion is a large cat native to Africa, called the "King of the Jungle" (though they live in savannas). They're the only social cats, living in prides. Males have iconic manes. Sadly, only 20,000 remain in the wild.</template>
+</category>
+
+<category><pattern>WHAT IS A TIGER</pattern>
+<template>A tiger is the largest wild cat, native to Asia. Each tiger has unique stripes like fingerprints. They're solitary and excellent swimmers. Only 4,500 remain in the wild - conservation is critical.</template>
+</category>
+
+<category><pattern>WHAT IS AN ELEPHANT</pattern>
+<template>An elephant is Earth's largest land animal, weighing up to 6 tons. They're highly intelligent, emotional, and have complex social structures. They mourn their dead and have amazing memory. Endangered due to poaching.</template>
+</category>
+
+<category><pattern>WHAT IS A WHALE</pattern>
+<template>A whale is a large marine mammal. Blue whales are the largest animals EVER - up to 100 feet long. Whales breathe air, nurse their young, and communicate with songs heard miles away.</template>
+</category>
+
+<category><pattern>WHAT IS A DOLPHIN</pattern>
+<template>A dolphin is a highly intelligent marine mammal. They use echolocation, have names for each other, and show self-awareness in mirrors. They're playful, social, and have helped save humans from sharks!</template>
+</category>
+
+<category><pattern>WHAT IS A SHARK</pattern>
+<template>A shark is a cartilaginous fish that's been around for 400 million years (before dinosaurs!). Great whites can detect blood from miles away. Sharks kill ~10 humans yearly; humans kill 100 million sharks.</template>
+</category>
+
+<category><pattern>WHAT IS A HORSE</pattern>
+<template>A horse is a domesticated mammal crucial to human civilization for 5,000 years - transportation, farming, warfare. They sleep standing up, can run at 55 mph, and see nearly 360 degrees.</template>
+</category>
+
+<category><pattern>WHAT IS A COW</pattern>
+<template>A cow is a domesticated bovine raised for meat, milk, and leather. Sacred in Hinduism. They have best friends, can recognize faces, and produce 8 gallons of milk daily. 1 billion cows exist worldwide.</template>
+</category>
+
+<category><pattern>WHAT IS A CHICKEN</pattern>
+<template>A chicken is a domesticated bird, the most common bird on Earth (25 billion). They're descendants of dinosaurs, can recognize 100+ individuals, and outnumber humans 3 to 1!</template>
+</category>
+
+<category><pattern>WHAT IS A SNAKE</pattern>
+<template>A snake is a legless reptile. 3,000+ species exist, 600 venomous. They smell with their tongues, swallow prey whole, and shed skin as they grow. Snakes control rodent populations and produce useful venom.</template>
+</category>
+
+<category><pattern>WHAT IS A SPIDER</pattern>
+<template>A spider is an eight-legged arachnid (not insects!). 45,000+ species exist. Most are harmless; only ~25 are dangerous to humans. Spider silk is stronger than steel by weight. They eat 400-800 million tons of insects yearly!</template>
+</category>
+
+<category><pattern>WHAT IS A BEE</pattern>
+<template>A bee is a flying insect crucial for pollinating 75% of crops. A colony has one queen, workers (female), and drones (male). They communicate through dance! Colony collapse disorder threatens global food security.</template>
+</category>
+
+<category><pattern>WHAT IS A BUTTERFLY</pattern>
+<template>A butterfly is an insect with colorful wings. They undergo metamorphosis: egg → caterpillar → chrysalis → butterfly. Monarchs migrate 3,000 miles! They taste with their feet and have 12,000 eyes.</template>
+</category>
+
+<category><pattern>WHAT IS AN ANT</pattern>
+<template>An ant is a social insect living in colonies up to millions. They can lift 50x their body weight! Ants have been around for 100 million years and exist on every continent except Antarctica.</template>
+</category>
+
+<category><pattern>WHAT IS A BEAR</pattern>
+<template>A bear is a large carnivorous mammal found in the Americas, Europe, and Asia. 8 species exist. Bears hibernate, are excellent swimmers, and can run 35 mph despite their size. Mostly avoid humans.</template>
+</category>
+
+<category><pattern>WHAT IS A WOLF</pattern>
+<template>A wolf is a wild canine and ancestor of domestic dogs. They live in packs with complex social hierarchies. Wolves communicate through howls heard 10 miles away. Crucial apex predators in ecosystems.</template>
+</category>
+
+<category><pattern>WHAT IS A MONKEY</pattern>
+<template>A monkey is a primate with tails (unlike apes). 260+ species exist. Highly social and intelligent, they use tools, teach behaviors, and show empathy. Found in Africa, Asia, and Central/South America.</template>
+</category>
+
+<category><pattern>WHAT IS A GORILLA</pattern>
+<template>A gorilla is the largest living primate, native to African forests. They're gentle herbivores, share 98% of our DNA, and live in family groups led by a silverback male. Critically endangered.</template>
+</category>
+
+<category><pattern>WHAT IS A CHIMPANZEE</pattern>
+<template>A chimpanzee is our closest living relative, sharing 98.7% of our DNA. They use tools, have culture, feel emotions, and can learn sign language. Native to African forests. Endangered.</template>
+</category>
+
+<category><pattern>WHAT IS A PANDA</pattern>
+<template>A giant panda is a black-and-white bear native to China, eating almost exclusively bamboo (12 hours daily!). Symbol of wildlife conservation, they were endangered but recently recovered to "vulnerable" status.</template>
+</category>
+
+<category><pattern>WHAT IS A KOALA</pattern>
+<template>A koala is an Australian marsupial (not a bear!). They sleep 22 hours daily, eat only eucalyptus leaves (which are toxic to most animals), and have fingerprints nearly identical to humans!</template>
+</category>
+
+<category><pattern>WHAT IS A KANGAROO</pattern>
+<template>A kangaroo is an Australian marsupial that hops on powerful hind legs at up to 35 mph. Females have pouches for joeys. They can't walk backward and can use their tail as a fifth leg.</template>
+</category>
+
+<category><pattern>WHAT IS A PENGUIN</pattern>
+<template>A penguin is a flightless bird adapted for aquatic life. 18 species exist, mainly in the Southern Hemisphere. Emperor penguins survive -60°C Antarctic winters! They're monogamous and share parenting duties.</template>
+</category>
+
+<category><pattern>WHAT IS AN EAGLE</pattern>
+<template>An eagle is a large bird of prey with exceptional vision (4-8 times sharper than humans). The bald eagle is the US national symbol. Eagles can dive at 100+ mph and carry prey their own weight.</template>
+</category>
+
+<category><pattern>WHAT IS AN OWL</pattern>
+<template>An owl is a nocturnal bird of prey with excellent night vision and hearing. They can rotate their heads 270 degrees! 200+ species exist. Associated with wisdom in Western culture.</template>
+</category>
+
+<category><pattern>WHAT IS A PARROT</pattern>
+<template>A parrot is a colorful bird known for mimicking human speech. 350+ species exist. They're highly intelligent, social, and can live 50-80 years. Some learn 100+ words and understand context!</template>
+</category>
+
+<category><pattern>WHAT IS A CROCODILE</pattern>
+<template>A crocodile is a large reptile that's survived virtually unchanged for 200 million years. They have the strongest bite force of any animal (3,700 psi!) and can go a year without eating.</template>
+</category>
+
+<category><pattern>WHAT IS A TURTLE</pattern>
+<template>A turtle is a reptile with a protective shell. They've existed for 200+ million years, surviving dinosaurs! Sea turtles navigate thousands of miles. Some species live 100+ years. Many are endangered.</template>
+</category>
+
+<category><pattern>WHAT IS A FROG</pattern>
+<template>A frog is an amphibian that starts life as a tadpole. 7,000+ species exist on every continent except Antarctica. They breathe through their skin, which must stay moist. Frogs indicate ecosystem health.</template>
+</category>
+
+<category><pattern>WHAT IS AN OCTOPUS</pattern>
+<template>An octopus is a highly intelligent mollusk with 8 arms, 3 hearts, and blue blood. They can change color, squeeze through tiny spaces, open jars, and solve puzzles. They live only 1-2 years!</template>
+</category>
+
+<category><pattern>WHAT IS A JELLYFISH</pattern>
+<template>A jellyfish is a marine animal with no brain, heart, or bones - just 95% water! They've existed for 500 million years. Some are immortal (can revert to youth). Stings range from mild to deadly.</template>
+</category>
+
+<category><pattern>WHAT IS A GIRAFFE</pattern>
+<template>A giraffe is the world's tallest animal (up to 18 feet), native to Africa. Their 6-foot necks have only 7 vertebrae (same as humans!). Their tongues are 20 inches long and bluish to prevent sunburn!</template>
+</category>
+
+<category><pattern>WHAT IS A ZEBRA</pattern>
+<template>A zebra is an African horse relative with black and white stripes. Each zebra's pattern is unique like fingerprints! Stripes may confuse predators, regulate temperature, or deter flies.</template>
+</category>
+
+<category><pattern>WHAT IS A HIPPO</pattern>
+<template>A hippopotamus is a large semi-aquatic African mammal. Despite their docile appearance, they're one of Africa's most dangerous animals, killing 500 people yearly. They secrete natural sunscreen!</template>
+</category>
+
+<category><pattern>WHAT IS A RHINO</pattern>
+<template>A rhinoceros is a large herbivore with horns made of keratin (like fingernails). 5 species exist, all endangered due to poaching. They've lived for 50 million years but may soon go extinct.</template>
+</category>
+
+<category><pattern>WHAT IS A CAMEL</pattern>
+<template>A camel is a desert mammal with humps storing fat (not water!). They can survive weeks without water and tolerate 25% body water loss (humans die at 15%). Two types: dromedary (1 hump) and Bactrian (2).</template>
+</category>
+
+<category><pattern>WHAT IS A DEER</pattern>
+<template>A deer is a hoofed mammal found worldwide. Males grow and shed antlers annually. They're herbivores, excellent swimmers, and have been important for human hunting for millennia.</template>
+</category>
+
+<category><pattern>WHAT IS A RABBIT</pattern>
+<template>A rabbit is a small mammal with long ears. They're social, reproduce rapidly (hence "breed like rabbits"), and were domesticated 1,400 years ago. They can't vomit and eat their own droppings for nutrition!</template>
+</category>
+
+<category><pattern>WHAT IS A SQUIRREL</pattern>
+<template>A squirrel is a rodent known for collecting and burying nuts. They "forget" about 25% of their buried food, accidentally planting millions of trees! They can fall from any height without dying.</template>
+</category>
+
+<category><pattern>WHAT IS A RAT</pattern>
+<template>A rat is a rodent that's both pest and pet. They're intelligent, social, can laugh when tickled, and feel empathy. They've spread disease but also advanced medical research. There are 56 species.</template>
+</category>
+
+<category><pattern>WHAT IS A BAT</pattern>
+<template>A bat is the only mammal capable of true flight. 1,400+ species exist, making up 20% of all mammals. They pollinate plants, control insects (eating 1,000 mosquitoes per hour!), and echolocate.</template>
+</category>
+
+<category><pattern>WHAT IS A MOSQUITO</pattern>
+<template>A mosquito is a small flying insect - and the deadliest animal on Earth! They kill 700,000+ humans yearly by transmitting malaria, dengue, and other diseases. Only females bite (need blood for eggs).</template>
+</category>
+
+<category><pattern>WHAT IS A DINOSAUR</pattern>
+<template>Dinosaurs were a group of reptiles that dominated Earth for 165 million years until an asteroid caused their extinction 66 million years ago. Birds are actually living dinosaurs! T-Rex and Triceratops are famous examples.</template>
+</category>
+
+<category><pattern>WHAT IS A FOX</pattern>
+<template>A fox is a small canine known for cunning. 37 species exist worldwide. Red foxes are most common. They're solitary hunters with excellent hearing - they can hear a mouse under snow!</template>
+</category>
+
+<category><pattern>WHAT IS A PEACOCK</pattern>
+<template>A peacock is a male peafowl known for its spectacular tail feathers, displayed to attract mates. Native to South Asia, they symbolize beauty and royalty. Females (peahens) are plain-colored.</template>
+</category>
+
+<category><pattern>WHAT IS A FLAMINGO</pattern>
+<template>A flamingo is a pink wading bird. They're born gray and turn pink from eating shrimp and algae! They can only eat with their heads upside down and stand on one leg to conserve body heat.</template>
+</category>
+
+<category><pattern>WHAT IS A DUCK</pattern>
+<template>A duck is a waterfowl found on every continent except Antarctica. They have waterproof feathers, webbed feet, and quacks that DO echo (contrary to myth). Some species migrate thousands of miles.</template>
+</category>
+
+</aiml>
