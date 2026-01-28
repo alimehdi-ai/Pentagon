@@ -1,4 +1,5 @@
 autocorrect
 aiml
 flask
-autocorrect
+neo4j
+nltk

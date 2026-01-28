@@ -26,7 +26,8 @@ from neo4j_handler import (
     create_user, authenticate_user, get_user_by_id,
     get_or_create_session, get_user_sessions, get_chat_history,
     get_chat_history_by_session, get_graph_stats, get_agent_info,
-    get_graph_schema
+    get_graph_schema, query_session_memory, get_session_memory,
+    get_person_from_session, find_or_create_person
 )
 
 # Initialize spell checker
@@ -162,11 +163,13 @@ def signup():
 def login():
     """Handle user login"""
     data = request.get_json()
+    print(f"[LOGIN DEBUG] Received data: {data}")
     if not data:
         return jsonify({'success': False, 'message': 'No data provided'}), 400
     
     username = data.get('username', '').strip().lower()
     password = data.get('password', '')
+    print(f"[LOGIN DEBUG] Username: '{username}', Password length: {len(password)}")
     
     if not username or not password:
         return jsonify({'success': False, 'message': 'Username and password are required'}), 400
@@ -234,12 +237,11 @@ def get_contextual_response(query, user_id, session_id):
     """Answer queries that require previous chat context in the same session."""
     query_lower = query.lower().strip()
     history = context_store.get_history(user_id, session_id, limit=10)
-    if not history:
-        return None
 
     last_user = context_store.get_last_user_message(user_id, session_id)
     last_bot = context_store.get_last_bot_message(user_id, session_id)
 
+    # Check for "what did I say" type questions
     if any(p in query_lower for p in [
         "what did i say", "what i said", "my last message",
         "repeat what i said", "last message"
@@ -256,12 +258,53 @@ def get_contextual_response(query, user_id, session_id):
 
     if any(p in query_lower for p in [
         "summarize", "summary", "recap", "conversation so far",
-        "what have we talked about", "context"
+        "what have we talked about"
     ]):
         context_text = context_store.get_context_text(user_id, session_id, limit=5)
         if context_text:
             return f"Here is a quick recap:\n{context_text}"
 
+    # Try to answer from stored facts and conversation history
+    fact_response = context_store.answer_from_context(user_id, session_id, query)
+    if fact_response:
+        return fact_response
+
+    return None
+
+
+def get_fact_acknowledgment(query, user_id, session_id):
+    """Generate acknowledgment when user shares personal information."""
+    import re
+    query_lower = query.lower().strip()
+    
+    # Check if this message shares new information
+    acknowledgments = {
+        r"my (?:name is|name's) (\w+)": "Nice to meet you, {0}! I'll remember that. 😊",
+        r"my (?:fav(?:ou?rite)?|favorite) (?:color|colour) is (\w+)": "Got it! {0} is a great color! 🎨 I'll remember that.",
+        r"my (?:fav(?:ou?rite)?|favorite) food is (.+?)(?:\.|$)": "Yum! {0} sounds delicious! 🍽️ I'll remember that.",
+        r"my (?:fav(?:ou?rite)?|favorite) movie is (.+?)(?:\.|$)": "Nice choice! I'll remember that {0} is your favorite movie! 🎬",
+        r"my (?:fav(?:ou?rite)?|favorite) song is (.+?)(?:\.|$)": "Great taste in music! I'll remember {0}! 🎵",
+        r"my (?:fav(?:ou?rite)?|favorite) book is (.+?)(?:\.|$)": "A book lover! I'll remember {0}! 📚",
+        r"my (?:fav(?:ou?rite)?|favorite) game is (.+?)(?:\.|$)": "Cool! I'll remember that {0} is your favorite game! 🎮",
+        r"my (?:fav(?:ou?rite)?|favorite) sport is (.+?)(?:\.|$)": "Nice! I'll remember that you love {0}! ⚽",
+        r"my (?:fav(?:ou?rite)?|favorite) animal is (.+?)(?:\.|$)": "Awesome! I'll remember that you love {0}! 🦁",
+        r"i am (\d+) years old": "Got it! You're {0} years old. I'll remember that! 🎂",
+        r"i'm (\d+) years old": "Got it! You're {0} years old. I'll remember that! 🎂",
+        r"i live in (.+?)(?:\.|$)": "Cool! {0} sounds nice! I'll remember you live there. 🏠",
+        r"i am from (.+?)(?:\.|$)": "Nice! {0} is a great place! I'll remember that. 🌍",
+        r"i'm from (.+?)(?:\.|$)": "Nice! {0} is a great place! I'll remember that. 🌍",
+        r"i (?:like|love|enjoy) (\w+)": "Nice! I'll remember that you like {0}! ❤️",
+        r"i have a (.+?) named (\w+)": "Aww! {1} the {0} sounds adorable! I'll remember that! 🐾",
+        r"my pet(?:'s)? name is (\w+)": "Cute name! I'll remember that your pet is called {0}! 🐾",
+        r"my birthday is (.+?)(?:\.|$)": "I'll remember your birthday is {0}! 🎉",
+    }
+    
+    for pattern, response_template in acknowledgments.items():
+        match = re.search(pattern, query_lower, re.IGNORECASE)
+        if match:
+            groups = match.groups()
+            return response_template.format(*[g.strip() for g in groups])
+    
     return None
 
 
@@ -291,12 +334,17 @@ def get_bot_response():
     nlp_data = process_nlp(original_query)
     nlp_data['intent'] = detect_intent(original_query)
     
+    # Extract facts from current message BEFORE trying to respond
+    # This allows "my favorite color is blue" to be stored before any response logic
+    context_store._extract_facts(user_id, session_id, original_query)
+    
     # Get user context for better responses
     context = get_user_context(user_id)
     
     # First check if user is asking about their personal info
     personal_response = get_user_personal_response(original_query, user_id)
     contextual_response = get_contextual_response(original_query, user_id, session_id)
+    fact_acknowledgment = get_fact_acknowledgment(original_query, user_id, session_id)
     
     if personal_response:
         response = personal_response
@@ -304,6 +352,10 @@ def get_bot_response():
     elif contextual_response:
         response = contextual_response
         response_source = 'session_context'
+    elif fact_acknowledgment:
+        # User shared personal info, acknowledge it
+        response = fact_acknowledgment
+        response_source = 'fact_acknowledgment'
     else:
         # Try to find answer from Neo4j knowledge
         neo4j_response = search_knowledge(original_query, nlp_data['intent'], nlp_data['entities'])
@@ -402,9 +454,13 @@ def api_chat():
     nlp_data = process_nlp(original_query)
     nlp_data['intent'] = detect_intent(original_query)
     
+    # Extract facts from current message BEFORE trying to respond
+    context_store._extract_facts(user_id, session_id, original_query)
+    
     # Try to find answer from Neo4j knowledge first
     neo4j_response = search_knowledge(original_query, nlp_data['intent'], nlp_data['entities'])
     contextual_response = get_contextual_response(original_query, user_id, session_id)
+    fact_acknowledgment = get_fact_acknowledgment(original_query, user_id, session_id)
     
     # Spell correction for AIML
     corrected_words = [spell(w) for w in original_query.split()]
@@ -413,6 +469,9 @@ def api_chat():
     # Determine bot response
     if contextual_response:
         response = contextual_response
+    elif fact_acknowledgment:
+        # User shared personal info, acknowledge it
+        response = fact_acknowledgment
     elif neo4j_response:
         response = neo4j_response
     else:
@@ -520,4 +579,4 @@ def get_status():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
