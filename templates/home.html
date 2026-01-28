@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pentagon - AI Chatbot | PF AI Project</title>
+    <title>Synapse - AI Chatbot | PF AI Project</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,152 +14,89 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #1a1a2e;
-            color: #eaeaea;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #f5f5f5;
+            color: #333;
             height: 100vh;
             overflow: hidden;
         }
 
         .container {
-            display: flex;
+            display: grid;
+            grid-template-columns: 300px 1fr 340px;
             height: 100vh;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 280px;
-            background: #16213e;
-            border-right: 1px solid #2a2a4a;
+            background: #fff;
+            border-right: 1px solid #e5e5e5;
             display: flex;
             flex-direction: column;
         }
 
         .bot-info {
-            padding: 15px;
-            border-bottom: 1px solid #2a2a4a;
-            text-align: center;
+            padding: 24px;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .bot-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .bot-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3em;
-        }
-
-        .bot-name {
-            font-size: 1.3em;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .team-short {
-            color: #8892b0;
-            font-size: 0.7em;
-            margin-top: 5px;
-        }
-
-        .chat-history-section {
-            padding: 15px;
-            flex: 1;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .chat-history-section h3 {
-            color: #8892b0;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            gap: 14px;
             margin-bottom: 12px;
         }
 
-        .chat-history-list {
-            flex: 1;
-            overflow-y: auto;
+        .bot-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            color: #fff;
         }
 
-        .chat-history-item {
-            background: #1a1a2e;
-            border-radius: 8px;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
+        .bot-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #1a1a1a;
         }
 
-        .chat-history-item:hover {
-            background: #252545;
-        }
-
-        .chat-history-item .user-msg {
-            color: #a5b4fc;
-            font-size: 0.8em;
-            margin-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chat-history-item .bot-msg {
-            color: #8892b0;
+        .team-short {
+            color: #888;
             font-size: 0.75em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chat-history-item .timestamp {
-            color: #6b7280;
-            font-size: 0.65em;
             margin-top: 4px;
-        }
-
-        .no-history {
-            text-align: center;
-            color: #6b7280;
-            font-size: 0.8em;
-            padding: 20px;
         }
 
         .user-info-bar {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px 15px;
-            background: #1a1a2e;
-            border-bottom: 1px solid #2a2a4a;
+            gap: 12px;
+            padding: 16px 24px;
+            background: #fafafa;
+            border-bottom: 1px solid #e5e5e5;
         }
 
         .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #3b82f6;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #4a4a4a;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #fff;
             font-size: 0.9em;
         }
 
         .user-info-bar span {
             flex: 1;
-            font-size: 0.85em;
-            color: #eaeaea;
+            font-size: 0.9em;
+            color: #333;
+            font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -168,90 +105,158 @@
         .logout-btn {
             background: transparent;
             border: none;
-            color: #8892b0;
+            color: #999;
             cursor: pointer;
-            padding: 5px 8px;
-            border-radius: 5px;
+            padding: 8px 10px;
+            border-radius: 8px;
             transition: all 0.2s;
         }
 
         .logout-btn:hover {
-            background: #ef444420;
-            color: #ef4444;
+            background: #fee2e2;
+            color: #dc2626;
         }
 
-        .team-info {
-            padding: 20px;
+        .chat-history-section {
+            padding: 20px 24px;
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .section-header h3 {
+            color: #666;
+            font-size: 0.75em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .new-chat-btn {
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            border: none;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .new-chat-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .chat-history-list {
             flex: 1;
             overflow-y: auto;
         }
 
-        .team-info h3 {
-            color: #8892b0;
-            font-size: 0.75em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .info-item {
-            background: #1a1a2e;
-            border-radius: 8px;
-            padding: 12px;
+        .chat-history-item {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 14px 16px;
             margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
-        .info-item label {
-            color: #8892b0;
+        .chat-history-item:hover {
+            background: #f0f0f0;
+            border-color: #e0e0e0;
+        }
+
+        .chat-history-item .user-msg {
+            color: #333;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-history-item .bot-msg {
+            color: #777;
+            font-size: 0.8em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-history-item .timestamp {
+            color: #aaa;
             font-size: 0.7em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin-top: 8px;
         }
 
-        .info-item p {
-            color: #eaeaea;
-            font-size: 0.9em;
-            margin-top: 4px;
+        .no-history {
+            text-align: center;
+            color: #999;
+            font-size: 0.85em;
+            padding: 30px 20px;
         }
 
         /* Main Chat Area */
         .main-content {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            background: #1a1a2e;
+            background: #fafafa;
         }
 
         .chat-header {
-            padding: 15px 25px;
-            background: #16213e;
-            border-bottom: 1px solid #2a2a4a;
+            padding: 20px 30px;
+            background: #fff;
+            border-bottom: 1px solid #e5e5e5;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .chat-header h2 {
-            font-size: 1.1em;
+            font-size: 1.15em;
             font-weight: 600;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-header h2 i {
+            color: #4a4a4a;
         }
 
         .status-badge {
-            background: #10b981;
-            color: #fff;
-            padding: 4px 12px;
+            background: #dcfce7;
+            color: #16a34a;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.75em;
+            font-size: 0.8em;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .status-badge::before {
             content: '';
             width: 8px;
             height: 8px;
-            background: #fff;
+            background: #16a34a;
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -263,17 +268,17 @@
 
         .chat-messages {
             flex: 1;
-            padding: 20px;
+            padding: 24px 30px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .message {
             display: flex;
-            gap: 10px;
-            max-width: 70%;
+            gap: 14px;
+            max-width: 75%;
             animation: fadeIn 0.3s ease;
         }
 
@@ -288,159 +293,172 @@
         }
 
         .message-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.9em;
+            font-size: 1em;
             flex-shrink: 0;
         }
 
         .message.bot .message-avatar {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            color: #fff;
         }
 
         .message.user .message-avatar {
-            background: #3b82f6;
+            background: #4a4a4a;
+            color: #fff;
         }
 
         .message-content {
-            background: #16213e;
-            padding: 12px 16px;
-            border-radius: 16px;
-            line-height: 1.5;
+            background: #fff;
+            padding: 16px 20px;
+            border-radius: 18px;
+            line-height: 1.6;
+            font-size: 0.95em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e8e8e8;
         }
 
         .message.user .message-content {
-            background: #3b82f6;
-            border-bottom-right-radius: 4px;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            color: #fff;
+            border: none;
+            border-bottom-right-radius: 6px;
         }
 
         .message.bot .message-content {
-            border-bottom-left-radius: 4px;
+            border-bottom-left-radius: 6px;
         }
 
         .chat-input-area {
-            padding: 20px;
-            background: #16213e;
-            border-top: 1px solid #2a2a4a;
+            padding: 24px 30px;
+            background: #fff;
+            border-top: 1px solid #e5e5e5;
         }
 
-        .input-wrapper {
+        .input-container {
             display: flex;
-            gap: 10px;
-            background: #1a1a2e;
-            border-radius: 12px;
-            padding: 8px;
-            border: 1px solid #2a2a4a;
+            gap: 12px;
+            background: #f5f5f5;
+            border-radius: 16px;
+            padding: 10px 12px;
+            border: 2px solid #e5e5e5;
+            transition: all 0.3s;
         }
 
-        .input-wrapper:focus-within {
-            border-color: #667eea;
+        .input-container:focus-within {
+            border-color: #4a4a4a;
+            box-shadow: 0 0 0 4px rgba(74, 74, 74, 0.1);
         }
 
         .chat-input {
             flex: 1;
             background: transparent;
             border: none;
-            color: #eaeaea;
-            font-size: 0.95em;
-            padding: 8px 12px;
+            color: #333;
+            font-size: 1em;
+            padding: 10px 14px;
             outline: none;
         }
 
         .chat-input::placeholder {
-            color: #6b7280;
+            color: #999;
         }
 
         .send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
             border: none;
             color: #fff;
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.2s, opacity 0.2s;
+            transition: all 0.2s;
         }
 
         .send-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .send-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.98);
         }
 
         /* NLP Analysis Panel */
         .nlp-panel {
-            width: 320px;
-            background: #16213e;
-            border-left: 1px solid #2a2a4a;
+            background: #fff;
+            border-left: 1px solid #e5e5e5;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
         .nlp-header {
-            padding: 15px 20px;
-            border-bottom: 1px solid #2a2a4a;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e5e5;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nlp-header i {
-            color: #667eea;
+            color: #4a4a4a;
+            font-size: 1.1em;
         }
 
         .nlp-header h3 {
-            font-size: 0.95em;
+            font-size: 1em;
             font-weight: 600;
+            color: #1a1a1a;
         }
 
         .nlp-content {
             flex: 1;
             overflow-y: auto;
-            padding: 15px;
+            padding: 20px;
         }
 
         .nlp-section {
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 12px;
+            background: #fafafa;
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 16px;
+            border: 1px solid #e8e8e8;
         }
 
         .nlp-section h4 {
-            color: #8892b0;
+            color: #666;
             font-size: 0.7em;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
         }
 
         .nlp-section h4 i {
-            color: #667eea;
+            color: #4a4a4a;
         }
 
         /* Sentiment Display */
         .sentiment-display {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
         }
 
         .sentiment-emoji {
-            font-size: 2.5em;
+            font-size: 2.8em;
         }
 
         .sentiment-details {
@@ -450,94 +468,100 @@
         .sentiment-label {
             font-weight: 600;
             font-size: 1.1em;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            color: #333;
         }
 
         .sentiment-bar {
-            height: 6px;
-            background: #2a2a4a;
-            border-radius: 3px;
+            height: 8px;
+            background: #e5e5e5;
+            border-radius: 4px;
             overflow: hidden;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .sentiment-bar-fill {
             height: 100%;
-            border-radius: 3px;
+            border-radius: 4px;
             transition: width 0.5s ease;
         }
 
-        .sentiment-bar-fill.positive { background: #10b981; }
+        .sentiment-bar-fill.positive { background: #22c55e; }
         .sentiment-bar-fill.negative { background: #ef4444; }
-        .sentiment-bar-fill.neutral { background: #6b7280; }
+        .sentiment-bar-fill.neutral { background: #9ca3af; }
 
         .sentiment-scores {
             display: flex;
-            gap: 15px;
-            font-size: 0.75em;
-            color: #8892b0;
+            gap: 16px;
+            font-size: 0.8em;
+            color: #777;
         }
 
         /* Tags Display */
         .tag-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
 
         .tag {
-            background: #2a2a4a;
-            padding: 4px 10px;
-            border-radius: 15px;
+            background: #e8e8e8;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 0.8em;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            color: #444;
         }
 
         .tag .pos {
-            color: #667eea;
-            font-size: 0.7em;
+            color: #666;
+            font-size: 0.75em;
             font-weight: 600;
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 10px;
         }
 
         /* Entity tags */
         .entity-tag {
-            background: #312e81;
-            color: #a5b4fc;
+            background: #e0e7ff;
+            color: #3730a3;
         }
 
         /* Noun definitions */
         .noun-item {
-            background: #2a2a4a;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 8px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1px solid #e5e5e5;
         }
 
         .noun-word {
             font-weight: 600;
-            color: #667eea;
-            margin-bottom: 4px;
+            color: #333;
+            margin-bottom: 6px;
         }
 
         .noun-def {
             font-size: 0.85em;
-            color: #8892b0;
-            line-height: 1.4;
+            color: #666;
+            line-height: 1.5;
         }
 
         /* Empty state */
         .empty-state {
             text-align: center;
-            color: #6b7280;
-            padding: 30px;
+            color: #999;
+            padding: 40px 20px;
         }
 
         .empty-state i {
-            font-size: 2em;
-            margin-bottom: 10px;
-            color: #4b5563;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #ccc;
         }
 
         /* Scrollbar styling */
@@ -546,39 +570,34 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #1a1a2e;
+            background: #f5f5f5;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #3b3b5c;
+            background: #d0d0d0;
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #4b4b6c;
+            background: #bbb;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 280px 1fr;
+            }
             .nlp-panel {
                 display: none;
             }
         }
 
         @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
             .sidebar {
-                width: 60px;
-            }
-            .bot-info, .chat-history-section, .user-info-bar {
                 display: none;
-            }
-            .sidebar::after {
-                content: '🤖';
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-                font-size: 1.5em;
             }
         }
     </style>
@@ -589,27 +608,31 @@
         <div class="sidebar">
             <div class="bot-info">
                 <div class="bot-header">
-                    <div class="bot-avatar">🤖</div>
-                    <div class="bot-name">Pentagon</div>
+                    <div class="bot-avatar">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div>
+                        <div class="bot-name">Synapse</div>
+                        <div class="team-short">by Hussain, Nevera & Aeliya</div>
+                    </div>
                 </div>
-                <div class="team-short">by Muqeet, Zaryab & Ali | PF AI - A1</div>
             </div>
             <div class="user-info-bar">
-                <div class="user-avatar">👤</div>
+                <div class="user-avatar"><i class="fas fa-user"></i></div>
                 <span id="userDisplayName">User</span>
                 <button class="logout-btn" onclick="logout()" title="Logout">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
             </div>
             <div class="chat-history-section">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <h3 style="margin-bottom: 0;">Chat History</h3>
-                    <button onclick="newChatSession()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 0.7em;" title="New Chat">
+                <div class="section-header">
+                    <h3>Conversations</h3>
+                    <button class="new-chat-btn" onclick="newChatSession()">
                         <i class="fas fa-plus"></i> New
                     </button>
                 </div>
                 <div class="chat-history-list" id="chatHistoryList">
-                    <div class="no-history">No chat history yet</div>
+                    <div class="no-history">No conversations yet</div>
                 </div>
             </div>
         </div>
@@ -617,19 +640,19 @@
         <!-- Main Chat Area -->
         <div class="main-content">
             <div class="chat-header">
-                <h2><i class="fas fa-comments"></i> Chat with Pentagon</h2>
+                <h2><i class="fas fa-comments"></i> Chat with Synapse</h2>
                 <div class="status-badge">Online</div>
             </div>
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
-                    <div class="message-avatar">🤖</div>
+                    <div class="message-avatar"><i class="fas fa-brain"></i></div>
                     <div class="message-content">
-                        Hello! I'm <strong>Pentagon</strong>, an AI chatbot created by Muqeet, Zaryab, and Ali for the PF AI course. I can understand your messages using NLP! Try asking me something.
+                        Hello! I'm <strong>Synapse</strong>, an AI chatbot created by Hussain Haider, Nevera, and Aeliya for the PF AI course. I can understand your messages using NLP! Try asking me something.
                     </div>
                 </div>
             </div>
             <div class="chat-input-area">
-                <div class="input-wrapper">
+                <div class="input-container">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off">
                     <button class="send-btn" id="sendBtn">
                         <i class="fas fa-paper-plane"></i>
@@ -641,7 +664,7 @@
         <!-- NLP Analysis Panel -->
         <div class="nlp-panel">
             <div class="nlp-header">
-                <i class="fas fa-brain"></i>
+                <i class="fas fa-chart-bar"></i>
                 <h3>NLP Analysis</h3>
             </div>
             <div class="nlp-content" id="nlpContent">
@@ -663,28 +686,24 @@
             const chatHistoryList = $('#chatHistoryList');
 
             // Check if user is logged in
-            const currentUser = sessionStorage.getItem('pentagon_user');
-            let userId = sessionStorage.getItem('pentagon_user_id');
-            let sessionId = sessionStorage.getItem('pentagon_session_id');
+            const currentUser = sessionStorage.getItem('synapse_user');
+            let userId = sessionStorage.getItem('synapse_user_id');
+            let sessionId = sessionStorage.getItem('synapse_session_id');
             
             if (!currentUser || !userId) {
-                // Redirect to login page if not authenticated
                 window.location.href = '/login';
                 return;
             }
 
-            // Parse user data and display username
             const userData = JSON.parse(currentUser);
             $('#userDisplayName').text(userData.name || userData.username);
             
-            // Show admin badge if user is admin
             if (userData.user_type === 'admin') {
-                $('#userDisplayName').after('<span class="admin-badge" style="background: #f59e0b; color: #000; font-size: 0.6em; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">ADMIN</span>');
+                $('#userDisplayName').after('<span style="background: #fbbf24; color: #000; font-size: 0.65em; padding: 3px 8px; border-radius: 6px; margin-left: 10px; font-weight: 600;">ADMIN</span>');
             }
             
             console.log('User ID:', userId, 'User:', userData.username, 'Session:', sessionId);
 
-            // Create new session if none exists
             if (!sessionId) {
                 $.ajax({
                     url: '/api/session/new/' + userId,
@@ -693,7 +712,7 @@
                     success: function(data) {
                         if (data.session_id) {
                             sessionId = data.session_id;
-                            sessionStorage.setItem('pentagon_session_id', sessionId);
+                            sessionStorage.setItem('synapse_session_id', sessionId);
                             console.log('New session created:', sessionId);
                         }
                     },
@@ -703,15 +722,13 @@
                 });
             }
 
-            // Logout function
             window.logout = function() {
-                sessionStorage.removeItem('pentagon_user');
-                sessionStorage.removeItem('pentagon_user_id');
-                sessionStorage.removeItem('pentagon_session_id');
+                sessionStorage.removeItem('synapse_user');
+                sessionStorage.removeItem('synapse_user_id');
+                sessionStorage.removeItem('synapse_session_id');
                 window.location.href = '/login';
             };
             
-            // New chat session function
             window.newChatSession = function() {
                 $.ajax({
                     url: '/api/session/new/' + userId,
@@ -719,9 +736,9 @@
                     success: function(data) {
                         if (data.session_id) {
                             sessionId = data.session_id;
-                            sessionStorage.setItem('pentagon_session_id', sessionId);
+                            sessionStorage.setItem('synapse_session_id', sessionId);
                             chatMessages.empty();
-                            chatMessages.append('<div class="welcome-message" style="text-align: center; color: #8892b0; padding: 20px;">New chat session started!</div>');
+                            chatMessages.append('<div style="text-align: center; color: #888; padding: 30px; font-size: 0.9em;">New conversation started!</div>');
                             loadUserSessions();
                             console.log('New session created:', sessionId);
                         }
@@ -750,12 +767,11 @@
 
             function updateChatHistory(history) {
                 if (!history || history.length === 0) {
-                    chatHistoryList.html('<div class="no-history">No chat history yet</div>');
+                    chatHistoryList.html('<div class="no-history">No conversations yet</div>');
                     return;
                 }
 
                 let html = '';
-                // Show most recent first in sidebar
                 const reversed = [...history].reverse();
                 reversed.forEach(item => {
                     const userMsg = item.input || item.user_text || '';
@@ -764,8 +780,8 @@
                     const sessId = item.session_id || '';
                     html += `
                         <div class="chat-history-item" data-session="${sessId}" data-input="${userMsg.replace(/"/g, '&quot;')}" data-output="${botMsg.replace(/"/g, '&quot;')}">
-                            <div class="user-msg">👤 ${userMsg}</div>
-                            <div class="bot-msg">🤖 ${botMsg}</div>
+                            <div class="user-msg"><i class="fas fa-user" style="color:#999;margin-right:6px;font-size:0.8em;"></i>${userMsg}</div>
+                            <div class="bot-msg"><i class="fas fa-brain" style="color:#999;margin-right:6px;font-size:0.8em;"></i>${botMsg}</div>
                             <div class="timestamp">${time}</div>
                         </div>
                     `;
@@ -777,9 +793,6 @@
                 $.get('/api/sessions/' + userId)
                     .done(function(data) {
                         console.log('User sessions:', data);
-                        if (data && data.sessions && data.sessions.length > 0) {
-                            // Could display session list here if needed
-                        }
                     })
                     .fail(function(xhr, status, error) {
                         console.log('Could not load sessions:', error);
@@ -799,13 +812,11 @@
                     });
             }
 
-            // Load history into chat area only on initial page load
             function loadInitialHistory() {
                 $.get('/api/chat_history/' + userId)
                     .done(function(data) {
                         if (data && data.history && data.history.length > 0) {
                             updateChatHistory(data.history);
-                            // Restore messages to chat area
                             chatMessages.empty();
                             data.history.forEach(item => {
                                 addMessage(item.input, true, false);
@@ -821,10 +832,10 @@
 
             function addMessage(content, isUser, animate = true) {
                 const messageClass = isUser ? 'user' : 'bot';
-                const avatar = isUser ? '👤' : '🤖';
-                const animClass = animate ? '' : ' style="animation: none;"';
+                const avatar = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-brain"></i>';
+                const animStyle = animate ? '' : ' style="animation: none;"';
                 const message = `
-                    <div class="message ${messageClass}"${animClass}>
+                    <div class="message ${messageClass}"${animStyle}>
                         <div class="message-avatar">${avatar}</div>
                         <div class="message-content">${content}</div>
                     </div>
@@ -843,7 +854,6 @@
 
                 let html = '';
 
-                // Sentiment Analysis
                 if (nlpData.sentiment && nlpData.sentiment.sentiment) {
                     const s = nlpData.sentiment;
                     html += `
@@ -870,7 +880,6 @@
                     `;
                 }
 
-                // Tokens & POS Tags
                 if (nlpData.pos_tags && nlpData.pos_tags.length > 0) {
                     html += `
                         <div class="nlp-section">
@@ -883,7 +892,6 @@
                     html += '</div></div>';
                 }
 
-                // Named Entities
                 if (nlpData.entities && nlpData.entities.length > 0) {
                     html += `
                         <div class="nlp-section">
@@ -898,12 +906,11 @@
                     html += `
                         <div class="nlp-section">
                             <h4><i class="fas fa-user-tag"></i> Named Entities</h4>
-                            <p style="color: #6b7280; font-size: 0.85em;">No named entities detected</p>
+                            <p style="color: #999; font-size: 0.85em;">No named entities detected</p>
                         </div>
                     `;
                 }
 
-                // Noun Definitions
                 if (nlpData.nouns && nlpData.nouns.length > 0) {
                     html += `
                         <div class="nlp-section">
@@ -930,12 +937,11 @@
                 addMessage(message, true);
                 chatInput.val('');
 
-                // Show typing indicator
                 const typingId = 'typing-' + Date.now();
                 chatMessages.append(`
                     <div class="message bot" id="${typingId}">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-content"><em>Analyzing...</em></div>
+                        <div class="message-avatar"><i class="fas fa-brain"></i></div>
+                        <div class="message-content"><em style="color:#888;">Analyzing...</em></div>
                     </div>
                 `);
                 chatMessages.scrollTop(chatMessages[0].scrollHeight);
@@ -944,15 +950,13 @@
                     .done(function(data) {
                         $(`#${typingId}`).remove();
                         
-                        // Handle both JSON and string responses
                         let response, nlpData;
                         if (typeof data === 'object') {
                             response = data.bot_reply || data.response;
                             nlpData = data.nlp;
-                            // Update session ID if returned (new session created)
                             if (data.session_id && data.session_id !== sessionId) {
                                 sessionId = data.session_id;
-                                sessionStorage.setItem('pentagon_session_id', sessionId);
+                                sessionStorage.setItem('synapse_session_id', sessionId);
                             }
                         } else {
                             response = data;
@@ -961,8 +965,6 @@
 
                         addMessage(response, false);
                         updateNLPPanel(nlpData);
-                        
-                        // Refresh chat history from database
                         loadChatHistory();
                     })
                     .fail(function() {
@@ -979,9 +981,7 @@
                 }
             });
 
-            // Load chat history on page load (initial load restores to chat area)
             loadInitialHistory();
-
             chatInput.focus();
         });
     </script>

@@ -95,14 +95,14 @@ def load_aiml_brain():
 
 def set_bot_properties():
     """Set bot identity properties"""
-    k.setBotPredicate("name", "Pentagon")
+    k.setBotPredicate("name", "Synapse")
     k.setBotPredicate("master", "Mehmood Hussain")
     k.setBotPredicate("botmaster", "teacher")
     k.setBotPredicate("birthday", "January 2026")
     k.setBotPredicate("location", "Pakistan")
     k.setBotPredicate("gender", "robot")
     k.setBotPredicate("species", "chatbot")
-    print("Bot identity set: Pentagon")
+    print("Bot identity set: Synapse")
 
 
 # Load AIML brain and set properties

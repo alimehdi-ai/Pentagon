@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pentagon - Login</title>
+    <title>Synapse - Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,86 +14,161 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #1a1a2e;
-            color: #eaeaea;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            color: #333;
             min-height: 100vh;
+            display: flex;
+        }
+
+        /* Left Panel - Branding */
+        .brand-panel {
+            flex: 1;
+            background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(120, 120, 120, 0.1) 0%, transparent 70%);
+            animation: pulse-bg 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse-bg {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(5%, 5%); }
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%);
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .auth-container {
-            width: 100%;
-            max-width: 420px;
-            padding: 20px;
+        .brand-logo i {
+            font-size: 3em;
+            color: #fff;
         }
 
-        .auth-card {
-            background: #16213e;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        .brand-title {
+            font-size: 3em;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .brand-subtitle {
+            font-size: 1.1em;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .brand-features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 320px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #aaa;
+            font-size: 0.95em;
+        }
+
+        .feature-item i {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        /* Right Panel - Auth */
+        .auth-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            max-width: 550px;
         }
 
         .auth-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .bot-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 2em;
+            margin-bottom: 40px;
         }
 
         .auth-header h1 {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 5px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
         }
 
         .auth-header p {
-            color: #8892b0;
-            font-size: 0.9em;
+            color: #666;
+            font-size: 1em;
         }
 
         .auth-tabs {
             display: flex;
-            margin-bottom: 25px;
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 5px;
+            gap: 10px;
+            margin-bottom: 35px;
+            background: #e5e5e5;
+            padding: 6px;
+            border-radius: 12px;
         }
 
         .auth-tab {
             flex: 1;
-            padding: 12px;
-            text-align: center;
+            padding: 14px 20px;
             border: none;
             background: transparent;
-            color: #8892b0;
+            color: #666;
             font-size: 0.95em;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s ease;
         }
 
         .auth-tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
+            background: #fff;
+            color: #1a1a1a;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
 
         .auth-tab:hover:not(.active) {
-            color: #fff;
+            color: #333;
         }
 
         .auth-form {
@@ -105,14 +180,14 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
-            color: #8892b0;
-            font-size: 0.85em;
-            margin-bottom: 8px;
+            color: #444;
+            font-size: 0.9em;
+            margin-bottom: 10px;
             font-weight: 500;
         }
 
@@ -122,48 +197,54 @@
 
         .input-wrapper i {
             position: absolute;
-            left: 15px;
+            left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #667eea;
+            color: #999;
+            font-size: 1em;
         }
 
         .form-input {
             width: 100%;
-            padding: 14px 14px 14px 45px;
-            background: #1a1a2e;
-            border: 1px solid #2a2a4a;
-            border-radius: 10px;
-            color: #eaeaea;
-            font-size: 0.95em;
-            transition: border-color 0.3s;
+            padding: 16px 16px 16px 50px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            color: #333;
+            font-size: 1em;
+            transition: all 0.3s ease;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #4a4a4a;
+            box-shadow: 0 0 0 4px rgba(74, 74, 74, 0.1);
         }
 
         .form-input::placeholder {
-            color: #6b7280;
+            color: #aaa;
         }
 
         .auth-btn {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 16px;
+            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: #fff;
             font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .auth-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .auth-btn:active {
@@ -176,41 +257,40 @@
             transform: none;
         }
 
-        .error-message {
-            background: #dc262620;
-            border: 1px solid #dc2626;
-            color: #ef4444;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.85em;
+        .message-box {
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            font-size: 0.9em;
             display: none;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
         }
 
         .success-message {
-            background: #10b98120;
-            border: 1px solid #10b981;
-            color: #10b981;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.85em;
-            display: none;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
         }
 
         .team-credit {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
             text-align: center;
-            margin-top: 25px;
-            color: #6b7280;
-            font-size: 0.75em;
+            color: #888;
+            font-size: 0.85em;
         }
 
-        .team-credit a {
-            color: #667eea;
-            text-decoration: none;
+        .team-credit strong {
+            color: #555;
         }
 
-        /* Loading spinner */
+        /* Spinner */
         .spinner {
             display: inline-block;
             width: 20px;
@@ -219,91 +299,162 @@
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 0.8s ease-in-out infinite;
-            margin-right: 8px;
-            vertical-align: middle;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            body {
+                flex-direction: column;
+            }
+
+            .brand-panel {
+                padding: 40px 30px;
+                min-height: 300px;
+            }
+
+            .brand-features {
+                display: none;
+            }
+
+            .auth-panel {
+                max-width: 100%;
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-panel {
+                padding: 30px 20px;
+                min-height: 200px;
+            }
+
+            .brand-title {
+                font-size: 2em;
+            }
+
+            .brand-logo {
+                width: 80px;
+                height: 80px;
+                border-radius: 20px;
+            }
+
+            .brand-logo i {
+                font-size: 2em;
+            }
+
+            .auth-panel {
+                padding: 30px 20px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.6em;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <div class="bot-avatar">🤖</div>
-                <h1>Pentagon</h1>
-                <p>AI Chatbot with NLP</p>
+    <!-- Brand Panel -->
+    <div class="brand-panel">
+        <div class="brand-content">
+            <div class="brand-logo">
+                <i class="fas fa-brain"></i>
             </div>
-
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="login">Login</button>
-                <button class="auth-tab" data-tab="signup">Sign Up</button>
+            <h1 class="brand-title">Synapse</h1>
+            <p class="brand-subtitle">AI-Powered Conversational Intelligence</p>
+            <div class="brand-features">
+                <div class="feature-item">
+                    <i class="fas fa-comments"></i>
+                    <span>Natural Language Processing</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Real-time Sentiment Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-database"></i>
+                    <span>Knowledge Graph Integration</span>
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div id="errorMessage" class="error-message"></div>
-            <div id="successMessage" class="success-message"></div>
+    <!-- Auth Panel -->
+    <div class="auth-panel">
+        <div class="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to continue your conversation</p>
+        </div>
 
-            <!-- Login Form -->
-            <form id="loginForm" class="auth-form active">
-                <div class="form-group">
-                    <label for="loginUsername">Username</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="loginUsername" class="form-input" placeholder="Enter your username" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
-                    </div>
-                </div>
-                <button type="submit" class="auth-btn" id="loginBtn">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
-            </form>
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Sign In</button>
+            <button class="auth-tab" data-tab="signup">Create Account</button>
+        </div>
 
-            <!-- Signup Form -->
-            <form id="signupForm" class="auth-form">
-                <div class="form-group">
-                    <label for="signupName">Full Name</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-user"></i>
-                        <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="signupUsername">Username</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-at"></i>
-                        <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" id="signupPassword" class="form-input" placeholder="Create a password" required minlength="6">
-                    </div>
-                </div>
-                <button type="submit" class="auth-btn" id="signupBtn">
-                    <i class="fas fa-user-plus"></i> Create Account
-                </button>
-            </form>
+        <div id="errorMessage" class="message-box error-message"></div>
+        <div id="successMessage" class="message-box success-message"></div>
 
-            <div class="team-credit">
-                by Muqeet, Zaryab & Ali | PF AI - A1
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="loginUsername" class="form-input" placeholder="Enter your username" required>
+                </div>
             </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <button type="submit" class="auth-btn" id="loginBtn">
+                <i class="fas fa-arrow-right"></i> Sign In
+            </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="auth-form">
+            <div class="form-group">
+                <label for="signupName">Full Name</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="signupUsername">Username</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-at"></i>
+                    <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signupPassword" class="form-input" placeholder="Create a password (min 6 chars)" required minlength="6">
+                </div>
+            </div>
+            <button type="submit" class="auth-btn" id="signupBtn">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+        </form>
+
+        <div class="team-credit">
+            Built by <strong>Hussain Haider, Nevera & Aeliya</strong> | PF AI Course - Section A1
         </div>
     </div>
 
@@ -311,7 +462,7 @@
     <script>
         $(document).ready(function() {
             // Check if already logged in
-            const currentUser = sessionStorage.getItem('pentagon_user');
+            const currentUser = sessionStorage.getItem('synapse_user');
             if (currentUser) {
                 window.location.href = '/';
             }
@@ -324,6 +475,15 @@
                 $('.auth-form').removeClass('active');
                 $(`#${tab}Form`).addClass('active');
                 hideMessages();
+                
+                // Update header text
+                if (tab === 'login') {
+                    $('.auth-header h1').text('Welcome Back');
+                    $('.auth-header p').text('Sign in to continue your conversation');
+                } else {
+                    $('.auth-header h1').text('Get Started');
+                    $('.auth-header p').text('Create an account to begin chatting');
+                }
             });
 
             function showError(message) {
@@ -375,8 +535,8 @@
                     data: JSON.stringify({ username, password }),
                     success: function(response) {
                         if (response.success) {
-                            sessionStorage.setItem('pentagon_user', JSON.stringify(response.user));
-                            sessionStorage.setItem('pentagon_user_id', response.user.id);
+                            sessionStorage.setItem('synapse_user', JSON.stringify(response.user));
+                            sessionStorage.setItem('synapse_user_id', response.user.id);
                             showSuccess('Login successful! Redirecting...');
                             setTimeout(() => {
                                 window.location.href = '/';
@@ -424,9 +584,8 @@
                     data: JSON.stringify({ name, username, email, password }),
                     success: function(response) {
                         if (response.success) {
-                            showSuccess('Account created! Please login.');
+                            showSuccess('Account created! Please sign in.');
                             setLoading(btn, false);
-                            // Switch to login tab
                             setTimeout(() => {
                                 $('.auth-tab[data-tab="login"]').click();
                                 $('#loginUsername').val(username);

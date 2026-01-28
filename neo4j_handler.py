@@ -146,17 +146,17 @@ def init_graph_structure():
     
     try:
         with d.session() as session:
-            # Create Agent node (Pentagon bot) first
+            # Create Agent node (Synapse bot) first
             session.run("""
-                MERGE (a:Agent {name: 'Pentagon'})
+                MERGE (a:Agent {name: 'Synapse'})
                 ON CREATE SET 
                     a.creator = 'Group A1',
-                    a.members = ['Abdul Muqeet (S2024376069)', 'Zaryab Hassan (S2024376094)', 'Ali Mehdi (S2024376092)', 'Naila Nasir (F2023231018)', 'Shahman Naeem (F2023231004)'],
+                    a.members = ['Hussain Haider (S2024376005)', 'Nevera (S2024376014)', 'Aeliya (F2023376042)'],
                     a.city = 'Lahore',
-                    a.company = 'Devsinc',
+                    a.company = 'Microsoft',
                     a.created_at = datetime()
             """)
-            print("Agent node initialized (Pentagon)")
+            print("Agent node initialized (Synapse)")
             
             # Run migration for old schema
             migrate_old_schema()
