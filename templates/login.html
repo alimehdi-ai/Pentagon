@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synapse - Login</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,9 +14,9 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
+            color: #1c1917;
             min-height: 100vh;
             display: flex;
         }
@@ -24,7 +24,7 @@
         /* Left Panel - Branding */
         .brand-panel {
             flex: 1;
-            background: linear-gradient(145deg, #2d2d2d 0%, #1a1a1a 100%);
+            background: linear-gradient(145deg, #f59e0b 0%, #d97706 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -41,7 +41,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(120, 120, 120, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
             animation: pulse-bg 15s ease-in-out infinite;
         }
 
@@ -59,13 +59,14 @@
         .brand-logo {
             width: 120px;
             height: 120px;
-            background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         .brand-logo i {
@@ -83,7 +84,7 @@
 
         .brand-subtitle {
             font-size: 1.1em;
-            color: #888;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 40px;
         }
 
@@ -98,14 +99,14 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            color: #aaa;
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.95em;
         }
 
         .feature-item i {
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -121,6 +122,7 @@
             justify-content: center;
             padding: 60px;
             max-width: 550px;
+            background: #fffef7;
         }
 
         .auth-header {
@@ -130,12 +132,13 @@
         .auth-header h1 {
             font-size: 2em;
             font-weight: 700;
-            color: #1a1a1a;
+            color: #1c1917;
             margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
 
         .auth-header p {
-            color: #666;
+            color: #78716c;
             font-size: 1em;
         }
 
@@ -143,7 +146,7 @@
             display: flex;
             gap: 10px;
             margin-bottom: 35px;
-            background: #e5e5e5;
+            background: #fef3c7;
             padding: 6px;
             border-radius: 12px;
         }
@@ -153,7 +156,7 @@
             padding: 14px 20px;
             border: none;
             background: transparent;
-            color: #666;
+            color: #92400e;
             font-size: 0.95em;
             font-weight: 600;
             cursor: pointer;
@@ -163,12 +166,13 @@
 
         .auth-tab.active {
             background: #fff;
-            color: #1a1a1a;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            color: #1c1917;
+            box-shadow: 0 2px 10px rgba(202, 138, 4, 0.15);
         }
 
         .auth-tab:hover:not(.active) {
-            color: #333;
+            color: #78350f;
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .auth-form {
@@ -185,10 +189,10 @@
 
         .form-group label {
             display: block;
-            color: #444;
+            color: #57534e;
             font-size: 0.9em;
             margin-bottom: 10px;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .input-wrapper {
@@ -200,40 +204,41 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            color: #d97706;
             font-size: 1em;
         }
 
         .form-input {
             width: 100%;
             padding: 16px 16px 16px 50px;
-            background: #fff;
-            border: 2px solid #e0e0e0;
+            background: #fefce8;
+            border: 2px solid #fde68a;
             border-radius: 12px;
-            color: #333;
+            color: #1c1917;
             font-size: 1em;
             transition: all 0.3s ease;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #4a4a4a;
-            box-shadow: 0 0 0 4px rgba(74, 74, 74, 0.1);
+            border-color: #fbbf24;
+            background: #fffef7;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.15);
         }
 
         .form-input::placeholder {
-            color: #aaa;
+            color: #a8a29e;
         }
 
         .auth-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             border: none;
             border-radius: 12px;
-            color: #fff;
+            color: #1c1917;
             font-size: 1em;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -244,7 +249,7 @@
 
         .auth-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
         }
 
         .auth-btn:active {
@@ -280,14 +285,14 @@
         .team-credit {
             margin-top: 40px;
             padding-top: 30px;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #fde68a;
             text-align: center;
-            color: #888;
+            color: #a8a29e;
             font-size: 0.85em;
         }
 
         .team-credit strong {
-            color: #555;
+            color: #78716c;
         }
 
         /* Spinner */
@@ -295,9 +300,9 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(28, 25, 23, 0.2);
             border-radius: 50%;
-            border-top-color: #fff;
+            border-top-color: #1c1917;
             animation: spin 0.8s ease-in-out infinite;
         }
 
@@ -361,21 +366,21 @@
     <div class="brand-panel">
         <div class="brand-content">
             <div class="brand-logo">
-                <i class="fas fa-brain"></i>
+                <i class="fa-solid fa-bolt"></i>
             </div>
             <h1 class="brand-title">Synapse</h1>
             <p class="brand-subtitle">AI-Powered Conversational Intelligence</p>
             <div class="brand-features">
                 <div class="feature-item">
-                    <i class="fas fa-comments"></i>
+                    <i class="fa-solid fa-microchip"></i>
                     <span>Natural Language Processing</span>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-chart-line"></i>
+                    <i class="fa-solid fa-chart-simple"></i>
                     <span>Real-time Sentiment Analysis</span>
                 </div>
                 <div class="feature-item">
-                    <i class="fas fa-database"></i>
+                    <i class="fa-solid fa-diagram-project"></i>
                     <span>Knowledge Graph Integration</span>
                 </div>
             </div>
@@ -402,19 +407,19 @@
             <div class="form-group">
                 <label for="loginUsername">Username</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-user"></i>
+                    <i class="fa-solid fa-circle-user"></i>
                     <input type="text" id="loginUsername" class="form-input" placeholder="Enter your username" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="loginPassword">Password</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-lock"></i>
+                    <i class="fa-solid fa-key"></i>
                     <input type="password" id="loginPassword" class="form-input" placeholder="Enter your password" required>
                 </div>
             </div>
             <button type="submit" class="auth-btn" id="loginBtn">
-                <i class="fas fa-arrow-right"></i> Sign In
+                <i class="fa-solid fa-arrow-right"></i> Sign In
             </button>
         </form>
 
@@ -423,33 +428,33 @@
             <div class="form-group">
                 <label for="signupName">Full Name</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-user"></i>
+                    <i class="fa-solid fa-id-card"></i>
                     <input type="text" id="signupName" class="form-input" placeholder="Enter your full name" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="signupUsername">Username</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-at"></i>
+                    <i class="fa-solid fa-at"></i>
                     <input type="text" id="signupUsername" class="form-input" placeholder="Choose a username" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="signupEmail">Email</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-envelope"></i>
                     <input type="email" id="signupEmail" class="form-input" placeholder="Enter your email" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="signupPassword">Password</label>
                 <div class="input-wrapper">
-                    <i class="fas fa-lock"></i>
+                    <i class="fa-solid fa-key"></i>
                     <input type="password" id="signupPassword" class="form-input" placeholder="Create a password (min 6 chars)" required minlength="6">
                 </div>
             </div>
             <button type="submit" class="auth-btn" id="signupBtn">
-                <i class="fas fa-user-plus"></i> Create Account
+                <i class="fa-solid fa-user-plus"></i> Create Account
             </button>
         </form>
 

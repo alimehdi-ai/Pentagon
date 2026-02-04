@@ -2,21 +2,23 @@
 Neo4j Database Handler for Pentagon Chatbot
 
 Graph Schema (3 Core Nodes):
-  - Person: The human user (long-term identity)
-  - Agent: The bot (Pentagon)
-  - Session: One chat conversation instance (Episode - memory container)
+  - Human: The human user (long-term identity)
+  - Bot: The AI assistant (Synapse)
+  - Conversation: One chat conversation instance (Episode - memory container)
 
 Relationships:
-  (Person)-[:CREATED]->(Agent)    # User is the bot creator
-  (Person)-[:USES]->(Agent)       # User is interacting with bot
-  (Person)-[:HAS_SESSION]->(Session)  # This chat belongs to this user
-  (Session)-[:WITH_AGENT]->(Agent)    # This chat session is with this bot
+  (Human)-[:BUILT]->(Bot)           # User is the bot creator
+  (Human)-[:INTERACTS]->(Bot)       # User is interacting with bot
+  (Human)-[:OWNS_CONVERSATION]->(Conversation)  # This chat belongs to this user
+  (Conversation)-[:HOSTED_BY]->(Bot)    # This chat session is with this bot
 
-Session stores arrays (short-term memory):
-  - messages[]: All conversation messages [{role, content}]
-  - sentiments[]: Sentiment score per message
-  - entities[]: Extracted entities (name, place, topic, etc)
-  - timestamps[]: Time of each message
+Conversation stores indexed properties (short-term memory):
+  - message1, message2, ...: Individual messages
+  - intent1, intent2, ...: Intent per message
+  - sentiment1, sentiment2, ...: Sentiment per message
+  - entity1, entity2, ...: Extracted entities per message
+  - timestamp1, timestamp2, ...: Time of each message
+  - msg_count: Total message count
 """
 
 from neo4j import GraphDatabase
@@ -68,64 +70,102 @@ def hash_password(password):
 # ============== GRAPH INITIALIZATION ==============
 
 def migrate_old_schema():
-    """Migrate old User nodes to Person nodes if they exist"""
+    """Migrate old User/Person/Agent/Session nodes to Human/Bot/Conversation nodes"""
     d = get_driver()
     if not d:
         return False
     
     try:
         with d.session() as session:
-            # Check if old User nodes exist
+            # Migrate Person nodes to Human nodes
+            old_persons = session.run("""
+                MATCH (p:Person)
+                WHERE NOT p:Human
+                RETURN count(p) as count
+            """).single()
+            
+            if old_persons and old_persons['count'] > 0:
+                print(f"Migrating {old_persons['count']} Person nodes to Human nodes...")
+                session.run("""
+                    MATCH (p:Person)
+                    SET p:Human
+                    SET p.is_creator = CASE WHEN p.username = 'admin' THEN true ELSE false END
+                """)
+            
+            # Migrate User nodes to Human nodes
             old_users = session.run("""
                 MATCH (u:User)
-                WHERE NOT u:Person
+                WHERE NOT u:Human
                 RETURN count(u) as count
             """).single()
             
             if old_users and old_users['count'] > 0:
-                print(f"Migrating {old_users['count']} old User nodes to Person nodes...")
-                
-                # Add Person label to all User nodes
+                print(f"Migrating {old_users['count']} User nodes to Human nodes...")
                 session.run("""
                     MATCH (u:User)
-                    SET u:Person
+                    SET u:Human
                     SET u.is_creator = CASE WHEN u.username = 'admin' THEN true ELSE false END
                 """)
-                
-                # Migrate old HAS_SESSION relationships (User->Session to Person->Session)
-                # They already work since Person now has User label too
-                
-                # Create USES relationships for all users to Agent
+            
+            # Migrate Agent nodes to Bot nodes
+            old_agents = session.run("""
+                MATCH (a:Agent)
+                WHERE NOT a:Bot
+                RETURN count(a) as count
+            """).single()
+            
+            if old_agents and old_agents['count'] > 0:
+                print(f"Migrating {old_agents['count']} Agent nodes to Bot nodes...")
                 session.run("""
-                    MATCH (p:Person), (a:Agent {name: 'Pentagon'})
-                    WHERE NOT (p)-[:USES]->(a)
-                    CREATE (p)-[:USES]->(a)
+                    MATCH (a:Agent)
+                    SET a:Bot
                 """)
-                
-                # Create CREATED relationship for admin
-                session.run("""
-                    MATCH (p:Person {username: 'admin'}), (a:Agent {name: 'Pentagon'})
-                    WHERE NOT (p)-[:CREATED]->(a)
-                    CREATE (p)-[:CREATED]->(a)
-                """)
-                
-                # Migrate old sessions to have WITH_AGENT relationship
-                session.run("""
-                    MATCH (s:Session), (a:Agent {name: 'Pentagon'})
-                    WHERE NOT (s)-[:WITH_AGENT]->(a)
-                    CREATE (s)-[:WITH_AGENT]->(a)
-                """)
-                
-                # Migrate old sessions: convert inputN/outputN to arrays if needed
+            
+            # Migrate Session nodes to Conversation nodes
+            old_sessions = session.run("""
+                MATCH (s:Session)
+                WHERE NOT s:Conversation
+                RETURN count(s) as count
+            """).single()
+            
+            if old_sessions and old_sessions['count'] > 0:
+                print(f"Migrating {old_sessions['count']} Session nodes to Conversation nodes...")
                 session.run("""
                     MATCH (s:Session)
-                    WHERE s.messages IS NULL
-                    SET s.messages = [], s.sentiments = [], s.entities = [], s.timestamps = []
+                    SET s:Conversation
                 """)
-                
-                print("Migration completed!")
             
-            # Clean up old base Person node if exists
+            # Create INTERACTS relationships for all humans to Bot
+            session.run("""
+                MATCH (h:Human), (b:Bot {name: 'Synapse'})
+                WHERE NOT (h)-[:INTERACTS]->(b)
+                CREATE (h)-[:INTERACTS]->(b)
+            """)
+            
+            # Create BUILT relationship for admin
+            session.run("""
+                MATCH (h:Human {username: 'admin'}), (b:Bot {name: 'Synapse'})
+                WHERE NOT (h)-[:BUILT]->(b)
+                CREATE (h)-[:BUILT]->(b)
+            """)
+            
+            # Migrate old conversations to have HOSTED_BY relationship
+            session.run("""
+                MATCH (c:Conversation), (b:Bot {name: 'Synapse'})
+                WHERE NOT (c)-[:HOSTED_BY]->(b)
+                CREATE (c)-[:HOSTED_BY]->(b)
+            """)
+            
+            # Migrate OWNS_CONVERSATION relationships
+            session.run("""
+                MATCH (h:Human)-[r:HAS_SESSION]->(c:Conversation)
+                WHERE NOT (h)-[:OWNS_CONVERSATION]->(c)
+                CREATE (h)-[:OWNS_CONVERSATION]->(c)
+            """)
+            
+            print("Migration completed!")
+            
+            # Clean up old base nodes if exists
             session.run("""
                 MATCH (p:Person {type: 'base'})
                 WHERE NOT (p)<-[:IS_A]-()
@@ -139,52 +179,52 @@ def migrate_old_schema():
 
 
 def init_graph_structure():
-    """Initialize base graph structure with Person and Agent nodes"""
+    """Initialize base graph structure with Human and Bot nodes"""
     d = get_driver()
     if not d:
         return False
     
     try:
         with d.session() as session:
-            # Create Agent node (Synapse bot) first
+            # Create Bot node (Synapse) first
             session.run("""
-                MERGE (a:Agent {name: 'Synapse'})
+                MERGE (b:Bot {name: 'Synapse'})
                 ON CREATE SET 
-                    a.creator = 'Group A1',
-                    a.members = ['Hussain Haider (S2024376005)', 'Nevera (S2024376014)', 'Aeliya (F2023376042)'],
-                    a.city = 'Lahore',
-                    a.company = 'Microsoft',
-                    a.created_at = datetime()
+                    b.creator = 'Group A1',
+                    b.members = ['Hussain Haider (S2024376005)', 'Nevera (S2024376014)', 'Aeliya (F2023376042)'],
+                    b.city = 'Lahore',
+                    b.company = 'Microsoft',
+                    b.created_at = datetime()
             """)
-            print("Agent node initialized (Synapse)")
+            print("Bot node initialized (Synapse)")
             
             # Run migration for old schema
             migrate_old_schema()
             
-            # Check if admin exists (as Person or User)
+            # Check if admin exists (as Human, Person or User)
             admin_exists = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.username = 'admin'
-                RETURN p
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.username = 'admin'
+                RETURN h
             """).single()
             
             if not admin_exists:
                 admin_id = str(uuid.uuid4())
                 session.run("""
-                    MATCH (a:Agent {name: 'Pentagon'})
-                    CREATE (p:Person {
+                    MATCH (b:Bot {name: 'Synapse'})
+                    CREATE (h:Human {
                         id: $id,
                         username: 'admin',
                         name: 'Administrator',
-                        email: 'admin@pentagon.ai',
+                        email: 'admin@synapse.ai',
                         password_hash: $password_hash,
                         is_creator: true,
                         created_at: datetime()
                     })
-                    CREATE (p)-[:CREATED]->(a)
-                    CREATE (p)-[:USES]->(a)
+                    CREATE (h)-[:BUILT]->(b)
+                    CREATE (h)-[:INTERACTS]->(b)
                 """, id=admin_id, password_hash=hash_password('12345678'))
-                print("Admin Person created (username: admin, password: 12345678)")
+                print("Admin Human created (username: admin, password: 12345678)")
             
             print("Graph structure initialized successfully!")
             return True
@@ -196,38 +236,38 @@ def init_graph_structure():
 # ============== PERSON MANAGEMENT ==============
 
 def create_user(username, name, email, password):
-    """Create a new Person node with USES relationship to Agent"""
+    """Create a new Human node with INTERACTS relationship to Bot"""
     d = get_driver()
     if not d:
         return False, "Database connection error", None
     
     try:
         with d.session() as session:
-            # Check if username exists (support both Person and User labels)
+            # Check if username exists (support Human, Person and User labels)
             existing = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.username = $username
-                RETURN p
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.username = $username
+                RETURN h
             """, username=username).single()
             
             if existing:
                 return False, "Username already exists", None
             
-            # Check if email exists (support both Person and User labels)
+            # Check if email exists (support Human, Person and User labels)
             email_exists = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.email = $email
-                RETURN p
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.email = $email
+                RETURN h
             """, email=email).single()
             
             if email_exists:
                 return False, "Email already registered", None
             
-            # Create Person with USES relationship to Agent
-            person_id = str(uuid.uuid4())
+            # Create Human with INTERACTS relationship to Bot
+            human_id = str(uuid.uuid4())
             session.run("""
-                MATCH (a:Agent {name: 'Pentagon'})
-                CREATE (p:Person {
+                MATCH (b:Bot {name: 'Synapse'})
+                CREATE (h:Human {
                     id: $id,
                     username: $username,
                     name: $name,
@@ -236,12 +276,12 @@ def create_user(username, name, email, password):
                     is_creator: false,
                     created_at: datetime()
                 })
-                CREATE (p)-[:USES]->(a)
-            """, id=person_id, username=username, name=name, email=email, 
+                CREATE (h)-[:INTERACTS]->(b)
+            """, id=human_id, username=username, name=name, email=email, 
                 password_hash=hash_password(password))
             
             return True, "User created successfully", {
-                'id': person_id,
+                'id': human_id,
                 'username': username,
                 'name': name,
                 'email': email
@@ -251,7 +291,7 @@ def create_user(username, name, email, password):
 
 
 def authenticate_user(username, password):
-    """Authenticate Person/User by username and password (supports both labels)"""
+    """Authenticate Human/Person/User by username and password (supports all labels)"""
     d = get_driver()
     if not d:
         return False, "Database connection error", None
@@ -265,9 +305,9 @@ def authenticate_user(username, password):
             
             # First check if user exists at all
             user_check = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.username = $username
-                RETURN p.username as username, p.password_hash as stored_hash
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.username = $username
+                RETURN h.username as username, h.password_hash as stored_hash
             """, username=username).single()
             
             if user_check:
@@ -277,13 +317,13 @@ def authenticate_user(username, password):
             else:
                 print(f"[AUTH DEBUG] User '{username}' not found in database!")
             
-            # Support both Person and User labels for backward compatibility
+            # Support Human, Person and User labels for backward compatibility
             result = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) 
-                  AND p.username = $username 
-                  AND p.password_hash = $password_hash
-                RETURN p.id as id, p.username as username, p.name as name, p.email as email
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) 
+                  AND h.username = $username 
+                  AND h.password_hash = $password_hash
+                RETURN h.id as id, h.username as username, h.name as name, h.email as email
             """, username=username, password_hash=password_hash).single()
             
             if result:
@@ -302,7 +342,7 @@ def authenticate_user(username, password):
 
 
 def get_user_by_id(user_id):
-    """Get Person/User information by ID (supports both labels)"""
+    """Get Human/Person/User information by ID (supports all labels)"""
     d = get_driver()
     if not d:
         return None
@@ -310,9 +350,9 @@ def get_user_by_id(user_id):
     try:
         with d.session() as session:
             result = session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.id = $user_id
-                RETURN p.id as id, p.username as username, p.name as name, p.email as email
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                RETURN h.id as id, h.username as username, h.name as name, h.email as email
             """, user_id=user_id).single()
             
             if result:
@@ -329,8 +369,8 @@ def get_user_by_id(user_id):
 
 def find_or_create_person(user_id=None, email=None):
     """
-    Find Person/User by user ID or email (supports both labels).
-    If not found, returns None (use create_user to create new Person)
+    Find Human/Person/User by user ID or email (supports all labels).
+    If not found, returns None (use create_user to create new Human)
     """
     d = get_driver()
     if not d:
@@ -340,15 +380,15 @@ def find_or_create_person(user_id=None, email=None):
         with d.session() as session:
             if user_id:
                 result = session.run("""
-                    MATCH (p)
-                    WHERE (p:Person OR p:User) AND p.id = $user_id
-                    RETURN p.id as id, p.username as username, p.name as name, p.email as email
+                    MATCH (h)
+                    WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                    RETURN h.id as id, h.username as username, h.name as name, h.email as email
                 """, user_id=user_id).single()
             elif email:
                 result = session.run("""
-                    MATCH (p)
-                    WHERE (p:Person OR p:User) AND p.email = $email
-                    RETURN p.id as id, p.username as username, p.name as name, p.email as email
+                    MATCH (h)
+                    WHERE (h:Human OR h:Person OR h:User) AND h.email = $email
+                    RETURN h.id as id, h.username as username, h.name as name, h.email as email
                 """, email=email).single()
             else:
                 return None
@@ -365,14 +405,14 @@ def find_or_create_person(user_id=None, email=None):
     return None
 
 
-# ============== SESSION MANAGEMENT ==============
+# ============== CONVERSATION MANAGEMENT ==============
 
 def get_or_create_session(user_id, session_id=None):
     """
-    Get existing session or create new one for user.
+    Get existing conversation or create new one for user.
     Creates relationships:
-      (Person)-[:HAS_SESSION]->(Session)
-      (Session)-[:WITH_AGENT]->(Agent)
+      (Human)-[:OWNS_CONVERSATION]->(Conversation)
+      (Conversation)-[:HOSTED_BY]->(Bot)
     """
     d = get_driver()
     if not d:
@@ -380,43 +420,41 @@ def get_or_create_session(user_id, session_id=None):
     
     try:
         with d.session() as session:
-            # If session_id provided, verify it exists (support both Person and User)
+            # If session_id provided, verify it exists (support Human, Person and User)
             if session_id:
                 existing = session.run("""
-                    MATCH (p)-[:HAS_SESSION]->(s:Session {id: $session_id})
-                    WHERE (p:Person OR p:User) AND p.id = $user_id
-                    RETURN s.id as id
+                    MATCH (h)-[:OWNS_CONVERSATION|HAS_SESSION]->(c)
+                    WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                      AND (c:Conversation OR c:Session) AND c.id = $session_id
+                    RETURN c.id as id
                 """, user_id=user_id, session_id=session_id).single()
                 
                 if existing:
                     return session_id
             
-            # Create new session with array properties and relationships
+            # Create new Conversation with indexed properties
             new_session_id = str(uuid.uuid4())
             session.run("""
-                MATCH (p)
-                WHERE (p:Person OR p:User) AND p.id = $user_id
-                MATCH (a:Agent {name: 'Pentagon'})
-                CREATE (s:Session {
+                MATCH (h)
+                WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                MATCH (b:Bot {name: 'Synapse'})
+                CREATE (c:Conversation {
                     id: $session_id,
                     started_at: datetime(),
-                    messages: [],
-                    sentiments: [],
-                    entities: [],
-                    timestamps: []
+                    msg_count: 0
                 })
-                CREATE (p)-[:HAS_SESSION]->(s)
-                CREATE (s)-[:WITH_AGENT]->(a)
+                CREATE (h)-[:OWNS_CONVERSATION]->(c)
+                CREATE (c)-[:HOSTED_BY]->(b)
             """, user_id=user_id, session_id=new_session_id)
             
             return new_session_id
     except Exception as e:
-        print(f"Error creating session: {e}")
+        print(f"Error creating conversation: {e}")
         return str(uuid.uuid4())
 
 
 def get_user_sessions(user_id):
-    """Get all sessions for a Person/User (supports both labels)"""
+    """Get all conversations for a Human/Person/User (supports all labels)"""
     d = get_driver()
     if not d:
         return []
@@ -424,11 +462,12 @@ def get_user_sessions(user_id):
     try:
         with d.session() as session:
             results = session.run("""
-                MATCH (p)-[:HAS_SESSION]->(s:Session)
-                WHERE (p:Person OR p:User) AND p.id = $user_id
-                RETURN s.id as session_id, s.started_at as started_at, 
-                       CASE WHEN s.messages IS NOT NULL THEN size(s.messages) ELSE s.chat_count END as message_count
-                ORDER BY s.started_at DESC
+                MATCH (h)-[:OWNS_CONVERSATION|HAS_SESSION]->(c)
+                WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                  AND (c:Conversation OR c:Session)
+                RETURN c.id as session_id, c.started_at as started_at, 
+                       COALESCE(c.msg_count, 0) as message_count
+                ORDER BY c.started_at DESC
             """, user_id=user_id)
             
             sessions = []
@@ -444,15 +483,17 @@ def get_user_sessions(user_id):
         return []
 
 
-# ============== CHAT STORAGE (Array-based Session Memory) ==============
+# ============== CHAT STORAGE (Indexed Conversation Memory) ==============
 
 def store_chat(user_id, session_id, user_input, agent_output, timestamp, nlp_data, prev_chat_id=None):
     """
-    Store chat in Session node by appending to arrays:
-      - messages[]: {role: 'user'/'agent', content: '...'}
-      - sentiments[]: sentiment score per message
-      - entities[]: extracted entities
-      - timestamps[]: time of each message
+    Store chat in Conversation node using indexed properties:
+      - message1, message2, ...: Individual messages (alternating user/bot)
+      - intent1, intent2, ...: Intent per user message
+      - sentiment1, sentiment2, ...: Sentiment per user message  
+      - entity1, entity2, ...: Extracted entities per user message
+      - timestamp1, timestamp2, ...: Time of each exchange
+      - msg_count: Total message count
     """
     d = get_driver()
     if not d:
@@ -464,48 +505,56 @@ def store_chat(user_id, session_id, user_input, agent_output, timestamp, nlp_dat
             sentiment = 0.0
             sentiment_label = "neutral"
             if nlp_data and 'sentiment' in nlp_data and nlp_data['sentiment']:
-                sentiment = nlp_data['sentiment'].get('compound', 0.0)
+                sentiment = nlp_data['sentiment'].get('scores', {}).get('compound', 0.0)
                 sentiment_label = nlp_data['sentiment'].get('sentiment', 'neutral')
+            
+            # Extract intent
+            intent = 'general'
+            if nlp_data and 'intent' in nlp_data:
+                intent = nlp_data['intent'][0] if isinstance(nlp_data['intent'], list) and len(nlp_data['intent']) > 0 else str(nlp_data['intent'])
             
             # Extract entities
             entities = []
             if nlp_data and 'entities' in nlp_data:
-                entities = nlp_data['entities']  # List of entity dicts
-            
-            # Create message objects
-            user_message = json.dumps({'role': 'user', 'content': user_input})
-            agent_message = json.dumps({'role': 'agent', 'content': agent_output})
-            
-            # Create entity JSON
+                entities = nlp_data['entities']
             entities_json = json.dumps(entities) if entities else '[]'
             
-            # Append to Session arrays
-            session.run("""
-                MATCH (s:Session {id: $session_id})
-                SET s.messages = s.messages + [$user_msg, $agent_msg],
-                    s.sentiments = s.sentiments + [$sentiment],
-                    s.entities = s.entities + [$entities],
-                    s.timestamps = s.timestamps + [$timestamp],
-                    s.last_updated = datetime()
-            """, session_id=session_id, 
-                user_msg=user_message, agent_msg=agent_message,
-                sentiment=sentiment, entities=entities_json, timestamp=timestamp)
-            
-            # Return a chat ID
-            result = session.run("""
-                MATCH (s:Session {id: $session_id})
-                RETURN size(s.timestamps) as count
+            # Get current message count and increment
+            count_result = session.run("""
+                MATCH (c)
+                WHERE (c:Conversation OR c:Session) AND c.id = $session_id
+                RETURN COALESCE(c.msg_count, 0) as count
             """, session_id=session_id).single()
             
-            count = result['count'] if result else 1
-            return f"{session_id}_chat{count}"
+            current_count = count_result['count'] if count_result else 0
+            new_count = current_count + 1
+            
+            # Store using indexed properties: message1, intent1, sentiment1, etc.
+            session.run(f"""
+                MATCH (c)
+                WHERE (c:Conversation OR c:Session) AND c.id = $session_id
+                SET c.message{new_count}_user = $user_input,
+                    c.message{new_count}_bot = $agent_output,
+                    c.intent{new_count} = $intent,
+                    c.sentiment{new_count} = $sentiment,
+                    c.sentiment{new_count}_label = $sentiment_label,
+                    c.entity{new_count} = $entities,
+                    c.timestamp{new_count} = $timestamp,
+                    c.msg_count = $new_count,
+                    c.last_updated = datetime()
+            """, session_id=session_id, 
+                user_input=user_input, agent_output=agent_output,
+                intent=intent, sentiment=sentiment, sentiment_label=sentiment_label,
+                entities=entities_json, timestamp=timestamp, new_count=new_count)
+            
+            return f"{session_id}_msg{new_count}"
     except Exception as e:
         print(f"Error storing chat: {e}")
         return str(uuid.uuid4())
 
 
 def get_chat_history(user_id):
-    """Get all chats for a Person/User across all sessions (supports both labels and old schema)"""
+    """Get all chats for a Human/Person/User across all conversations (supports all labels and formats)"""
     d = get_driver()
     if not d:
         return []
@@ -513,65 +562,40 @@ def get_chat_history(user_id):
     try:
         with d.session() as session:
             results = session.run("""
-                MATCH (p)-[:HAS_SESSION]->(s:Session)
-                WHERE (p:Person OR p:User) AND p.id = $user_id
-                RETURN s as session_node, s.id as session_id, s.messages as messages, 
-                       s.sentiments as sentiments, s.entities as entities,
-                       s.timestamps as timestamps, s.started_at as started_at,
-                       s.chat_count as chat_count
-                ORDER BY s.started_at ASC
+                MATCH (h)-[:OWNS_CONVERSATION|HAS_SESSION]->(c)
+                WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                  AND (c:Conversation OR c:Session)
+                RETURN c as conv_node, c.id as session_id, c.msg_count as msg_count,
+                       c.started_at as started_at
+                ORDER BY c.started_at ASC
             """, user_id=user_id)
             
             all_chats = []
             for record in results:
                 session_id = record['session_id']
-                messages = record['messages']
+                conv = dict(record['conv_node'])
+                msg_count = record['msg_count'] or conv.get('chat_count', 0) or 0
                 
-                # Check if using new array format or old inputN/outputN format
-                if messages is not None and len(messages) > 0:
-                    # New format: arrays
-                    sentiments = record['sentiments'] or []
-                    timestamps = record['timestamps'] or []
+                # Read indexed properties: message1_user, message1_bot, intent1, etc.
+                for i in range(1, int(msg_count) + 1):
+                    user_msg = conv.get(f'message{i}_user') or conv.get(f'input{i}', '')
+                    bot_msg = conv.get(f'message{i}_bot') or conv.get(f'output{i}', '')
+                    intent = conv.get(f'intent{i}', 'general')
+                    sentiment = conv.get(f'sentiment{i}', 0)
+                    sentiment_label = conv.get(f'sentiment{i}_label', 'neutral')
+                    timestamp = conv.get(f'timestamp{i}')
                     
-                    chat_num = 0
-                    for i in range(0, len(messages), 2):
-                        chat_num += 1
-                        try:
-                            user_msg = json.loads(messages[i]) if i < len(messages) else {}
-                            agent_msg = json.loads(messages[i+1]) if i+1 < len(messages) else {}
-                        except:
-                            user_msg = {'content': messages[i] if i < len(messages) else ''}
-                            agent_msg = {'content': messages[i+1] if i+1 < len(messages) else ''}
-                        sentiment_idx = chat_num - 1
-                        
+                    if user_msg or bot_msg:
                         all_chats.append({
                             'session_id': session_id,
-                            'chat_number': chat_num,
-                            'input': user_msg.get('content', ''),
-                            'output': agent_msg.get('content', ''),
-                            'sentiment': sentiments[sentiment_idx] if sentiment_idx < len(sentiments) else 0,
-                            'timestamp': timestamps[sentiment_idx] if sentiment_idx < len(timestamps) else None
+                            'chat_number': i,
+                            'input': user_msg,
+                            'output': bot_msg,
+                            'intent': intent,
+                            'sentiment': sentiment,
+                            'sentiment_label': sentiment_label,
+                            'timestamp': timestamp
                         })
-                else:
-                    # Old format: inputN/outputN properties
-                    sess = dict(record['session_node'])
-                    chat_count = record['chat_count'] or 0
-                    
-                    for i in range(1, int(chat_count) + 1):
-                        input_val = sess.get(f'input{i}')
-                        output_val = sess.get(f'output{i}')
-                        sentiment_val = sess.get(f'sentiment{i}', 'neutral')
-                        timestamp_val = sess.get(f'timestamp{i}')
-                        
-                        if input_val and output_val:
-                            all_chats.append({
-                                'session_id': session_id,
-                                'chat_number': i,
-                                'input': input_val,
-                                'output': output_val,
-                                'sentiment': sentiment_val,
-                                'timestamp': timestamp_val
-                            })
             
             return all_chats
     except Exception as e:
@@ -580,7 +604,7 @@ def get_chat_history(user_id):
 
 
 def get_chat_history_by_session(user_id, session_id):
-    """Get chats for a specific session (supports both labels and old schema)"""
+    """Get chats for a specific conversation (supports all labels and formats)"""
     d = get_driver()
     if not d:
         return []
@@ -588,71 +612,46 @@ def get_chat_history_by_session(user_id, session_id):
     try:
         with d.session() as session:
             result = session.run("""
-                MATCH (p)-[:HAS_SESSION]->(s:Session {id: $session_id})
-                WHERE (p:Person OR p:User) AND p.id = $user_id
-                RETURN s as session_node, s.messages as messages, s.sentiments as sentiments,
-                       s.entities as entities, s.timestamps as timestamps, s.chat_count as chat_count
+                MATCH (h)-[:OWNS_CONVERSATION|HAS_SESSION]->(c)
+                WHERE (h:Human OR h:Person OR h:User) AND h.id = $user_id
+                  AND (c:Conversation OR c:Session) AND c.id = $session_id
+                RETURN c as conv_node, c.msg_count as msg_count
             """, user_id=user_id, session_id=session_id).single()
             
             if not result:
                 return []
             
-            messages = result['messages']
+            conv = dict(result['conv_node'])
+            msg_count = result['msg_count'] or conv.get('chat_count', 0) or 0
             chats = []
             
-            # Check if using new array format or old inputN/outputN format
-            if messages is not None and len(messages) > 0:
-                # New format
-                sentiments = result['sentiments'] or []
-                entities = result['entities'] or []
-                timestamps = result['timestamps'] or []
+            # Read indexed properties
+            for i in range(1, int(msg_count) + 1):
+                user_msg = conv.get(f'message{i}_user') or conv.get(f'input{i}', '')
+                bot_msg = conv.get(f'message{i}_bot') or conv.get(f'output{i}', '')
+                intent = conv.get(f'intent{i}', 'general')
+                sentiment = conv.get(f'sentiment{i}', 0)
+                sentiment_label = conv.get(f'sentiment{i}_label', 'neutral')
+                entities_json = conv.get(f'entity{i}', '[]')
+                timestamp = conv.get(f'timestamp{i}')
                 
-                chat_num = 0
-                for i in range(0, len(messages), 2):
-                    chat_num += 1
-                    try:
-                        user_msg = json.loads(messages[i]) if i < len(messages) else {}
-                        agent_msg = json.loads(messages[i+1]) if i+1 < len(messages) else {}
-                    except:
-                        user_msg = {'content': messages[i] if i < len(messages) else ''}
-                        agent_msg = {'content': messages[i+1] if i+1 < len(messages) else ''}
-                    sentiment_idx = chat_num - 1
-                    
-                    try:
-                        ent_list = json.loads(entities[sentiment_idx]) if sentiment_idx < len(entities) else []
-                    except:
-                        ent_list = []
-                    
+                try:
+                    entities = json.loads(entities_json) if entities_json else []
+                except:
+                    entities = []
+                
+                if user_msg or bot_msg:
                     chats.append({
                         'session_id': session_id,
-                        'chat_number': chat_num,
-                        'input': user_msg.get('content', ''),
-                        'output': agent_msg.get('content', ''),
-                        'sentiment': sentiments[sentiment_idx] if sentiment_idx < len(sentiments) else 0,
-                        'entities': ent_list,
-                        'timestamp': timestamps[sentiment_idx] if sentiment_idx < len(timestamps) else None
+                        'chat_number': i,
+                        'input': user_msg,
+                        'output': bot_msg,
+                        'intent': intent,
+                        'sentiment': sentiment,
+                        'sentiment_label': sentiment_label,
+                        'entities': entities,
+                        'timestamp': timestamp
                     })
-            else:
-                # Old format: inputN/outputN properties
-                sess = dict(result['session_node'])
-                chat_count = result['chat_count'] or 0
-                
-                for i in range(1, int(chat_count) + 1):
-                    input_val = sess.get(f'input{i}')
-                    output_val = sess.get(f'output{i}')
-                    sentiment_val = sess.get(f'sentiment{i}', 'neutral')
-                    timestamp_val = sess.get(f'timestamp{i}')
-                    
-                    if input_val and output_val:
-                        chats.append({
-                            'session_id': session_id,
-                            'chat_number': i,
-                            'input': input_val,
-                            'output': output_val,
-                            'sentiment': sentiment_val,
-                            'entities': [],
-                            'timestamp': timestamp_val
-                        })
             
             return chats
     except Exception as e:
@@ -660,12 +659,12 @@ def get_chat_history_by_session(user_id, session_id):
         return []
 
 
-# ============== SESSION MEMORY QUERIES ==============
+# ============== CONVERSATION MEMORY QUERIES ==============
 
 def get_session_memory(session_id):
     """
-    Get the full memory container for a session.
-    Returns: messages[], sentiments[], entities[], timestamps[]
+    Get the full memory container for a conversation using indexed properties.
+    Returns dict with all messageN_user, messageN_bot, intentN, etc.
     """
     d = get_driver()
     if not d:
@@ -674,17 +673,38 @@ def get_session_memory(session_id):
     try:
         with d.session() as session:
             result = session.run("""
-                MATCH (s:Session {id: $session_id})
-                RETURN s.messages as messages, s.sentiments as sentiments,
-                       s.entities as entities, s.timestamps as timestamps
+                MATCH (c)
+                WHERE (c:Conversation OR c:Session) AND c.id = $session_id
+                RETURN c as conv_node, c.msg_count as msg_count
             """, session_id=session_id).single()
             
             if result:
+                conv = dict(result['conv_node'])
+                msg_count = result['msg_count'] or 0
+                
+                messages = []
+                sentiments = []
+                intents = []
+                entities = []
+                timestamps = []
+                
+                for i in range(1, int(msg_count) + 1):
+                    messages.append({
+                        'user': conv.get(f'message{i}_user', ''),
+                        'bot': conv.get(f'message{i}_bot', '')
+                    })
+                    sentiments.append(conv.get(f'sentiment{i}', 0))
+                    intents.append(conv.get(f'intent{i}', 'general'))
+                    entities.append(conv.get(f'entity{i}', '[]'))
+                    timestamps.append(conv.get(f'timestamp{i}'))
+                
                 return {
-                    'messages': result['messages'] or [],
-                    'sentiments': result['sentiments'] or [],
-                    'entities': result['entities'] or [],
-                    'timestamps': result['timestamps'] or []
+                    'messages': messages,
+                    'sentiments': sentiments,
+                    'intents': intents,
+                    'entities': entities,
+                    'timestamps': timestamps,
+                    'msg_count': msg_count
                 }
     except Exception as e:
         print(f"Error getting session memory: {e}")
@@ -693,16 +713,18 @@ def get_session_memory(session_id):
 
 def query_session_memory(session_id, query_type):
     """
-    Query session memory for specific information.
+    Query conversation memory for specific information.
     
     Query types:
-      - 'user_name': Find PERSON entity in entities[]
-      - 'last_message': Last item in messages[]
-      - 'first_message': First item in messages[]
-      - 'last_sentiment': Last item in sentiments[]
-      - 'last_entity': Last item in entities[]
-      - 'average_sentiment': Average of sentiments[]
+      - 'user_name': Find PERSON entity in entities
+      - 'last_message': Last user/bot message pair
+      - 'first_message': First user/bot message pair
+      - 'last_sentiment': Last sentiment value
+      - 'last_intent': Last detected intent
+      - 'last_entity': Last entity list
+      - 'average_sentiment': Average of all sentiments
       - 'all_entities': All entities mentioned
+      - 'mood_summary': Overall mood based on average sentiment
     """
     memory = get_session_memory(session_id)
     if not memory:
@@ -710,36 +732,40 @@ def query_session_memory(session_id, query_type):
     
     messages = memory['messages']
     sentiments = memory['sentiments']
+    intents = memory['intents']
     entities = memory['entities']
     
     try:
         if query_type == 'user_name':
             # Search for PERSON entity in entities
             for entity_json in reversed(entities):
-                entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
-                for ent in entity_list:
-                    if isinstance(ent, dict) and ent.get('label') == 'PERSON':
-                        return ent.get('text')
+                try:
+                    entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
+                    for ent in entity_list:
+                        if isinstance(ent, dict) and ent.get('type') == 'PERSON':
+                            return ent.get('name')
+                except:
+                    pass
             return None
         
         elif query_type == 'last_message':
             if messages:
-                last_msg = json.loads(messages[-1]) if isinstance(messages[-1], str) else messages[-1]
-                return last_msg.get('content')
+                return messages[-1]
             return None
         
         elif query_type == 'first_message':
             if messages:
-                first_msg = json.loads(messages[0]) if isinstance(messages[0], str) else messages[0]
-                return first_msg.get('content')
+                return messages[0]
             return None
         
         elif query_type == 'last_user_message':
-            # Find last user message
-            for msg_json in reversed(messages):
-                msg = json.loads(msg_json) if isinstance(msg_json, str) else msg_json
-                if msg.get('role') == 'user':
-                    return msg.get('content')
+            if messages:
+                return messages[-1].get('user', '')
+            return None
+        
+        elif query_type == 'last_bot_message':
+            if messages:
+                return messages[-1].get('bot', '')
             return None
         
         elif query_type == 'last_sentiment':
@@ -747,34 +773,47 @@ def query_session_memory(session_id, query_type):
                 return sentiments[-1]
             return None
         
+        elif query_type == 'last_intent':
+            if intents:
+                return intents[-1]
+            return None
+        
         elif query_type == 'last_entity':
             for entity_json in reversed(entities):
-                entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
-                if entity_list:
-                    return entity_list[-1]
+                try:
+                    entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
+                    if entity_list:
+                        return entity_list[-1]
+                except:
+                    pass
             return None
         
         elif query_type == 'average_sentiment':
             if sentiments:
-                return sum(sentiments) / len(sentiments)
+                numeric_sentiments = [s for s in sentiments if isinstance(s, (int, float))]
+                if numeric_sentiments:
+                    return sum(numeric_sentiments) / len(numeric_sentiments)
             return 0.0
         
         elif query_type == 'all_entities':
             all_ents = []
             for entity_json in entities:
-                entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
-                all_ents.extend(entity_list)
+                try:
+                    entity_list = json.loads(entity_json) if isinstance(entity_json, str) else entity_json
+                    all_ents.extend(entity_list)
+                except:
+                    pass
             return all_ents
         
         elif query_type == 'mood_summary':
             if sentiments:
-                avg = sum(sentiments) / len(sentiments)
-                if avg > 0.3:
-                    return 'positive'
-                elif avg < -0.3:
-                    return 'negative'
-                else:
-                    return 'neutral'
+                numeric_sentiments = [s for s in sentiments if isinstance(s, (int, float))]
+                if numeric_sentiments:
+                    avg = sum(numeric_sentiments) / len(numeric_sentiments)
+                    if avg > 0.3:
+                        return 'positive'
+                    elif avg < -0.3:
+                        return 'negative'
             return 'neutral'
         
     except Exception as e:
@@ -784,7 +823,7 @@ def query_session_memory(session_id, query_type):
 
 
 def get_person_from_session(session_id):
-    """Get the Person/User who owns this session (supports both labels)"""
+    """Get the Human/Person/User who owns this conversation (supports all labels)"""
     d = get_driver()
     if not d:
         return None
@@ -792,9 +831,10 @@ def get_person_from_session(session_id):
     try:
         with d.session() as session:
             result = session.run("""
-                MATCH (p)-[:HAS_SESSION]->(s:Session {id: $session_id})
-                WHERE p:Person OR p:User
-                RETURN p.id as id, p.username as username, p.name as name, p.email as email
+                MATCH (h)-[:OWNS_CONVERSATION|HAS_SESSION]->(c)
+                WHERE (h:Human OR h:Person OR h:User)
+                  AND (c:Conversation OR c:Session) AND c.id = $session_id
+                RETURN h.id as id, h.username as username, h.name as name, h.email as email
             """, session_id=session_id).single()
             
             if result:
@@ -826,15 +866,23 @@ def search_knowledge(query, intent, entities):
 
 def generate_cypher_queries(user_id, session_id, user_input, agent_output, timestamp, nlp_data, prev_chat_id=None):
     """Generate Cypher queries for visualization/logging purposes"""
-    chat_id = f"{session_id}_chat_preview"
+    chat_id = f"{session_id}_msg_preview"
+    
+    # Get intent
+    intent = 'general'
+    if nlp_data and 'intent' in nlp_data:
+        intent = nlp_data['intent'][0] if isinstance(nlp_data['intent'], list) and len(nlp_data['intent']) > 0 else str(nlp_data['intent'])
     
     queries = [
-        f"// Store chat in session arrays (messages, sentiments, entities, timestamps)",
-        f"MATCH (s:Session {{id: '{session_id}'}})",
-        f"SET s.messages = s.messages + [user_msg, agent_msg],",
-        f"    s.sentiments = s.sentiments + [sentiment],",
-        f"    s.entities = s.entities + [entities],",
-        f"    s.timestamps = s.timestamps + [timestamp]"
+        f"// Store chat in Conversation using indexed properties (message1, intent1, etc.)",
+        f"MATCH (c:Conversation {{id: '{session_id}'}})",
+        f"SET c.messageN_user = '{user_input[:50]}...',",
+        f"    c.messageN_bot = '{agent_output[:50]}...',",
+        f"    c.intentN = '{intent}',",
+        f"    c.sentimentN = sentiment_value,",
+        f"    c.entityN = entities_json,",
+        f"    c.timestampN = '{timestamp}'",
+        f"    c.msg_count = N"
     ]
     
     return queries, chat_id
@@ -850,15 +898,16 @@ def get_graph_stats():
     
     try:
         with d.session() as session:
-            # Count nodes
-            person_count = session.run("MATCH (p:Person) RETURN count(p) as count").single()['count']
-            session_count = session.run("MATCH (s:Session) RETURN count(s) as count").single()['count']
-            agent_count = session.run("MATCH (a:Agent) RETURN count(a) as count").single()['count']
+            # Count nodes (support both old and new labels)
+            human_count = session.run("MATCH (h) WHERE h:Human OR h:Person OR h:User RETURN count(h) as count").single()['count']
+            conv_count = session.run("MATCH (c) WHERE c:Conversation OR c:Session RETURN count(c) as count").single()['count']
+            bot_count = session.run("MATCH (b) WHERE b:Bot OR b:Agent RETURN count(b) as count").single()['count']
             
-            # Count total messages
+            # Count total messages by summing msg_count
             msg_result = session.run("""
-                MATCH (s:Session)
-                RETURN sum(size(s.messages)) as total
+                MATCH (c)
+                WHERE c:Conversation OR c:Session
+                RETURN sum(COALESCE(c.msg_count, 0)) as total
             """).single()
             total_messages = msg_result['total'] if msg_result['total'] else 0
             
@@ -870,9 +919,9 @@ def get_graph_stats():
             relationship_count = rel_result['count'] if rel_result else 0
             
             return {
-                'persons': person_count,
-                'sessions': session_count,
-                'agents': agent_count,
+                'humans': human_count,
+                'conversations': conv_count,
+                'bots': bot_count,
                 'total_messages': total_messages,
                 'relationships': relationship_count,
                 'connected': True
@@ -882,7 +931,7 @@ def get_graph_stats():
 
 
 def get_agent_info():
-    """Get Agent (Pentagon) information"""
+    """Get Bot (Synapse) information"""
     d = get_driver()
     if not d:
         return None
@@ -890,9 +939,10 @@ def get_agent_info():
     try:
         with d.session() as session:
             result = session.run("""
-                MATCH (a:Agent {name: 'Pentagon'})
-                RETURN a.name as name, a.creator as creator, a.members as members,
-                       a.city as city, a.company as company
+                MATCH (b)
+                WHERE (b:Bot OR b:Agent) AND b.name = 'Synapse'
+                RETURN b.name as name, b.creator as creator, b.members as members,
+                       b.city as city, b.company as company
             """).single()
             
             if result:
@@ -904,49 +954,53 @@ def get_agent_info():
                     'company': result['company']
                 }
     except Exception as e:
-        print(f"Error getting agent info: {e}")
+        print(f"Error getting bot info: {e}")
     return None
 
 
 def get_graph_schema():
-    """Return the graph schema description (3 Core Nodes)"""
+    """Return the graph schema description (3 Core Nodes with new names)"""
     return {
         'nodes': [
             {
-                'label': 'Person',
+                'label': 'Human',
                 'description': 'The human user (long-term identity)',
                 'properties': ['id', 'username', 'name', 'email', 'password_hash', 'is_creator', 'created_at']
             },
             {
-                'label': 'Agent',
-                'description': 'The bot (Pentagon)',
+                'label': 'Bot',
+                'description': 'The AI assistant (Synapse)',
                 'properties': ['name', 'creator', 'members', 'city', 'company', 'created_at']
             },
             {
-                'label': 'Session',
+                'label': 'Conversation',
                 'description': 'One chat conversation instance (Episode - memory container)',
-                'properties': ['id', 'started_at', 'last_updated', 'messages[]', 'sentiments[]', 'entities[]', 'timestamps[]']
+                'properties': ['id', 'started_at', 'last_updated', 'msg_count', 'messageN_user', 'messageN_bot', 'intentN', 'sentimentN', 'entityN', 'timestampN']
             }
         ],
         'relationships': [
-            {'type': 'CREATED', 'from': 'Person', 'to': 'Agent', 'description': 'User is the bot creator'},
-            {'type': 'USES', 'from': 'Person', 'to': 'Agent', 'description': 'User is interacting with bot'},
-            {'type': 'HAS_SESSION', 'from': 'Person', 'to': 'Session', 'description': 'This chat belongs to this user'},
-            {'type': 'WITH_AGENT', 'from': 'Session', 'to': 'Agent', 'description': 'This chat session is with this bot'}
+            {'type': 'BUILT', 'from': 'Human', 'to': 'Bot', 'description': 'User is the bot creator'},
+            {'type': 'INTERACTS', 'from': 'Human', 'to': 'Bot', 'description': 'User is interacting with bot'},
+            {'type': 'OWNS_CONVERSATION', 'from': 'Human', 'to': 'Conversation', 'description': 'This chat belongs to this user'},
+            {'type': 'HOSTED_BY', 'from': 'Conversation', 'to': 'Bot', 'description': 'This conversation is with this bot'}
         ],
-        'session_memory': {
-            'messages': 'All conversation messages [{role, content}]',
-            'sentiments': 'Sentiment score per message',
-            'entities': 'Extracted entities (name, place, topic, etc)',
-            'timestamps': 'Time of each message'
+        'conversation_memory': {
+            'messageN_user': 'User message N (message1_user, message2_user, ...)',
+            'messageN_bot': 'Bot response N (message1_bot, message2_bot, ...)',
+            'intentN': 'Detected intent for message N (intent1, intent2, ...)',
+            'sentimentN': 'Sentiment score for message N (sentiment1, sentiment2, ...)',
+            'entityN': 'Extracted entities for message N (entity1, entity2, ...)',
+            'timestampN': 'Timestamp for message N (timestamp1, timestamp2, ...)',
+            'msg_count': 'Total number of message exchanges'
         },
         'memory_queries': {
-            'user_name': 'Find PERSON entity inside entities[]',
-            'last_message': 'Last item in messages[]',
-            'last_sentiment': 'Last item in sentiments[]',
-            'last_entity': 'Last item in entities[]',
-            'first_message': 'First item in messages[]',
-            'average_sentiment': 'Average of sentiments[]',
+            'user_name': 'Find PERSON entity in entityN properties',
+            'last_message': 'Get messageN where N = msg_count',
+            'last_sentiment': 'Get sentimentN where N = msg_count',
+            'last_intent': 'Get intentN where N = msg_count',
+            'last_entity': 'Get entityN where N = msg_count',
+            'first_message': 'Get message1_user and message1_bot',
+            'average_sentiment': 'Average of all sentimentN values',
             'mood_summary': 'Overall mood based on average sentiment'
         }
     }

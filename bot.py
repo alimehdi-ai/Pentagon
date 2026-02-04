@@ -18,7 +18,8 @@ from context_store import ChatContextStore
 
 # Import custom modules
 from nltk_processor import (
-    detect_intent, process_nlp, analyze_sentiment
+    detect_intent, process_nlp, analyze_sentiment,
+    tokenize_sentences, is_multi_sentence, process_multi_sentence, combine_nlp_results
 )
 from neo4j_handler import (
     store_chat, get_user_context, search_knowledge,
@@ -330,58 +331,105 @@ def get_bot_response():
     
     session_tracking = user_sessions[user_id][session_id]
     
-    # Process NLP on original query (includes intent, entities, sentiment, WordNet nouns)
-    nlp_data = process_nlp(original_query)
-    nlp_data['intent'] = detect_intent(original_query)
+    # Check if input has multiple sentences
+    is_multi = is_multi_sentence(original_query)
     
-    # Extract facts from current message BEFORE trying to respond
-    # This allows "my favorite color is blue" to be stored before any response logic
-    context_store._extract_facts(user_id, session_id, original_query)
-    
-    # Get user context for better responses
-    context = get_user_context(user_id)
-    
-    # First check if user is asking about their personal info
-    personal_response = get_user_personal_response(original_query, user_id)
-    contextual_response = get_contextual_response(original_query, user_id, session_id)
-    fact_acknowledgment = get_fact_acknowledgment(original_query, user_id, session_id)
-    
-    if personal_response:
-        response = personal_response
-        response_source = 'user_profile'
-    elif contextual_response:
-        response = contextual_response
-        response_source = 'session_context'
-    elif fact_acknowledgment:
-        # User shared personal info, acknowledge it
-        response = fact_acknowledgment
-        response_source = 'fact_acknowledgment'
-    else:
-        # Try to find answer from Neo4j knowledge
-        neo4j_response = search_knowledge(original_query, nlp_data['intent'], nlp_data['entities'])
+    if is_multi:
+        # Process each sentence separately and combine responses
+        sentence_results = process_multi_sentence(original_query)
+        nlp_data = combine_nlp_results(sentence_results)
         
-        # Spell correction for AIML
-        corrected_words = [spell(w) for w in original_query.split()]
-        question = " ".join(corrected_words)
+        # Get responses for each sentence
+        responses = []
+        for sent_data in sentence_results:
+            sentence = sent_data['text']
+            sent_nlp = sent_data['nlp']
+            sent_intent = sent_data['intent']
+            
+            # Extract facts from each sentence
+            context_store._extract_facts(user_id, session_id, sentence)
+            
+            # Check for personal/contextual responses for each sentence
+            personal_resp = get_user_personal_response(sentence, user_id)
+            contextual_resp = get_contextual_response(sentence, user_id, session_id)
+            fact_ack = get_fact_acknowledgment(sentence, user_id, session_id)
+            
+            if personal_resp:
+                responses.append(personal_resp)
+            elif contextual_resp:
+                responses.append(contextual_resp)
+            elif fact_ack:
+                responses.append(fact_ack)
+            else:
+                # Try AIML for this sentence
+                corrected = " ".join([spell(w) for w in sentence.split()])
+                aiml_resp = k.respond(corrected, session_id)
+                if aiml_resp:
+                    responses.append(aiml_resp)
+                elif sent_nlp.get('nouns') and len(sent_nlp['nouns']) > 0:
+                    noun_def = sent_nlp['nouns'][0]
+                    if noun_def.get('definition'):
+                        responses.append(f"'{noun_def['word']}' means: {noun_def['definition']}")
         
-        # Determine bot response
-        if neo4j_response:
-            response = neo4j_response
-            response_source = 'neo4j'
+        # Combine responses
+        if responses:
+            enhanced_response = " | ".join(responses) if len(responses) > 1 else responses[0]
         else:
-            # Fallback to AIML
-            response = k.respond(question, session_id)
-            response_source = 'aiml'
-            if not response:
-                response = ":)"
-    
-    # Enhance response with WordNet definition if applicable
-    enhanced_response = response
-    if response_source == 'aiml' and nlp_data['nouns'] and len(nlp_data['nouns']) > 0:
-        if any(word in original_query.lower() for word in ['what is', 'define', 'meaning', 'explain']):
-            noun_def = nlp_data['nouns'][0]
-            if noun_def['definition'] and response == ":)":
-                enhanced_response = f"'{noun_def['word']}' means: {noun_def['definition']}"
+            enhanced_response = k.respond(original_query, session_id) or ":)"
+        
+        response_source = 'multi_sentence'
+        nlp_data['intent'] = [s['intent'] for s in sentence_results]
+    else:
+        # Single sentence processing (original logic)
+        nlp_data = process_nlp(original_query)
+        nlp_data['intent'] = detect_intent(original_query)
+        
+        # Extract facts from current message BEFORE trying to respond
+        context_store._extract_facts(user_id, session_id, original_query)
+        
+        # Get user context for better responses
+        context = get_user_context(user_id)
+        
+        # First check if user is asking about their personal info
+        personal_response = get_user_personal_response(original_query, user_id)
+        contextual_response = get_contextual_response(original_query, user_id, session_id)
+        fact_acknowledgment = get_fact_acknowledgment(original_query, user_id, session_id)
+        
+        if personal_response:
+            response = personal_response
+            response_source = 'user_profile'
+        elif contextual_response:
+            response = contextual_response
+            response_source = 'session_context'
+        elif fact_acknowledgment:
+            response = fact_acknowledgment
+            response_source = 'fact_acknowledgment'
+        else:
+            # Try to find answer from Neo4j knowledge
+            neo4j_response = search_knowledge(original_query, nlp_data['intent'], nlp_data['entities'])
+            
+            # Spell correction for AIML
+            corrected_words = [spell(w) for w in original_query.split()]
+            question = " ".join(corrected_words)
+            
+            # Determine bot response
+            if neo4j_response:
+                response = neo4j_response
+                response_source = 'neo4j'
+            else:
+                # Fallback to AIML
+                response = k.respond(question, session_id)
+                response_source = 'aiml'
+                if not response:
+                    response = ":)"
+        
+        # Enhance response with WordNet definition if applicable
+        enhanced_response = response
+        if response_source == 'aiml' and nlp_data['nouns'] and len(nlp_data['nouns']) > 0:
+            if any(word in original_query.lower() for word in ['what is', 'define', 'meaning', 'explain']):
+                noun_def = nlp_data['nouns'][0]
+                if noun_def['definition'] and response == ":)":
+                    enhanced_response = f"'{noun_def['word']}' means: {noun_def['definition']}"
 
     # Generate Cypher queries for visualization
     cypher_queries, chat_id = generate_cypher_queries(
@@ -389,7 +437,7 @@ def get_bot_response():
         session_tracking['prev_chat_id']
     )
     
-    # Store Chat in Neo4j (links Session -> Chat -> Agent)
+    # Store Chat in Neo4j (links Conversation -> Bot)
     chat_id = store_chat(
         user_id, session_id, original_query, enhanced_response, timestamp, nlp_data,
         session_tracking['prev_chat_id']
@@ -406,6 +454,7 @@ def get_bot_response():
         'cypher_queries': cypher_queries,
         'bot_reply': enhanced_response,
         'session_id': session_id,
+        'is_multi_sentence': is_multi,
         'metadata': {
             'user_id': user_id,
             'intent': nlp_data['intent'],

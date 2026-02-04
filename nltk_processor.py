@@ -1,10 +1,11 @@
 """
 NLTK Processing Module for PEMABOT
 Handles all NLP operations: tokenization, POS tagging, NER, sentiment analysis
+Supports multi-sentence processing by tokenizing into child sentences
 """
 
 import nltk
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.tag import pos_tag
 from nltk.chunk import ne_chunk
 from nltk.corpus import wordnet
@@ -208,3 +209,133 @@ def process_nlp(text):
         print(f"NLP processing error: {e}")
     
     return result
+
+
+def tokenize_sentences(text):
+    """
+    Tokenize text into individual sentences for multi-sentence handling.
+    Returns a list of sentence strings.
+    """
+    try:
+        sentences = sent_tokenize(text)
+        # Filter out empty sentences and strip whitespace
+        sentences = [s.strip() for s in sentences if s.strip()]
+        return sentences if sentences else [text]
+    except Exception as e:
+        print(f"Sentence tokenization error: {e}")
+        return [text]
+
+
+def is_multi_sentence(text):
+    """
+    Check if text contains multiple sentences.
+    Returns True if there are 2 or more sentences.
+    """
+    sentences = tokenize_sentences(text)
+    return len(sentences) > 1
+
+
+def process_multi_sentence(text):
+    """
+    Process text that may contain multiple sentences.
+    Returns a list of processed sentence data.
+    """
+    sentences = tokenize_sentences(text)
+    
+    results = []
+    for i, sentence in enumerate(sentences):
+        sentence_data = {
+            'sentence_num': i + 1,
+            'text': sentence,
+            'nlp': process_nlp(sentence),
+            'intent': detect_intent(sentence)
+        }
+        results.append(sentence_data)
+    
+    return results
+
+
+def combine_nlp_results(sentence_results):
+    """
+    Combine NLP results from multiple sentences into a single result.
+    Used for the overall analysis display.
+    """
+    combined = {
+        'tokens': [],
+        'pos_tags': [],
+        'nouns': [],
+        'entities': [],
+        'sentiment': {'sentiment': 'Neutral', 'emoji': '😐', 'scores': {'positive': 0, 'negative': 0, 'neutral': 100, 'compound': 0}},
+        'sentences': [],
+        'is_multi_sentence': len(sentence_results) > 1
+    }
+    
+    total_compound = 0
+    total_pos = 0
+    total_neg = 0
+    total_neu = 0
+    
+    for result in sentence_results:
+        nlp = result['nlp']
+        combined['tokens'].extend(nlp.get('tokens', []))
+        combined['pos_tags'].extend(nlp.get('pos_tags', []))
+        combined['nouns'].extend(nlp.get('nouns', []))
+        combined['entities'].extend(nlp.get('entities', []))
+        
+        # Accumulate sentiment scores
+        if nlp.get('sentiment'):
+            scores = nlp['sentiment'].get('scores', {})
+            total_compound += scores.get('compound', 0)
+            total_pos += scores.get('positive', 0)
+            total_neg += scores.get('negative', 0)
+            total_neu += scores.get('neutral', 0)
+        
+        combined['sentences'].append({
+            'num': result['sentence_num'],
+            'text': result['text'],
+            'intent': result['intent'],
+            'sentiment': nlp.get('sentiment', {}).get('sentiment', 'Neutral')
+        })
+    
+    # Average sentiment scores
+    n = len(sentence_results)
+    if n > 0:
+        avg_compound = total_compound / n
+        combined['sentiment']['scores'] = {
+            'positive': round(total_pos / n, 1),
+            'negative': round(total_neg / n, 1),
+            'neutral': round(total_neu / n, 1),
+            'compound': round(avg_compound, 3)
+        }
+        
+        # Determine overall sentiment
+        if avg_compound >= 0.05:
+            combined['sentiment']['sentiment'] = 'Positive'
+            combined['sentiment']['emoji'] = '😊'
+        elif avg_compound <= -0.05:
+            combined['sentiment']['sentiment'] = 'Negative'
+            combined['sentiment']['emoji'] = '😔'
+        else:
+            combined['sentiment']['sentiment'] = 'Neutral'
+            combined['sentiment']['emoji'] = '😐'
+    
+    # Remove duplicate entities
+    seen_entities = set()
+    unique_entities = []
+    for ent in combined['entities']:
+        key = (ent.get('name', ''), ent.get('type', ''))
+        if key not in seen_entities:
+            seen_entities.add(key)
+            unique_entities.append(ent)
+    combined['entities'] = unique_entities
+    
+    # Remove duplicate nouns
+    seen_nouns = set()
+    unique_nouns = []
+    for noun in combined['nouns']:
+        if noun.get('word') not in seen_nouns:
+            seen_nouns.add(noun.get('word'))
+            unique_nouns.append(noun)
+    combined['nouns'] = unique_nouns
+    
+    return combined

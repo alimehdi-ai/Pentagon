@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Synapse - AI Chatbot | PF AI Project</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,59 +14,61 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
+            color: #1c1917;
             height: 100vh;
             overflow: hidden;
         }
 
         .container {
             display: grid;
-            grid-template-columns: 300px 1fr 340px;
+            grid-template-columns: 340px 1fr;
             height: 100vh;
         }
 
-        /* Sidebar */
+        /* Sidebar - Left Panel (now integrated into main) */
         .sidebar {
-            background: #fff;
-            border-right: 1px solid #e5e5e5;
-            display: flex;
-            flex-direction: column;
+            display: none;
         }
 
         .bot-info {
-            padding: 24px;
-            border-bottom: 1px solid #e5e5e5;
+            padding: 20px;
+            border-bottom: 1px solid rgba(217, 179, 75, 0.3);
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
         }
 
         .bot-header {
             display: flex;
             align-items: center;
             gap: 14px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .bot-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4em;
+            font-size: 1.2em;
             color: #fff;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
         }
 
         .bot-name {
             font-size: 1.4em;
             font-weight: 700;
-            color: #1a1a1a;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .team-short {
-            color: #888;
+            color: #78716c;
             font-size: 0.75em;
             margin-top: 4px;
         }
@@ -75,16 +77,16 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 24px;
-            background: #fafafa;
-            border-bottom: 1px solid #e5e5e5;
+            padding: 16px 20px;
+            background: rgba(254, 243, 199, 0.8);
+            border-bottom: 1px solid rgba(217, 179, 75, 0.3);
         }
 
         .user-avatar {
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            background: #4a4a4a;
+            background: linear-gradient(135deg, #78716c 0%, #57534e 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -95,7 +97,7 @@
         .user-info-bar span {
             flex: 1;
             font-size: 0.9em;
-            color: #333;
+            color: #44403c;
             font-weight: 500;
             white-space: nowrap;
             overflow: hidden;
@@ -105,20 +107,42 @@
         .logout-btn {
             background: transparent;
             border: none;
-            color: #999;
+            color: #78716c;
             cursor: pointer;
             padding: 8px 10px;
             border-radius: 8px;
             transition: all 0.2s;
         }
 
+        .new-session-btn {
+            background: #fef3c7;
+            border: 1px solid rgba(202, 138, 4, 0.3);
+            color: #92400e;
+            cursor: pointer;
+            padding: 7px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .new-session-btn:hover {
+            background: #fde68a;
+            border-color: #f59e0b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.35);
+        }
+
         .logout-btn:hover {
-            background: #fee2e2;
+            background: rgba(239, 68, 68, 0.15);
             color: #dc2626;
         }
 
         .chat-history-section {
-            padding: 20px 24px;
+            padding: 16px 20px;
             flex: 1;
             overflow-y: auto;
             display: flex;
@@ -133,15 +157,15 @@
         }
 
         .section-header h3 {
-            color: #666;
-            font-size: 0.75em;
+            color: #888;
+            font-size: 0.7em;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
         }
 
         .new-chat-btn {
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             border: none;
             color: #fff;
             padding: 8px 14px;
@@ -157,7 +181,7 @@
 
         .new-chat-btn:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
         }
 
         .chat-history-list {
@@ -166,22 +190,22 @@
         }
 
         .chat-history-item {
-            background: #fafafa;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 12px;
             padding: 14px 16px;
             margin-bottom: 10px;
             cursor: pointer;
             transition: all 0.2s;
-            border: 1px solid transparent;
+            border: 1px solid rgba(217, 179, 75, 0.3);
         }
 
         .chat-history-item:hover {
-            background: #f0f0f0;
-            border-color: #e0e0e0;
+            background: rgba(254, 243, 199, 0.8);
+            border-color: rgba(245, 158, 11, 0.5);
         }
 
         .chat-history-item .user-msg {
-            color: #333;
+            color: #1f2937;
             font-size: 0.85em;
             font-weight: 500;
             margin-bottom: 6px;
@@ -191,7 +215,7 @@
         }
 
         .chat-history-item .bot-msg {
-            color: #777;
+            color: #57534e;
             font-size: 0.8em;
             white-space: nowrap;
             overflow: hidden;
@@ -199,49 +223,52 @@
         }
 
         .chat-history-item .timestamp {
-            color: #aaa;
+            color: #78716c;
             font-size: 0.7em;
             margin-top: 8px;
         }
 
         .no-history {
             text-align: center;
-            color: #999;
+            color: #78716c;
             font-size: 0.85em;
             padding: 30px 20px;
         }
 
-        /* Main Chat Area */
+        /* Main Chat Area - Right Side */
         .main-content {
             display: flex;
             flex-direction: column;
-            background: #fafafa;
+            background: #fffef7;
+            min-height: 0;
         }
 
         .chat-header {
-            padding: 20px 30px;
+            padding: 18px 24px;
             background: #fff;
-            border-bottom: 1px solid #e5e5e5;
+            border-bottom: 1px solid rgba(202, 138, 4, 0.15);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .chat-header h2 {
             font-size: 1.15em;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-weight: 700;
+            color: #1c1917;
             display: flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: -0.3px;
         }
 
         .chat-header h2 i {
-            color: #4a4a4a;
+            color: #f59e0b;
         }
 
         .status-badge {
-            background: #dcfce7;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 163, 74, 0.15) 100%);
             color: #16a34a;
             padding: 6px 14px;
             border-radius: 20px;
@@ -250,6 +277,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
         }
 
         .status-badge::before {
@@ -262,23 +290,25 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
         }
 
         .chat-messages {
             flex: 1;
-            padding: 24px 30px;
+            padding: 24px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            background: linear-gradient(180deg, #fffef7 0%, #fefce8 100%);
+            min-height: 0;
         }
 
         .message {
             display: flex;
-            gap: 14px;
-            max-width: 75%;
+            gap: 12px;
+            max-width: 80%;
             animation: fadeIn 0.3s ease;
         }
 
@@ -293,8 +323,8 @@
         }
 
         .message-avatar {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -304,161 +334,188 @@
         }
 
         .message.bot .message-avatar {
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: #fff;
         }
 
         .message.user .message-avatar {
-            background: #4a4a4a;
+            background: linear-gradient(135deg, #78716c 0%, #57534e 100%);
             color: #fff;
         }
 
         .message-content {
             background: #fff;
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-radius: 18px;
-            line-height: 1.6;
-            font-size: 0.95em;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e8e8e8;
+            line-height: 1.65;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            color: #1c1917;
         }
 
         .message.user .message-content {
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
-            color: #fff;
-            border: none;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1c1917;
+            font-weight: 500;
             border-bottom-right-radius: 6px;
         }
 
         .message.bot .message-content {
             border-bottom-left-radius: 6px;
+            border: 1px solid rgba(202, 138, 4, 0.12);
         }
 
         .chat-input-area {
-            padding: 24px 30px;
+            padding: 20px 24px;
             background: #fff;
-            border-top: 1px solid #e5e5e5;
+            border-top: 1px solid rgba(202, 138, 4, 0.12);
         }
 
         .input-container {
             display: flex;
             gap: 12px;
-            background: #f5f5f5;
+            background: #fefce8;
             border-radius: 16px;
-            padding: 10px 12px;
-            border: 2px solid #e5e5e5;
-            transition: all 0.3s;
+            padding: 8px 12px;
+            border: 2px solid rgba(202, 138, 4, 0.2);
+            transition: all 0.25s ease;
         }
 
         .input-container:focus-within {
-            border-color: #4a4a4a;
-            box-shadow: 0 0 0 4px rgba(74, 74, 74, 0.1);
+            border-color: #fbbf24;
+            background: #fffef7;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.15);
         }
 
         .chat-input {
             flex: 1;
             background: transparent;
             border: none;
-            color: #333;
-            font-size: 1em;
+            color: #1f2937;
+            font-size: 0.95em;
             padding: 10px 14px;
             outline: none;
         }
 
         .chat-input::placeholder {
-            color: #999;
+            color: #9ca3af;
         }
 
         .send-btn {
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             border: none;
             color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            font-size: 1.1em;
         }
 
         .send-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
         }
 
         .send-btn:active {
             transform: scale(0.98);
         }
 
-        /* NLP Analysis Panel */
+        /* NLP Analysis Panel - Left Side */
         .nlp-panel {
-            background: #fff;
-            border-left: 1px solid #e5e5e5;
+            background: linear-gradient(180deg, #fefce8 0%, #fef9c3 100%);
+            border-right: 1px solid rgba(202, 138, 4, 0.2);
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
 
         .nlp-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #e5e5e5;
+            padding: 20px;
+            border-bottom: 1px solid rgba(202, 138, 4, 0.15);
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        }
+
+        .nlp-header-content {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
+        .nlp-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .nlp-header i {
-            color: #4a4a4a;
-            font-size: 1.1em;
+            color: #fff;
+            font-size: 1.2em;
         }
 
         .nlp-header h3 {
-            font-size: 1em;
-            font-weight: 600;
-            color: #1a1a1a;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.3px;
+        }
+
+        .nlp-subtitle {
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 2px;
         }
 
         .nlp-content {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 16px;
+            min-height: 0;
         }
 
         .nlp-section {
-            background: #fafafa;
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 16px;
-            border: 1px solid #e8e8e8;
+            background: #fff;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(202, 138, 4, 0.08);
+            border: 1px solid rgba(202, 138, 4, 0.1);
         }
 
         .nlp-section h4 {
-            color: #666;
-            font-size: 0.7em;
+            color: #92400e;
+            font-size: 0.68em;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 14px;
+            letter-spacing: 1.2px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         .nlp-section h4 i {
-            color: #4a4a4a;
+            color: #f59e0b;
+            font-size: 1.1em;
         }
 
         /* Sentiment Display */
         .sentiment-display {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
 
         .sentiment-emoji {
-            font-size: 2.8em;
+            font-size: 2.5em;
         }
 
         .sentiment-details {
@@ -467,101 +524,150 @@
 
         .sentiment-label {
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1.05em;
             margin-bottom: 10px;
-            color: #333;
+            color: #1f2937;
         }
 
         .sentiment-bar {
-            height: 8px;
-            background: #e5e5e5;
-            border-radius: 4px;
+            height: 6px;
+            background: rgba(120, 113, 108, 0.2);
+            border-radius: 3px;
             overflow: hidden;
             margin-bottom: 6px;
         }
 
         .sentiment-bar-fill {
             height: 100%;
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.5s ease;
         }
 
-        .sentiment-bar-fill.positive { background: #22c55e; }
-        .sentiment-bar-fill.negative { background: #ef4444; }
-        .sentiment-bar-fill.neutral { background: #9ca3af; }
+        .sentiment-bar-fill.positive { background: linear-gradient(90deg, #10b981, #34d399); }
+        .sentiment-bar-fill.negative { background: linear-gradient(90deg, #ef4444, #f87171); }
+        .sentiment-bar-fill.neutral { background: linear-gradient(90deg, #6b7280, #9ca3af); }
 
         .sentiment-scores {
             display: flex;
-            gap: 16px;
-            font-size: 0.8em;
-            color: #777;
+            gap: 14px;
+            font-size: 0.75em;
+            color: #78716c;
         }
 
         /* Tags Display */
         .tag-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .tag {
-            background: #e8e8e8;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
+            background: rgba(251, 191, 36, 0.15);
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: 0.78em;
             display: flex;
             align-items: center;
-            gap: 6px;
-            color: #444;
+            gap: 5px;
+            color: #92400e;
+            border: 1px solid rgba(251, 191, 36, 0.4);
         }
 
         .tag .pos {
-            color: #666;
-            font-size: 0.75em;
+            color: #b45309;
+            font-size: 0.72em;
             font-weight: 600;
-            background: rgba(0,0,0,0.05);
-            padding: 2px 6px;
-            border-radius: 10px;
+            background: rgba(251, 191, 36, 0.25);
+            padding: 2px 5px;
+            border-radius: 8px;
         }
 
         /* Entity tags */
         .entity-tag {
-            background: #e0e7ff;
-            color: #3730a3;
+            background: rgba(234, 88, 12, 0.15);
+            color: #c2410c;
+            border-color: rgba(234, 88, 12, 0.3);
+        }
+
+        .entity-tag .pos {
+            background: rgba(234, 88, 12, 0.2);
+            color: #ea580c;
+        }
+
+        /* Intent tags */
+        .intent-tag {
+            background: rgba(101, 163, 13, 0.15);
+            color: #4d7c0f;
+            border-color: rgba(101, 163, 13, 0.3);
         }
 
         /* Noun definitions */
         .noun-item {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
-            padding: 14px;
-            margin-bottom: 10px;
-            border: 1px solid #e5e5e5;
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(217, 179, 75, 0.3);
         }
 
         .noun-word {
             font-weight: 600;
-            color: #333;
+            color: #1f2937;
             margin-bottom: 6px;
         }
 
         .noun-def {
-            font-size: 0.85em;
-            color: #666;
+            font-size: 0.82em;
+            color: #57534e;
             line-height: 1.5;
+        }
+
+        /* Sentence breakdown */
+        .sentence-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #f59e0b;
+        }
+
+        .sentence-num {
+            font-size: 0.7em;
+            color: #d97706;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .sentence-text {
+            font-size: 0.85em;
+            color: #1f2937;
+            margin-bottom: 6px;
+        }
+
+        .sentence-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 0.75em;
         }
 
         /* Empty state */
         .empty-state {
             text-align: center;
-            color: #999;
-            padding: 40px 20px;
+            color: #a8a29e;
+            padding: 50px 20px;
         }
 
         .empty-state i {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            color: #ccc;
+            font-size: 3em;
+            margin-bottom: 16px;
+            color: #fbbf24;
+            opacity: 0.6;
+        }
+
+        .empty-state p {
+            font-size: 0.9em;
+            font-weight: 500;
         }
 
         /* Scrollbar styling */
@@ -570,84 +676,96 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #f5f5f5;
+            background: rgba(254, 243, 199, 0.5);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #d0d0d0;
+            background: rgba(217, 179, 75, 0.4);
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #bbb;
+            background: rgba(217, 179, 75, 0.6);
         }
 
         /* Responsive */
-        @media (max-width: 1200px) {
+        @media (max-width: 900px) {
             .container {
-                grid-template-columns: 280px 1fr;
+                grid-template-columns: 1fr;
             }
             .nlp-panel {
                 display: none;
             }
         }
 
-        @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
+        @media (max-width: 600px) {
+            .chat-header {
+                padding: 14px 16px;
+                flex-wrap: wrap;
+                gap: 12px;
             }
-            .sidebar {
-                display: none;
+            .chat-messages {
+                padding: 16px;
+            }
+            .chat-input-area {
+                padding: 16px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="bot-info">
-                <div class="bot-header">
-                    <div class="bot-avatar">
-                        <i class="fas fa-brain"></i>
+        <!-- NLP Analysis Panel - Left Side -->
+        <div class="nlp-panel">
+            <div class="nlp-header">
+                <div class="nlp-header-content">
+                    <div class="nlp-icon">
+                        <i class="fa-solid fa-microchip"></i>
                     </div>
                     <div>
-                        <div class="bot-name">Synapse</div>
-                        <div class="team-short">by Hussain, Nevera & Aeliya</div>
+                        <h3>NLP Analysis</h3>
+                        <div class="nlp-subtitle">Real-time language processing</div>
                     </div>
                 </div>
             </div>
-            <div class="user-info-bar">
-                <div class="user-avatar"><i class="fas fa-user"></i></div>
-                <span id="userDisplayName">User</span>
-                <button class="logout-btn" onclick="logout()" title="Logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                </button>
-            </div>
-            <div class="chat-history-section">
-                <div class="section-header">
-                    <h3>Conversations</h3>
-                    <button class="new-chat-btn" onclick="newChatSession()">
-                        <i class="fas fa-plus"></i> New
-                    </button>
-                </div>
-                <div class="chat-history-list" id="chatHistoryList">
-                    <div class="no-history">No conversations yet</div>
+            <div class="nlp-content" id="nlpContent">
+                <div class="empty-state">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <p>Send a message to see NLP analysis</p>
                 </div>
             </div>
         </div>
 
-        <!-- Main Chat Area -->
+        <!-- Main Chat Area - Right Side -->
         <div class="main-content">
             <div class="chat-header">
-                <h2><i class="fas fa-comments"></i> Chat with Synapse</h2>
-                <div class="status-badge">Online</div>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div class="bot-avatar">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin: 0;"><i class="fa-regular fa-comment-dots"></i> Synapse</h2>
+                        <div class="team-short">by Hussain, Nevera & Aeliya</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <div class="status-badge">Online</div>
+                    <button class="new-session-btn" onclick="newChatSession()" title="New Chat">
+                        <i class="fa-solid fa-plus"></i>
+                        New Chat
+                    </button>
+                    <div class="user-avatar"><i class="fa-solid fa-circle-user"></i></div>
+                    <span id="userDisplayName" style="color: #44403c; font-weight: 500;">User</span>
+                    <button class="logout-btn" onclick="logout()" title="Logout">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                </div>
             </div>
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
-                    <div class="message-avatar"><i class="fas fa-brain"></i></div>
+                    <div class="message-avatar"><i class="fa-solid fa-bolt"></i></div>
                     <div class="message-content">
-                        Hello! I'm <strong>Synapse</strong>, an AI chatbot created by Hussain Haider, Nevera, and Aeliya for the PF AI course. I can understand your messages using NLP! Try asking me something.
+                        Hello! I'm <strong>Synapse</strong>, an AI chatbot created by Hussain Haider, Nevera, and Aeliya for the PF AI course. I can understand your messages using NLP and handle multiple sentences! Try asking me something. ✨
                     </div>
                 </div>
             </div>
@@ -655,22 +773,8 @@
                 <div class="input-container">
                     <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." autocomplete="off">
                     <button class="send-btn" id="sendBtn">
-                        <i class="fas fa-paper-plane"></i>
+                        <i class="fa-solid fa-arrow-up"></i>
                     </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- NLP Analysis Panel -->
-        <div class="nlp-panel">
-            <div class="nlp-header">
-                <i class="fas fa-chart-bar"></i>
-                <h3>NLP Analysis</h3>
-            </div>
-            <div class="nlp-content" id="nlpContent">
-                <div class="empty-state">
-                    <i class="fas fa-comment-dots"></i>
-                    <p>Send a message to see NLP analysis</p>
                 </div>
             </div>
         </div>
@@ -767,7 +871,7 @@
 
             function updateChatHistory(history) {
                 if (!history || history.length === 0) {
-                    chatHistoryList.html('<div class="no-history">No conversations yet</div>');
+                    chatHistoryList.html('<div class="no-history"><i class="fas fa-comments" style="display:block;margin-bottom:10px;font-size:1.5em;"></i>No conversations yet</div>');
                     return;
                 }
 
@@ -780,9 +884,9 @@
                     const sessId = item.session_id || '';
                     html += `
                         <div class="chat-history-item" data-session="${sessId}" data-input="${userMsg.replace(/"/g, '&quot;')}" data-output="${botMsg.replace(/"/g, '&quot;')}">
-                            <div class="user-msg"><i class="fas fa-user" style="color:#999;margin-right:6px;font-size:0.8em;"></i>${userMsg}</div>
-                            <div class="bot-msg"><i class="fas fa-brain" style="color:#999;margin-right:6px;font-size:0.8em;"></i>${botMsg}</div>
-                            <div class="timestamp">${time}</div>
+                            <div class="user-msg"><i class="fas fa-user" style="color:#d97706;margin-right:6px;font-size:0.8em;"></i>${userMsg}</div>
+                            <div class="bot-msg"><i class="fas fa-robot" style="color:#f59e0b;margin-right:6px;font-size:0.8em;"></i>${botMsg}</div>
+                            <div class="timestamp"><i class="fas fa-clock" style="margin-right:4px;"></i>${time}</div>
                         </div>
                     `;
                 });
@@ -832,7 +936,7 @@
 
             function addMessage(content, isUser, animate = true) {
                 const messageClass = isUser ? 'user' : 'bot';
-                const avatar = isUser ? '<i class="fas fa-user"></i>' : '<i class="fas fa-brain"></i>';
+                const avatar = isUser ? '<i class="fa-solid fa-circle-user"></i>' : '<i class="fa-solid fa-bolt"></i>';
                 const animStyle = animate ? '' : ' style="animation: none;"';
                 const message = `
                     <div class="message ${messageClass}"${animStyle}>
@@ -848,17 +952,38 @@
 
             function updateNLPPanel(nlpData) {
                 if (!nlpData) {
-                    nlpContent.html('<div class="empty-state"><i class="fas fa-comment-dots"></i><p>Send a message to see NLP analysis</p></div>');
+                    nlpContent.html('<div class="empty-state"><i class="fa-solid fa-sparkles"></i><p>Send a message to see NLP analysis</p></div>');
                     return;
                 }
 
                 let html = '';
 
+                // Show multi-sentence breakdown if available
+                if (nlpData.sentences && nlpData.sentences.length > 1) {
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fa-solid fa-list-ol"></i> Sentence Breakdown (${nlpData.sentences.length})</h4>
+                    `;
+                    nlpData.sentences.forEach(sent => {
+                        html += `
+                            <div class="sentence-item">
+                                <div class="sentence-num">Sentence ${sent.num}</div>
+                                <div class="sentence-text">${sent.text}</div>
+                                <div class="sentence-meta">
+                                    <span class="tag intent-tag">${Array.isArray(sent.intent) ? sent.intent[0] : sent.intent}</span>
+                                    <span class="tag">${sent.sentiment}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                }
+
                 if (nlpData.sentiment && nlpData.sentiment.sentiment) {
                     const s = nlpData.sentiment;
                     html += `
                         <div class="nlp-section">
-                            <h4><i class="fas fa-heart"></i> Sentiment Analysis</h4>
+                            <h4><i class="fa-regular fa-face-smile"></i> Sentiment</h4>
                             <div class="sentiment-display">
                                 <div class="sentiment-emoji">${s.emoji}</div>
                                 <div class="sentiment-details">
@@ -880,10 +1005,30 @@
                     `;
                 }
 
+                // Show detected intents
+                if (nlpData.intent) {
+                    const intents = Array.isArray(nlpData.intent) ? nlpData.intent.flat() : [nlpData.intent];
+                    html += `
+                        <div class="nlp-section">
+                            <h4><i class="fa-solid fa-crosshairs"></i> Intent</h4>
+                            <div class="tag-container">
+                    `;
+                    intents.forEach(intent => {
+                        if (Array.isArray(intent)) {
+                            intent.forEach(i => {
+                                html += `<div class="tag intent-tag">${i}</div>`;
+                            });
+                        } else {
+                            html += `<div class="tag intent-tag">${intent}</div>`;
+                        }
+                    });
+                    html += '</div></div>';
+                }
+
                 if (nlpData.pos_tags && nlpData.pos_tags.length > 0) {
                     html += `
                         <div class="nlp-section">
-                            <h4><i class="fas fa-tags"></i> Tokens & POS Tags</h4>
+                            <h4><i class="fa-solid fa-code"></i> POS Tags</h4>
                             <div class="tag-container">
                     `;
                     nlpData.pos_tags.forEach(item => {
@@ -895,7 +1040,7 @@
                 if (nlpData.entities && nlpData.entities.length > 0) {
                     html += `
                         <div class="nlp-section">
-                            <h4><i class="fas fa-user-tag"></i> Named Entities</h4>
+                            <h4><i class="fa-solid fa-at"></i> Entities</h4>
                             <div class="tag-container">
                     `;
                     nlpData.entities.forEach(entity => {
@@ -905,8 +1050,8 @@
                 } else {
                     html += `
                         <div class="nlp-section">
-                            <h4><i class="fas fa-user-tag"></i> Named Entities</h4>
-                            <p style="color: #999; font-size: 0.85em;">No named entities detected</p>
+                            <h4><i class="fa-solid fa-at"></i> Entities</h4>
+                            <p style="color: #a8a29e; font-size: 0.85em;">No named entities detected</p>
                         </div>
                     `;
                 }
@@ -914,7 +1059,7 @@
                 if (nlpData.nouns && nlpData.nouns.length > 0) {
                     html += `
                         <div class="nlp-section">
-                            <h4><i class="fas fa-book"></i> WordNet Definitions</h4>
+                            <h4><i class="fa-solid fa-book-open"></i> Definitions</h4>
                     `;
                     nlpData.nouns.forEach(noun => {
                         html += `
@@ -927,7 +1072,7 @@
                     html += '</div>';
                 }
 
-                nlpContent.html(html || '<div class="empty-state"><i class="fas fa-comment-dots"></i><p>No analysis available</p></div>');
+                nlpContent.html(html || '<div class="empty-state"><i class="fa-solid fa-sparkles"></i><p>No analysis available</p></div>');
             }
 
             function sendMessage() {
@@ -940,8 +1085,8 @@
                 const typingId = 'typing-' + Date.now();
                 chatMessages.append(`
                     <div class="message bot" id="${typingId}">
-                        <div class="message-avatar"><i class="fas fa-brain"></i></div>
-                        <div class="message-content"><em style="color:#888;">Analyzing...</em></div>
+                        <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                        <div class="message-content"><em style="color:#888;"><i class="fas fa-spinner fa-spin"></i> Analyzing...</em></div>
                     </div>
                 `);
                 chatMessages.scrollTop(chatMessages[0].scrollHeight);
