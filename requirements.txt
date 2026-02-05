@@ -3,3 +3,5 @@ aiml
 flask
 neo4j
 nltk
+numpy
+# Face ID uses face-api.js (browser-based, no Python dependencies needed)

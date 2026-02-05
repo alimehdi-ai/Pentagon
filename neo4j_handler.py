@@ -146,17 +146,17 @@ def init_graph_structure():
     
     try:
         with d.session() as session:
-            # Create Agent node (Synapse bot) first
+            # Create Agent node (Pentagon bot) first
             session.run("""
-                MERGE (a:Agent {name: 'Synapse'})
+                MERGE (a:Agent {name: 'Pentagon'})
                 ON CREATE SET 
-                    a.creator = 'Group A1',
-                    a.members = ['Hussain Haider (S2024376005)', 'Nevera (S2024376014)', 'Aeliya (F2023376042)'],
+                    a.creator = 'Pentagon Team',
+                    a.members = ['Ali Mehdi', 'Zaryab', 'Muqeet', 'Naila', 'Shaman'],
                     a.city = 'Lahore',
                     a.company = 'Microsoft',
                     a.created_at = datetime()
             """)
-            print("Agent node initialized (Synapse)")
+            print("Agent node initialized (Pentagon)")
             
             # Run migration for old schema
             migrate_old_schema()
@@ -298,6 +298,84 @@ def authenticate_user(username, password):
             return False, "Invalid username or password", None
     except Exception as e:
         print(f"[AUTH DEBUG] Exception: {e}")
+        return False, f"Authentication error: {e}", None
+
+
+def save_face_encoding(user_id, face_encoding_str):
+    """Save face encoding for a user"""
+    d = get_driver()
+    if not d:
+        return False, "Database connection error"
+    
+    try:
+        with d.session() as session:
+            result = session.run("""
+                MATCH (p)
+                WHERE (p:Person OR p:User) AND p.id = $user_id
+                SET p.face_encoding = $face_encoding
+                RETURN p.id as id
+            """, user_id=user_id, face_encoding=face_encoding_str).single()
+            
+            if result:
+                return True, "Face encoding saved successfully"
+            return False, "User not found"
+    except Exception as e:
+        return False, f"Error saving face encoding: {e}"
+
+
+def get_all_face_encodings():
+    """Get all users with face encodings for face recognition"""
+    d = get_driver()
+    if not d:
+        return []
+    
+    try:
+        with d.session() as session:
+            results = session.run("""
+                MATCH (p)
+                WHERE (p:Person OR p:User) AND p.face_encoding IS NOT NULL
+                RETURN p.id as id, p.username as username, p.name as name, 
+                       p.email as email, p.face_encoding as face_encoding
+            """)
+            
+            users = []
+            for record in results:
+                users.append({
+                    'id': record['id'],
+                    'username': record['username'],
+                    'name': record['name'],
+                    'email': record['email'],
+                    'face_encoding': record['face_encoding']
+                })
+            return users
+    except Exception as e:
+        print(f"Error getting face encodings: {e}")
+        return []
+
+
+def authenticate_by_face(user_id):
+    """Authenticate and return user data by ID (for face login)"""
+    d = get_driver()
+    if not d:
+        return False, "Database connection error", None
+    
+    try:
+        with d.session() as session:
+            result = session.run("""
+                MATCH (p)
+                WHERE (p:Person OR p:User) AND p.id = $user_id
+                RETURN p.id as id, p.username as username, p.name as name, p.email as email
+            """, user_id=user_id).single()
+            
+            if result:
+                return True, "Face login successful", {
+                    'id': result['id'],
+                    'username': result['username'],
+                    'name': result['name'],
+                    'email': result['email']
+                }
+            return False, "User not found", None
+    except Exception as e:
         return False, f"Authentication error: {e}", None
 
 

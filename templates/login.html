@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synapse - Login</title>
+    <title>Pentagon - Login</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -305,6 +305,180 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Face ID Styles */
+        .face-id-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #4a4a4a 0%, #2d2d2d 100%);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .face-id-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .face-id-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #888;
+            font-size: 0.85em;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+        /* Face ID Modal */
+        .face-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .face-modal.active {
+            display: flex;
+        }
+
+        .face-modal-content {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .face-modal h2 {
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .face-modal p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container video {
+            width: 100%;
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        .video-container canvas {
+            display: none;
+        }
+
+        .face-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 250px;
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .capture-btn {
+            padding: 14px 40px;
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .capture-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            padding: 14px 40px;
+            background: #e0e0e0;
+            border: none;
+            border-radius: 10px;
+            color: #333;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #d0d0d0;
+        }
+
+        .face-status {
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+
+        .face-status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .face-status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .face-status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
             body {
@@ -361,9 +535,9 @@
     <div class="brand-panel">
         <div class="brand-content">
             <div class="brand-logo">
-                <i class="fas fa-brain"></i>
+                <img src="/static/logo.png" alt="Pentagon" style="width: 80px; height: 80px; object-fit: cover; border-radius: 20px;">
             </div>
-            <h1 class="brand-title">Synapse</h1>
+            <h1 class="brand-title">Pentagon</h1>
             <p class="brand-subtitle">AI-Powered Conversational Intelligence</p>
             <div class="brand-features">
                 <div class="feature-item">
@@ -416,6 +590,12 @@
             <button type="submit" class="auth-btn" id="loginBtn">
                 <i class="fas fa-arrow-right"></i> Sign In
             </button>
+            
+            <div class="divider"><span>or</span></div>
+            
+            <button type="button" class="face-id-btn" id="faceLoginBtn" onclick="openFaceLogin()">
+                <i class="fas fa-camera"></i> Sign In with Face ID
+            </button>
         </form>
 
         <!-- Signup Form -->
@@ -454,15 +634,69 @@
         </form>
 
         <div class="team-credit">
-            Built by <strong>Hussain Haider, Nevera & Aeliya</strong> | PF AI Course - Section A1
+            Built by <strong>Ali Mehdi, Zaryab, Muqeet, Naila & Shaman</strong> | PF AI Course
+        </div>
+    </div>
+
+    <!-- Face ID Modal -->
+    <div class="face-modal" id="faceModal">
+        <div class="face-modal-content">
+            <h2><i class="fas fa-user-circle"></i> Face ID Login</h2>
+            <p id="faceModalMessage">Position your face within the oval and click capture</p>
+            
+            <div class="video-container">
+                <video id="faceVideo" autoplay playsinline></video>
+                <canvas id="faceCanvas"></canvas>
+                <div class="face-overlay"></div>
+            </div>
+            
+            <div id="faceStatus"></div>
+            
+            <div>
+                <button class="capture-btn" id="captureBtn" onclick="captureFace()">
+                    <i class="fas fa-camera"></i> Capture
+                </button>
+                <button class="cancel-btn" onclick="closeFaceModal()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
     <script>
+        // Global face-api.js state
+        let modelsLoaded = false;
+        let loadingModels = false;
+
+        // Load face-api.js models
+        async function loadFaceModels() {
+            if (modelsLoaded || loadingModels) return modelsLoaded;
+            
+            loadingModels = true;
+            const MODEL_URL = 'https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model';
+            
+            try {
+                await Promise.all([
+                    faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+                    faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+                    faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)
+                ]);
+                modelsLoaded = true;
+                console.log('Face-api.js models loaded successfully');
+            } catch (err) {
+                console.error('Error loading face models:', err);
+                modelsLoaded = false;
+            }
+            
+            loadingModels = false;
+            return modelsLoaded;
+        }
+
         $(document).ready(function() {
             // Check if already logged in
-            const currentUser = sessionStorage.getItem('synapse_user');
+            const currentUser = sessionStorage.getItem('pentagon_user');
             if (currentUser) {
                 window.location.href = '/';
             }
@@ -535,8 +769,8 @@
                     data: JSON.stringify({ username, password }),
                     success: function(response) {
                         if (response.success) {
-                            sessionStorage.setItem('synapse_user', JSON.stringify(response.user));
-                            sessionStorage.setItem('synapse_user_id', response.user.id);
+                            sessionStorage.setItem('pentagon_user', JSON.stringify(response.user));
+                            sessionStorage.setItem('pentagon_user_id', response.user.id);
                             showSuccess('Login successful! Redirecting...');
                             setTimeout(() => {
                                 window.location.href = '/';
@@ -603,6 +837,160 @@
                 });
             });
         });
+
+        // ============== FACE ID FUNCTIONS ==============
+        let faceStream = null;
+        let faceMode = 'login'; // 'login' or 'register'
+
+        async function openFaceLogin() {
+            faceMode = 'login';
+            $('#faceModalMessage').text('Position your face within the oval and click capture');
+            await openFaceModal();
+        }
+
+        async function openFaceModal() {
+            $('#faceModal').addClass('active');
+            $('#faceStatus').html('<div class="face-status info"><i class="fas fa-spinner fa-spin"></i> Loading face detection models...</div>');
+            $('#captureBtn').prop('disabled', true);
+            
+            // Load models first
+            const loaded = await loadFaceModels();
+            if (!loaded) {
+                $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> Failed to load face detection. Please refresh and try again.</div>');
+                return;
+            }
+            
+            await startCamera();
+        }
+
+        function closeFaceModal() {
+            $('#faceModal').removeClass('active');
+            stopCamera();
+        }
+
+        async function startCamera() {
+            try {
+                faceStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: 'user'
+                    } 
+                });
+                $('#faceVideo')[0].srcObject = faceStream;
+                $('#captureBtn').prop('disabled', false);
+                $('#faceStatus').html('<div class="face-status info"><i class="fas fa-info-circle"></i> Camera ready. Position your face and click Capture.</div>');
+            } catch (err) {
+                console.error('Camera error:', err);
+                $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> Could not access camera. Please allow camera permissions.</div>');
+            }
+        }
+
+        function stopCamera() {
+            if (faceStream) {
+                faceStream.getTracks().forEach(track => track.stop());
+                faceStream = null;
+            }
+        }
+
+        async function captureFace() {
+            const video = $('#faceVideo')[0];
+            
+            $('#captureBtn').prop('disabled', true).html('<span class="spinner"></span> Detecting face...');
+            $('#faceStatus').html('<div class="face-status info"><i class="fas fa-spinner fa-spin"></i> Analyzing face...</div>');
+            
+            try {
+                // Detect face and get descriptor using face-api.js
+                const detection = await faceapi
+                    .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions())
+                    .withFaceLandmarks()
+                    .withFaceDescriptor();
+                
+                if (!detection) {
+                    $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> No face detected. Please position your face clearly and try again.</div>');
+                    resetCaptureBtn();
+                    return;
+                }
+                
+                // Get the 128-dimensional face descriptor
+                const faceDescriptor = Array.from(detection.descriptor);
+                
+                $('#faceStatus').html('<div class="face-status info"><i class="fas fa-spinner fa-spin"></i> Processing...</div>');
+                
+                if (faceMode === 'login') {
+                    processFaceLogin(faceDescriptor);
+                } else {
+                    processFaceRegister(faceDescriptor);
+                }
+                
+            } catch (err) {
+                console.error('Face detection error:', err);
+                $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> Face detection failed. Please try again.</div>');
+                resetCaptureBtn();
+            }
+        }
+
+        function processFaceLogin(faceDescriptor) {
+            $.ajax({
+                url: '/api/auth/face/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ face_descriptor: faceDescriptor }),
+                success: function(response) {
+                    if (response.success) {
+                        $('#faceStatus').html('<div class="face-status success"><i class="fas fa-check-circle"></i> ' + response.message + ' (Confidence: ' + response.confidence + '%)</div>');
+                        
+                        sessionStorage.setItem('pentagon_user', JSON.stringify(response.user));
+                        sessionStorage.setItem('pentagon_user_id', response.user.id);
+                        
+                        setTimeout(() => {
+                            closeFaceModal();
+                            window.location.href = '/';
+                        }, 1500);
+                    } else {
+                        $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> ' + response.message + '</div>');
+                        resetCaptureBtn();
+                    }
+                },
+                error: function(xhr) {
+                    const response = xhr.responseJSON;
+                    $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> ' + (response?.message || 'Face login failed') + '</div>');
+                    resetCaptureBtn();
+                }
+            });
+        }
+
+        function processFaceRegister(faceDescriptor, userId) {
+            $.ajax({
+                url: '/api/auth/face/register',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ face_descriptor: faceDescriptor, user_id: userId }),
+                success: function(response) {
+                    if (response.success) {
+                        $('#faceStatus').html('<div class="face-status success"><i class="fas fa-check-circle"></i> ' + response.message + '</div>');
+                        setTimeout(() => {
+                            closeFaceModal();
+                        }, 1500);
+                    } else {
+                        $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> ' + response.message + '</div>');
+                        resetCaptureBtn();
+                    }
+                },
+                error: function(xhr) {
+                    const response = xhr.responseJSON;
+                    $('#faceStatus').html('<div class="face-status error"><i class="fas fa-exclamation-circle"></i> ' + (response?.message || 'Face registration failed') + '</div>');
+                    resetCaptureBtn();
+                }
+            });
+        }
+
+        function resetCaptureBtn() {
+            $('#captureBtn').prop('disabled', false).html('<i class="fas fa-camera"></i> Capture');
+        }
+
+        // Face ID is always available with face-api.js
+        // No need to check server-side availability
     </script>
 </body>
 </html>
